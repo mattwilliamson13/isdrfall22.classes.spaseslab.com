@@ -1,5 +1,40 @@
 [
   {
+    "objectID": "assignment/01-intro.html",
+    "href": "assignment/01-intro.html",
+    "title": "Assignment 1: Introductory material",
+    "section": "",
+    "text": "The first part of the course was designed to introduce some of the foundations of working in R, developing programming workflows, and getting help. These topics are important for building robust spatial workflows, but their utility extends beyond that to most things you’ll do in R during the course of your graduate research. This homework is meant to help reinforce those concepts and identify any gaps that I need to fill in as we go. By the end of this assignment you should be able to:\nYou’ll need to accept the link to access the questions."
+  },
+  {
+    "objectID": "assignment/01-intro.html#instructions",
+    "href": "assignment/01-intro.html#instructions",
+    "title": "Assignment 1: Introductory material",
+    "section": "Instructions",
+    "text": "Instructions\n\nAfter you’ve joined the assignment repository, you should have this file (named Readme.md) inside of a R project named assignment-1-xx where xx is your github username (or initials).\nOnce you’ve verified that you’ve correctly cloned the assignment repository, create a new Quarto document. Name this file assignment-1-xxx.qmd and give it a title (like M Williamson Assignment 1). Make sure that you select the html output option (Quarto can do a lot of cool things, but the html format is the least-likely to cause you additional headaches). We’ll be using Quarto throughout the course so it’s worth checking out the other tutorials in the getting started section.\nCopy the questions below into your document and change the color of their text.\nSave the changes and make your first commit!\nAnswer the questions making sure save and commit at least 4 more times (having 5 commits is part of the assignment).\nRender the document to html (you should now have at least 3 files in the repository: Readme.md, assignment-1-xx.qmd, and assignment-1-xx.html). Commit these changes and push them to the repository on GitHub. You should see the files there when you go to github.com."
+  },
+  {
+    "objectID": "assignment/final-proj.html",
+    "href": "assignment/final-proj.html",
+    "title": "Final Project",
+    "section": "",
+    "text": "The final project is an opportunity to bring all of the things you’ve learned in the course into a single reproducible workflow to answer a question of your choosing. Because each of you are in different stages of collecting your own data and because confronting datasets that aren’t yours can help clarify important concepts and design elements, I’m asking you to develop an analysis of data that isn’t yours. This final project should help you demonstrate:\n\nProper data management, cleaning, and manipulation technques\nThe ability to summarize spatial data and apply different statistical analyses to it\nThe ability to evaluate the performance of statistical models\nThe ability to generate visualizations that support your analyses\nThe ability to integrate code, analysis, and visualization with text descrbing your approach and discussing your results"
+  },
+  {
+    "objectID": "assignment/final-proj.html#requirements",
+    "href": "assignment/final-proj.html#requirements",
+    "title": "Final Project",
+    "section": "Requirements",
+    "text": "Requirements\nDatasets. The ability to manipulate and integrate a variety of data types, resolutions, and formats is a key component of this course. Your analysis should incorporate at least 5 datasets. The ultimate compostion of your database is up to you, but I’d like you to include 1 tabular dataset, 1 vector dataset, and 1 raster dataset. You should choose the other 2 (or more) to give you practice with the data types that are most relevant to your objectives and/or research.\nAnalyses. You’ve learned several classes of analyses (e.g., overlays, point-pattern, multivariate regression, and statistical learning). Apply at least one (preferably the one most tied to your own objectives and research) of these analyses to address your question. In the course of doing so, you’ll need to justify your choice, assess whether your data meets appropriate assumptions, and evaluate the implications of key assumptions you make. For example, if you’re conducting an overlay analysis, how does your choice of threshold affect the ultimate result? If you’ve fit a statistical model based on summary statistics (e.g, mean, median), how well does the model fit? How does the model change if you use different slices of the data?\nVisualizations. You should produce a minimum of 3 visualizations to accompany your analysis. One of these should be a publication quality location map. The others are up to you, but should a) help you tell the story of your analysis and b) help you meet your objectives for the course and your own research. These can be additional maps of results, figures that summarize your data or results in non-spatial ways, or interactive graphics that allow you to explore parts of your analysis.\nReporting You can generate a ‘manuscript’ style document (using Quarto) or a flexdashboard (using Quarto and shiny) as the final product. Your report should include:\n\nA brief (1-2 paragraphs) description of your question and why you’re interested in it.\nA Methods section with subsections describing the data sources, any processing steps you took and why, and your process for the analysis. Show your code and provide annotation to describe what you are attempting do with the various steps.\nA Results section that includes tabular results as well as any relevant visualizations that describe your data and analysis.\nA Discussion of your results that puts your results in the context of your question, considers alternative analysis strategies and why they may or may not be better than the approach you chose, describes additional data that might be important for your question, and considers the role of extent and resolution in your analysis."
+  },
+  {
+    "objectID": "assignment/final-proj.html#assessment",
+    "href": "assignment/final-proj.html#assessment",
+    "title": "Final Project",
+    "section": "Assessment",
+    "text": "Assessment\nYou’ll submit a draft of the final report on December 7. I’ll give you feedback based on your project and on your objectives for the course. You’ll then have a chance to address my feedback before turning in your final draft on December 15. Your final self-assessment will ask you to reflect on your objectives for the course and evaluate the degree to which your final project demonstrates that you achieved your objectives. Thus, when you are designing your project, make sure that you have your initial objectives in mind.\n\n\n\n\n\n\nTip\n\n\n\nA note on grades: You will be responsible for assessing how well your assignment demonstrates that you achieved your objectives. I reserve the right to change the grade you’ve given yourself, but will provide clear justification for why I’m doing that. Without a completed self-assessment there is no grade for your final project, so please make sure you complete it."
+  },
+  {
     "objectID": "assignment/index.html",
     "href": "assignment/index.html",
     "title": "Assignments",
@@ -84,11 +119,46 @@
     "text": "Readings\n\nThe syllabus, content, examples, and assignments pages for this class\n Chapter 1 - 6 in Venables et al., An Introduction to R (Venables et al. 2009) - for a quick refresher on data types in R (it’s only 30 pages)\n Chapters 1-2 in Douglas et al., An Introduction to R - provides another intro to R that’s been updated and is an open-source book.\n Happy Git and GitHub for the useR - all you really need to know to be a proficient user of git for version control and reproducible workflows."
   },
   {
+    "objectID": "content/01-content.html#objectives",
+    "href": "content/01-content.html#objectives",
+    "title": "Getting Started",
+    "section": "Objectives",
+    "text": "Objectives\nBy the end of today you should:\n\nBe able to articulate the organization of the course, the approach to grading, and the requirements for the final project\nBe able to access the RStudio Server and Github classroom\nBe able to clone the first self-reflection and assignment and know the process for submitting assignments"
+  },
+  {
     "objectID": "content/01-content.html#slides",
     "href": "content/01-content.html#slides",
     "title": "Getting Started",
     "section": "Slides",
     "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\nIntroductions\n\n\nWhy (not) R?\n\n\nAssignments, reflections, expectations\n\n\nGit and github classroom"
+  },
+  {
+    "objectID": "content/02-content.html",
+    "href": "content/02-content.html",
+    "title": "Basic Data Structures in R",
+    "section": "",
+    "text": "Today we’ll focus on how R organizes data and how you can managed and manipulate data in R. Readings are designed to give you more information how R conceptualizes data and how various rules and conventions affect your ability to access and manipulate data."
+  },
+  {
+    "objectID": "content/02-content.html#readings",
+    "href": "content/02-content.html#readings",
+    "title": "Basic Data Structures in R",
+    "section": "Readings",
+    "text": "Readings\n\n Chapter 3 in Douglas et al., An Introduction to R - provides another intro to R that’s been updated and is an open-source book.\n Writing the perfect question - a blogpost by Jon Skeet that describes the general etiquette for asking coding questions that are likely to get answered.\n Reprex Do’s and Don’ts - provides an overview of the components of a reproducible example and the use of the reprex package to generate them."
+  },
+  {
+    "objectID": "content/02-content.html#objectives",
+    "href": "content/02-content.html#objectives",
+    "title": "Basic Data Structures in R",
+    "section": "Objectives",
+    "text": "Objectives\nBy the end of today you should:\n\nBe able to distinguish the major datatypes used in R and deploy functions to determine the data type of a given object.\nBe able to subset and manipulate data using base R and the tidyverse\nUnderstand the key elements of getting help with coding errors"
+  },
+  {
+    "objectID": "content/02-content.html#slides",
+    "href": "content/02-content.html#slides",
+    "title": "Basic Data Structures in R",
+    "section": "Slides",
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\nBasic Data Structures in R\n\n\nAccessing subsets of data\n\n\nManipulating and combining data\n\n\nGetting help"
   },
   {
     "objectID": "content/index.html",
@@ -280,6 +350,41 @@
     "text": "Assignments\n\nCheck out the syllabus for more on grading!\n\n\n\n\n\nSelf-reflections (3x)\n\nYour goals for the course\nEvaluation criteria\nChecking in\n\nCoding exercises (4x)\n\nProblem solving\nReproducible workflows\nThinking critically\n\n\n\n\nFinal project (1st draft, final draft)\n\nPractice a full analysis workflow\nIntegrate analysis & visuals to tell a story"
   },
   {
+    "objectID": "slides/01-slides.html#orientation-to-rstudio-and-our-rstudio-server",
+    "href": "slides/01-slides.html#orientation-to-rstudio-and-our-rstudio-server",
+    "title": "Getting Started",
+    "section": "Orientation to RStudio and our RStudio server",
+    "text": "Orientation to RStudio and our RStudio server"
+  },
+  {
+    "objectID": "slides/01-slides.html#git-and-github-classroom",
+    "href": "slides/01-slides.html#git-and-github-classroom",
+    "title": "Getting Started",
+    "section": "Git and Github classroom",
+    "text": "Git and Github classroom\nIntroduce yourself to Git"
+  },
+  {
+    "objectID": "slides/02-slides.html#todays-plan",
+    "href": "slides/02-slides.html#todays-plan",
+    "title": "Basic Data Structures in R",
+    "section": "Today’s Plan",
+    "text": "Today’s Plan\n\n\nUnderstanding data types and their role in R\nReading, subsetting, and manipulating data\nGetting help"
+  },
+  {
+    "objectID": "slides/02-slides.html#data-types",
+    "href": "slides/02-slides.html#data-types",
+    "title": "Basic Data Structures in R",
+    "section": "Data types",
+    "text": "Data types\n\nDefinition\nFour most common\n\nNumeric\nInteger\nLogical\nCharacter"
+  },
+  {
+    "objectID": "slides/02-slides.html#data-structures",
+    "href": "slides/02-slides.html#data-structures",
+    "title": "Basic Data Structures in R",
+    "section": "Data structures",
+    "text": "Data structures"
+  },
+  {
     "objectID": "syllabus.html",
     "href": "syllabus.html",
     "title": "Syllabus",
@@ -355,40 +460,5 @@
     "title": "Syllabus",
     "section": "Academic Integrity",
     "text": "Academic Integrity\nAcademic integrity is the principle that asks students to engage with their academic work to the fullest and to behave honestly, transparently, and ethically in every assignment and every interaction with a peer, professor, or research participant. When a strong culture of academic integrity is fostered by students and faculty in an academic program, students learn more, build positive relationships and collaborations, and can feel more confident in the value of their degrees.\nIn order to cultivate fairness and credibility, everyone must participate in upholding academic integrity. Students in this class are responsible for asking for help or clarification when it’s needed, speaking up when they see unethical behavior taking place, and understanding and adhering to the Student Code of Conduct, including the section on academic misconduct. Boise State and I take academic misconduct very seriously. It’s important to know that when a student engages in academic misconduct, I will report the incident to the Office of the Dean of Students. I also have the right to assign sanctions, which could include requirements to revise or redo work, complete educational assignments to learn about academic integrity, and grade penalties ranging from lower credit on an assignment to failing this class1. Students should learn more by reviewing the Student Code of Conduct."
-  },
-  {
-    "objectID": "assignment/01-intro.html",
-    "href": "assignment/01-intro.html",
-    "title": "Assignment 1: Introductory material",
-    "section": "",
-    "text": "The first part of the course was designed to introduce some of the foundations of working in R, developing programming workflows, and getting help. These topics are important for building robust spatial workflows, but their utility extends beyond that to most things you’ll do in R during the course of your graduate research. This homework is meant to help reinforce those concepts and identify any gaps that I need to fill in as we go. By the end of this assignment you should be able to:\nYou’ll need to accept the link to access the questions."
-  },
-  {
-    "objectID": "assignment/01-intro.html#instructions",
-    "href": "assignment/01-intro.html#instructions",
-    "title": "Assignment 1: Introductory material",
-    "section": "Instructions",
-    "text": "Instructions\n\nAfter you’ve joined the assignment repository, you should have this file (named Readme.md) inside of a R project named assignment-1-xx where xx is your github username (or initials).\nOnce you’ve verified that you’ve correctly cloned the assignment repository, create a new Quarto document. Name this file assignment-1-xxx.qmd and give it a title (like M Williamson Assignment 1). Make sure that you select the html output option (Quarto can do a lot of cool things, but the html format is the least-likely to cause you additional headaches). We’ll be using Quarto throughout the course so it’s worth checking out the other tutorials in the getting started section.\nCopy the questions below into your document and change the color of their text.\nSave the changes and make your first commit!\nAnswer the questions making sure save and commit at least 4 more times (having 5 commits is part of the assignment).\nRender the document to html (you should now have at least 3 files in the repository: Readme.md, assignment-1-xx.qmd, and assignment-1-xx.html). Commit these changes and push them to the repository on GitHub. You should see the files there when you go to github.com."
-  },
-  {
-    "objectID": "content/01-content.html#objectives",
-    "href": "content/01-content.html#objectives",
-    "title": "Getting Started",
-    "section": "Objectives",
-    "text": "Objectives\nBy the end of today you should:\n\nBe able to articulate the organization of the course, the approach to grading, and the requirements for the final project\nBe able to access the RStudio Server and Github classroom\nBe able to clone the first self-reflection and assignment and know the process for submitting assignments"
-  },
-  {
-    "objectID": "slides/01-slides.html#orientation-to-rstudio-and-our-rstudio-server",
-    "href": "slides/01-slides.html#orientation-to-rstudio-and-our-rstudio-server",
-    "title": "Getting Started",
-    "section": "Orientation to RStudio and our RStudio server",
-    "text": "Orientation to RStudio and our RStudio server"
-  },
-  {
-    "objectID": "slides/01-slides.html#git-and-github-classroom",
-    "href": "slides/01-slides.html#git-and-github-classroom",
-    "title": "Getting Started",
-    "section": "Git and Github classroom",
-    "text": "Git and Github classroom\nIntroduce yourself to Git"
   }
 ]

@@ -15,6 +15,25 @@ span.underline{text-decoration: underline;}
 div.column{display: inline-block; vertical-align: top; width: 50%;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 
@@ -58,12 +77,12 @@ ul.task-list{list-style: none;}
 
 
 <meta property="og:title" content="Intro to Spatial Data in R - Repetitive Tasks and Functional Programming">
-<meta property="og:description" content="The slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).">
+<meta property="og:description" content="Functions - from Wickham et al., R for Data Science (Wickham and Grolemund 2016) describes the logic of functions and how to approach them with R and the tidyverse.">
 <meta property="og:image" content="https://isdrfall22.classes.spaseslab.com/files/social-image-f22.png">
 <meta property="og:site-name" content="Intro to Spatial Data in R">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:title" content="Intro to Spatial Data in R - Repetitive Tasks and Functional Programming">
-<meta name="twitter:description" content="The slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later).">
+<meta name="twitter:description" content="Functions - from Wickham et al., R for Data Science (Wickham and Grolemund 2016) describes the logic of functions and how to approach them with R and the tidyverse.">
 <meta name="twitter:image" content="https://isdrfall22.classes.spaseslab.com/files/social-image-f22.png">
 <meta name="twitter:creator" content="@MwilliamsonMatt">
 <meta name="twitter:card" content="summary_large_image">
@@ -329,6 +348,7 @@ ul.task-list{list-style: none;}
 
 <section id="readings" class="level2">
 <h2 class="anchored" data-anchor-id="readings">Readings</h2>
+<p><i class="fas fa-book"></i> <a href="https://r4ds.hadley.nz/functions.html">Functions</a> - from Wickham et al., <em>R for Data Science</em> <span class="citation" data-cites="wickham2016r">(<a href="#ref-wickham2016r" role="doc-biblioref">Wickham and Grolemund 2016</a>)</span> describes the logic of functions and how to approach them with <code>R</code> and the <code>tidyverse</code>.</p>
 </section>
 <section id="objectives" class="level2">
 <h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
@@ -372,9 +392,14 @@ ul.task-list{list-style: none;}
 </div>
 
 
+
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography">
+<div id="ref-wickham2016r" class="csl-entry" role="doc-biblioentry">
+Wickham, H., and G. Grolemund. 2016. R for data science: Import, tidy, transform, visualize, and model data. " O’Reilly Media, Inc.".
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

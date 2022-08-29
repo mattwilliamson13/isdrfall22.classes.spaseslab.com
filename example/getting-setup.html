@@ -297,6 +297,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#basic-workflow" id="toc-basic-workflow" class="nav-link" data-scroll-target="#basic-workflow">Basic workflow</a></li>
   </ul></li>
   <li><a href="#quarto" id="toc-quarto" class="nav-link" data-scroll-target="#quarto">Quarto</a></li>
+  <li><a href="#the-example" id="toc-the-example" class="nav-link" data-scroll-target="#the-example">The Example</a>
+  <ul class="collapse">
+  <li><a href="#setup-1" id="toc-setup-1" class="nav-link" data-scroll-target="#setup-1">Setup #1</a></li>
+  <li><a href="#pseudocode" id="toc-pseudocode" class="nav-link" data-scroll-target="#pseudocode">Pseudocode</a></li>
+  <li><a href="#programming" id="toc-programming" class="nav-link" data-scroll-target="#programming">Programming</a></li>
+  <li><a href="#rendering-the-document" id="toc-rendering-the-document" class="nav-link" data-scroll-target="#rendering-the-document">Rendering the document</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -412,13 +419,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </figure>
 </div>
 <p>Markdown is a simple formatting syntax for authoring HTML documents (it’s the basis for the Readme docs that GitHub creates for you). From there, <code>RStudio</code> calls <a href="https://pandoc.org/">pandoc</a> to render the markdown file into your chosen output format. <strong>I’m telling you this because there will be times when some part of this pipeline may break and you’ll need to know where the errors might be coming from.</strong></p>
-<p>You can create new Rmarkdown documents by going to File &gt;&gt; New File &gt;&gt; New Rmarkdown (we’ll be using html for this class)</p>
-<p>When you click the <strong>Knit</strong> button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.</p>
-<p>There are lots of helpful resources to help you get started using Rmarkdown. There’s a <a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">cheatsheet</a> and a much longer <a href="https://bookdown.org/yihui/rmarkdown/">user’s guide</a>. I don’t expect you to become an expert in Rmarkdown, but it is a helpful way to keep all of your thougths and code together in a single, coherent document. Getting proficient in Rmarkdown and git allows you to work with collaborators on an analysis, graphics, and manuscript all within a single platform. This fully-integrated workflow takes practice and patience (especially when you have collaborators that are new to this approach), this course is just an initial step down that path. I’ll do my best to keep it simple - please let me know if you have questions!</p>
+<p>You can create new Quarto documents by going to File &gt;&gt; New File &gt;&gt; New Quarto Document (or Presentation). There are lots of new documents devoted to <a href="https://quarto.org/">Quarto</a>, but some of them may assume you have some familiarity with <code>Markdown</code> or <code>Rmarkdown</code>. As such, I’m keeping this links to helpful Rmarkdown resources like this <a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">cheatsheet</a> and a much longer <a href="https://bookdown.org/yihui/rmarkdown/">user’s guide</a> in case you need more in-depth discussion of some of the ideas behind authoring in Quarto. I don’t expect you to become an expert in Quarto, but it is a helpful way to keep all of your thoughts and code together in a single, coherent document. Getting proficient in Quarto and git allows you to work with collaborators on an analysis, graphics, and manuscript all within a single platform. This fully-integrated workflow takes practice and patience (especially when you have collaborators that are new to this approach), this course is just an initial step down that path. I’ll do my best to keep it simple - please let me know if you have questions!</p>
+</section>
+<section id="the-example" class="level2">
+<h2 class="anchored" data-anchor-id="the-example">The Example</h2>
+<section id="setup-1" class="level3">
+<h3 class="anchored" data-anchor-id="setup-1">Setup #1</h3>
+</section>
+<section id="pseudocode" class="level3">
+<h3 class="anchored" data-anchor-id="pseudocode">Pseudocode</h3>
+</section>
+<section id="programming" class="level3">
+<h3 class="anchored" data-anchor-id="programming">Programming</h3>
+</section>
+<section id="rendering-the-document" class="level3">
+<h3 class="anchored" data-anchor-id="rendering-the-document">Rendering the document</h3>
+<p>When you click the <strong>Render</strong> button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.</p>
 
 
 <!-- -->
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -654,12 +675,24 @@ This is a [Quarto document](https://quarto.org/docs/get-started/authoring/rstudi
 
 Markdown is a simple formatting syntax for authoring HTML documents (it's the basis for the Readme docs that GitHub creates for you). From there, `RStudio` calls [pandoc](https://pandoc.org/) to render the markdown file into your chosen output format. **I'm telling you this because there will be times when some part of this pipeline may break and you'll need to know where the errors might be coming from.**
 
-You can create new Rmarkdown documents by going to File &gt;&gt; New File &gt;&gt; New Rmarkdown (we'll be using html for this class)
+You can create new Quarto documents by going to File &gt;&gt; New File &gt;&gt; New Quarto Document (or Presentation). There are lots of new documents devoted to [Quarto](https://quarto.org/), but some of them may assume you have some familiarity with `Markdown` or `Rmarkdown`. As such, I'm keeping this links to helpful Rmarkdown resources like this [cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf) and a much longer [user's guide](https://bookdown.org/yihui/rmarkdown/) in case you need more in-depth discussion of some of the ideas behind authoring in Quarto. I don't expect you to become an expert in Quarto, but it is a helpful way to keep all of your thoughts and code together in a single, coherent document. Getting proficient in Quarto and git allows you to work with collaborators on an analysis, graphics, and manuscript all within a single platform. This fully-integrated workflow takes practice and patience (especially when you have collaborators that are new to this approach), this course is just an initial step down that path. I'll do my best to keep it simple - please let me know if you have questions! 
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. 
+## The Example
+
+### Setup #1
 
 
-There are lots of helpful resources to help you get started using Rmarkdown. There's a [cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf) and a much longer [user's guide](https://bookdown.org/yihui/rmarkdown/). I don't expect you to become an expert in Rmarkdown, but it is a helpful way to keep all of your thougths and code together in a single, coherent document. Getting proficient in Rmarkdown and git allows you to work with collaborators on an analysis, graphics, and manuscript all within a single platform. This fully-integrated workflow takes practice and patience (especially when you have collaborators that are new to this approach), this course is just an initial step down that path. I'll do my best to keep it simple - please let me know if you have questions! 
+### Pseudocode
+
+
+### Programming
+
+
+### Rendering the document
+
+When you click the **Render** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. 
+
+
 </code></pre>
 </div></div></div></div></div>
 </div> <!-- /content -->

@@ -256,7 +256,7 @@
     "href": "example/getting-setup.html#the-example",
     "title": "Getting Setup",
     "section": "The Example",
-    "text": "The Example\n\nSetup #1\n\n\nPseudocode\n\n\nProgramming\n\n\nRendering the document\nWhen you click the Render button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document."
+    "text": "The Example\n\nSetup\nThe University of Exeter has been conducting an ongoing survey to understand the age at which the belief in Santa Claus begins to drop off. A sample of the data is located in your assignment01 folder. Our task is to bring the data into R, conduct some preliminary exploration of the data, and then fit a model to the data to see if age predicts belief in Santa. We’ll start by branching off of the master Quarto doc in our GitHub repo and then work through the steps together.\n\n\nPseudocode\nBefore we get started, let’s sketch out the steps in our analysis using pseudocode.\n\n\n\n\n\nProgramming\nNow that we have the basic steps in place, let’s transform the pseudocode into a repeatable Quarto document that explains what we’re doing, why, and what we found.\n\n\nRendering the document\nWhen you click the Render button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document."
   },
   {
     "objectID": "example/index.html",
@@ -754,6 +754,62 @@
     "title": "Quarto, literate programming, and pseudocode",
     "section": "What is literate progamming?",
     "text": "What is literate progamming?\n\nLet us change our traditional attitude to the construction of programs: Instead of imagining that our main task is to instruct a computer what to do, let us concentrate rather on explaining to human beings what we want a computer to do.\n\n— Donald Knuth, CSLI, 1984"
+  },
+  {
+    "objectID": "slides/03-slides.html#what-is-literate-programming",
+    "href": "slides/03-slides.html#what-is-literate-programming",
+    "title": "Quarto, literate programming, and pseudocode",
+    "section": "What is literate programming?",
+    "text": "What is literate programming?\n\nDocumentation containing code (not vice versa!)\nDirect connection between code and explanation\nConvey meaning to humans rather than telling computer what to do!\nMultiple “scales” possible"
+  },
+  {
+    "objectID": "slides/03-slides.html#why-literate-programming",
+    "href": "slides/03-slides.html#why-literate-programming",
+    "title": "Quarto, literate programming, and pseudocode",
+    "section": "Why literate programming?",
+    "text": "Why literate programming?\n\nYour analysis scripts are computer software\nIntegrate math, figures, code, and narrative in one place\nExplaining something helps you learn it"
+  },
+  {
+    "objectID": "slides/03-slides.html#pseudocode-and-literate-programming",
+    "href": "slides/03-slides.html#pseudocode-and-literate-programming",
+    "title": "Quarto, literate programming, and pseudocode",
+    "section": "Pseudocode and literate programming",
+    "text": "Pseudocode and literate programming\n\nAn informal way of writing the ‘logic’ of your program\nBalance between readability and precision\nAvoid syntactic drift"
+  },
+  {
+    "objectID": "slides/03-slides.html#writing-pseudocode",
+    "href": "slides/03-slides.html#writing-pseudocode",
+    "title": "Quarto, literate programming, and pseudocode",
+    "section": "Writing pseudocode",
+    "text": "Writing pseudocode\n\n\n\nFocus on statements\nMathematical operations\nConditionals\nIteration\nExceptions"
+  },
+  {
+    "objectID": "slides/03-slides.html#what-is-quarto",
+    "href": "slides/03-slides.html#what-is-quarto",
+    "title": "Quarto, literate programming, and pseudocode",
+    "section": "What is Quarto?",
+    "text": "What is Quarto?\n\nA multi-language platform for developing reproducible documents\nA ‘lab notebook’ for your analyses\nAllows transparent, reproducible scientific reports and presentations"
+  },
+  {
+    "objectID": "slides/03-slides.html#key-components",
+    "href": "slides/03-slides.html#key-components",
+    "title": "Quarto, literate programming, and pseudocode",
+    "section": "Key components",
+    "text": "Key components\n\nMetadata and global options: YAML\nText, figures, and tables: Markdown and LaTeX\nCode: knitr (or jupyter if you’re into that sort of thing)"
+  },
+  {
+    "objectID": "slides/03-slides.html#yaml---yet-another-markup-language",
+    "href": "slides/03-slides.html#yaml---yet-another-markup-language",
+    "title": "Quarto, literate programming, and pseudocode",
+    "section": "YAML - Yet Another Markup Language",
+    "text": "YAML - Yet Another Markup Language\n\nAllows you to set (or change) output format\nProvide options that apply to the entire document\nSpacing matters!\n\n ## Formatting Text\n\nBasic formatting via Markdown\nFancier options using Divs and spans via Pandoc\nFenced Divs start and end with ::: (can be any number >3 but must match)"
+  },
+  {
+    "objectID": "slides/03-slides.html#adding-code-chunks",
+    "href": "slides/03-slides.html#adding-code-chunks",
+    "title": "Quarto, literate programming, and pseudocode",
+    "section": "Adding Code Chunks",
+    "text": "Adding Code Chunks\n\nUse 3x ``` on each end\nInclude the engine {r} (or python or Julia)\nInclude options beneath the “fence” using a hashpipe (#|)"
   },
   {
     "objectID": "slides/04-slides.html#objectives",

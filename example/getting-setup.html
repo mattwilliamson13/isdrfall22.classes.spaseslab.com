@@ -299,7 +299,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#quarto" id="toc-quarto" class="nav-link" data-scroll-target="#quarto">Quarto</a></li>
   <li><a href="#the-example" id="toc-the-example" class="nav-link" data-scroll-target="#the-example">The Example</a>
   <ul class="collapse">
-  <li><a href="#setup-1" id="toc-setup-1" class="nav-link" data-scroll-target="#setup-1">Setup #1</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
   <li><a href="#pseudocode" id="toc-pseudocode" class="nav-link" data-scroll-target="#pseudocode">Pseudocode</a></li>
   <li><a href="#programming" id="toc-programming" class="nav-link" data-scroll-target="#programming">Programming</a></li>
   <li><a href="#rendering-the-document" id="toc-rendering-the-document" class="nav-link" data-scroll-target="#rendering-the-document">Rendering the document</a></li>
@@ -423,14 +423,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="the-example" class="level2">
 <h2 class="anchored" data-anchor-id="the-example">The Example</h2>
-<section id="setup-1" class="level3">
-<h3 class="anchored" data-anchor-id="setup-1">Setup #1</h3>
+<section id="setup" class="level3">
+<h3 class="anchored" data-anchor-id="setup">Setup</h3>
+<p>The University of Exeter has been conducting an <a href="https://exeterssis.eu.qualtrics.com/jfe/form/SV_3fOLbEP4wVLDn2R">ongoing survey</a> to understand the age at which the belief in Santa Claus begins to drop off. A sample of the data is located in your <code>assignment01</code> folder. Our task is to bring the data into R, conduct some preliminary exploration of the data, and then fit a model to the data to see if age predicts belief in Santa. We’ll start by branching off of the <code>master</code> Quarto doc in our GitHub repo and then work through the steps together.</p>
 </section>
 <section id="pseudocode" class="level3">
 <h3 class="anchored" data-anchor-id="pseudocode">Pseudocode</h3>
+<p>Before we get started, let’s sketch out the steps in our analysis using pseudocode.</p>
+<div class="cell">
+
+</div>
 </section>
 <section id="programming" class="level3">
 <h3 class="anchored" data-anchor-id="programming">Programming</h3>
+<p>Now that we have the basic steps in place, let’s transform the pseudocode into a repeatable Quarto document that explains what we’re doing, why, and what we found.</p>
 </section>
 <section id="rendering-the-document" class="level3">
 <h3 class="anchored" data-anchor-id="rendering-the-document">Rendering the document</h3>
@@ -679,14 +685,25 @@ You can create new Quarto documents by going to File &gt;&gt; New File &gt;&gt; 
 
 ## The Example
 
-### Setup #1
+### Setup 
 
+The University of Exeter has been conducting an [ongoing survey](https://exeterssis.eu.qualtrics.com/jfe/form/SV_3fOLbEP4wVLDn2R) to understand the age at which the belief in Santa Claus begins to drop off. A sample of the data is located in your `assignment01` folder. Our task is to bring the data into R, conduct some preliminary exploration of the data, and then fit a model to the data to see if age predicts belief in Santa. We'll start by branching off of the `master` Quarto doc in our GitHub repo and then work through the steps together. 
 
 ### Pseudocode
 
+Before we get started, let's sketch out the steps in our analysis using pseudocode.
+
+quarto-executable-code-5450563D
+
+```r
+#| eval: false
+#| echo: true
+
+```
 
 ### Programming
 
+Now that we have the basic steps in place, let's transform the pseudocode into a repeatable Quarto document that explains what we're doing, why, and what we found.
 
 ### Rendering the document
 

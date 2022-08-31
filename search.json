@@ -830,84 +830,112 @@
     "href": "slides/04-slides.html#what-are-functions",
     "title": "Repetitive Tasks and Functional Programming",
     "section": "What are functions?",
-    "text": "What are functions?"
+    "text": "What are functions?\n\nA specific class of R object (can call function inside functions)\n\n\nrg <- paste(\"The range of mpg is\", sum(mean(mtcars$mpg), sd(mtcars$mpg)), \"-\", sum(mean(mtcars$mpg), -sd(mtcars$mpg)))\nrg\n\n[1] \"The range of mpg is 26.1175730520891 - 14.0636769479109\"\n\n\n\nA self-contained (i.e., modular) piece of code that performs a specific task\nAllows powerful customization and extension of R"
   },
   {
     "objectID": "slides/04-slides.html#why-use-functions",
     "href": "slides/04-slides.html#why-use-functions",
     "title": "Repetitive Tasks and Functional Programming",
     "section": "Why use functions?",
-    "text": "Why use functions?"
+    "text": "Why use functions?\n\nCopy-and-paste and repetitive typing are prone to errors\nEvocative names and modular code make your analysis more tractable\nUpdate in one place!\n\n\nIf you are copy-and-pasting more than 2x, consider a function!"
   },
   {
-    "objectID": "slides/04-slides.html#key-elements",
-    "href": "slides/04-slides.html#key-elements",
+    "objectID": "slides/04-slides.html#getting-started",
+    "href": "slides/04-slides.html#getting-started",
     "title": "Repetitive Tasks and Functional Programming",
-    "section": "Key elements",
-    "text": "Key elements"
+    "section": "Getting started",
+    "text": "Getting started\n\nSketch out the steps in the algorithm (pseudocode!)\nDevelop working code for each step\nAnonymize\n\n\ndo_something <- function(arg1, arg2, arg3){\n  intermediate_process <- manipulate(arg1,arg2, arg3)\n  clean_output <- cleanup(intermediate_process)\n  return(clean_output)\n}"
   },
   {
     "objectID": "slides/04-slides.html#structure-of-functions-names",
     "href": "slides/04-slides.html#structure-of-functions-names",
     "title": "Repetitive Tasks and Functional Programming",
     "section": "Structure of functions: Names",
-    "text": "Structure of functions: Names"
+    "text": "Structure of functions: Names\n\n\n\nWhat will your function do?\nShort, but clear!\nAvoid using reserved words or functions that already exist\nUse snake_case\n\n\n\nsomething <- function(...){\n}\n\n\nNot Great\n\n\ndo_something_ultraspecific <- function(...){\n}\n\n\nBetter\n\n\ndo_something <- function(...){\n}\n\n\nPretty good"
   },
   {
     "objectID": "slides/04-slides.html#structure-of-functions-arguments",
     "href": "slides/04-slides.html#structure-of-functions-arguments",
     "title": "Repetitive Tasks and Functional Programming",
     "section": "Structure of functions: Arguments",
-    "text": "Structure of functions: Arguments"
+    "text": "Structure of functions: Arguments\n\nProvide the data that the function will work on\nProvide other arguments that control the details of the computation (often with defaults)\nCalled by name or position (names should be descriptive)\n\n\nnums <- rnorm(n = 1000, mean=2, sd=1.5)\n\n\nSame As\n\n\nnums <- rnorm(1000, 2, 1.5)"
   },
   {
-    "objectID": "slides/04-slides.html#structure-of-functions-operations",
-    "href": "slides/04-slides.html#structure-of-functions-operations",
+    "objectID": "slides/04-slides.html#structure-of-functions-body",
+    "href": "slides/04-slides.html#structure-of-functions-body",
     "title": "Repetitive Tasks and Functional Programming",
-    "section": "Structure of functions: Operations",
-    "text": "Structure of functions: Operations"
+    "section": "Structure of functions: Body",
+    "text": "Structure of functions: Body\n\nThe body of the function appears between the {}\nThis is where the function does its work\n\n\n# Compute confidence interval around mean using normal approximation\nmean_ci <- function(x, conf = 0.95) {\n  se <- sd(x) / sqrt(length(x))\n  alpha <- 1 - conf\n  mean(x) + se * qnorm(c(alpha / 2, 1 - alpha / 2))\n}\n\nx <- runif(100)\nmean_ci(x)\n\n[1] 0.5218492 0.6361041\n\nmean_ci(x, conf = 0.99)\n\n[1] 0.5038984 0.6540549"
   },
   {
     "objectID": "slides/04-slides.html#structure-of-functions-return",
     "href": "slides/04-slides.html#structure-of-functions-return",
     "title": "Repetitive Tasks and Functional Programming",
     "section": "Structure of functions: Return",
-    "text": "Structure of functions: Return"
+    "text": "Structure of functions: Return\n\nDefault is to return the last argument evaluated\nCan use return() to return an earlier value\nCan use list to return multiple values\nA note on the Environment\n\n\nmean_ci <- function(x, conf = 0.95) {\n  se <- sd(x) / sqrt(length(x))\n  alpha <- 1 - conf\n  ci <- mean(x) + se * qnorm(c(alpha / 2, 1 - alpha / 2))\n  myresults <- list(alpha = alpha, ci = ci, se = se)\n  return(myresults)\n}\n\nci_result <- mean_ci(x)"
   },
   {
-    "objectID": "slides/04-slides.html#functions-in-functions",
-    "href": "slides/04-slides.html#functions-in-functions",
+    "objectID": "slides/04-slides.html#structure-of-functions-return-1",
+    "href": "slides/04-slides.html#structure-of-functions-return-1",
     "title": "Repetitive Tasks and Functional Programming",
-    "section": "Functions in functions",
-    "text": "Functions in functions"
+    "section": "Structure of functions: Return",
+    "text": "Structure of functions: Return\n\nstr(ci_result)\n\nList of 3\n $ alpha: num 0.05\n $ ci   : num [1:2] 0.522 0.636\n $ se   : num 0.0291"
   },
   {
-    "objectID": "slides/04-slides.html#tips-for-writing-functions",
-    "href": "slides/04-slides.html#tips-for-writing-functions",
+    "objectID": "slides/04-slides.html#iteration",
+    "href": "slides/04-slides.html#iteration",
     "title": "Repetitive Tasks and Functional Programming",
-    "section": "Tips for writing functions",
-    "text": "Tips for writing functions"
+    "section": "Iteration",
+    "text": "Iteration\n\nAnother tool for reducing code duplication\nIteration for when you need to repeat the same task on different columns or datasets\nImperative iteration uses loops (for and while)\nFunctional iteration combines functions with the apply family to break computational challenges into independent pieces."
   },
   {
     "objectID": "slides/04-slides.html#loops",
     "href": "slides/04-slides.html#loops",
     "title": "Repetitive Tasks and Functional Programming",
     "section": "Loops",
-    "text": "Loops"
+    "text": "Loops\n\nUse counters (for) or conditionals (while) to repeat a set of tasks\n3 key components\n\nOutput - before you can loop, you need a place to store the results\nSequence - defines what you are looping over\nBody - defines what the code is actually doing"
+  },
+  {
+    "objectID": "slides/04-slides.html#loops-1",
+    "href": "slides/04-slides.html#loops-1",
+    "title": "Repetitive Tasks and Functional Programming",
+    "section": "Loops",
+    "text": "Loops\n\nlibrary(tidyverse)\ndf <- tibble(\n  a = rnorm(10),\n  b = rnorm(10),\n  c = rnorm(10),\n  d = rnorm(10)\n)\n\noutput <- vector(\"double\", ncol(df))  # 1. output\nfor (i in seq_along(df)) {            # 2. sequence\n  output[[i]] <- median(df[[i]])      # 3. body\n}\noutput\n\n[1] -0.7281176  1.0055786 -0.6381822  0.2882859\n\n#> [1] -0.24576245 -0.28730721 -0.05669771  0.14426335"
   },
   {
     "objectID": "slides/04-slides.html#the-apply-family",
     "href": "slides/04-slides.html#the-apply-family",
     "title": "Repetitive Tasks and Functional Programming",
     "section": "The apply family",
-    "text": "The apply family"
+    "text": "The apply family\n\nVectorized functions that eliminate explicit for loops\nDiffer by the class they work on and the output they return\napply, lapply are most common; extensions for parallel processing (e.g., parallel::mclapply)"
+  },
+  {
+    "objectID": "slides/04-slides.html#the-apply-family-1",
+    "href": "slides/04-slides.html#the-apply-family-1",
+    "title": "Repetitive Tasks and Functional Programming",
+    "section": "The apply family",
+    "text": "The apply family\n\napply for vectors and data frames\nArgs: X for the data, MARGIN how will the function be applied, (1=rows, 2=columns), FUN for your function, ... for other arguments to the function\n\n\napply(mtcars, 2, mean)\n\n       mpg        cyl       disp         hp       drat         wt       qsec \n 20.090625   6.187500 230.721875 146.687500   3.596563   3.217250  17.848750 \n        vs         am       gear       carb \n  0.437500   0.406250   3.687500   2.812500"
+  },
+  {
+    "objectID": "slides/04-slides.html#the-apply-family-2",
+    "href": "slides/04-slides.html#the-apply-family-2",
+    "title": "Repetitive Tasks and Functional Programming",
+    "section": "The apply family",
+    "text": "The apply family\n\nlapply for lists (either input or output)\nArgs: X for the data, FUN for your function, ... for other arguments to the function\n\n\ndata <- list(item1 = 1:4, \n             item2 = rnorm(10), \n             item3 = rnorm(20, 1), \n             item4 = rnorm(100, 5))\n\n# get the mean of each list item \nlapply(data, mean)\n\n$item1\n[1] 2.5\n\n$item2\n[1] -0.6598225\n\n$item3\n[1] 0.8748926\n\n$item4\n[1] 4.988351"
   },
   {
     "objectID": "slides/04-slides.html#the-map-family",
     "href": "slides/04-slides.html#the-map-family",
     "title": "Repetitive Tasks and Functional Programming",
     "section": "The map family",
-    "text": "The map family"
+    "text": "The map family\n\nSimilar to apply, but more consistent input/output\nAll take a vector for input\nDifference is based on the output you expect\nIntegrates with tidyverse"
+  },
+  {
+    "objectID": "slides/04-slides.html#the-map-family-1",
+    "href": "slides/04-slides.html#the-map-family-1",
+    "title": "Repetitive Tasks and Functional Programming",
+    "section": "The map family",
+    "text": "The map family\n\nmap(): output is a list\nmap_int(): output is an integer vector\nmap_lgl(): output is a logical vector\nmap_dbl(): output is a double vector\nmap_chr(): output is a character vector\nmap_df(), map_dfr(), map_dfc(): output is a dataframe (r and c specify how to combine the data)"
   },
   {
     "objectID": "slides/06-slides.html#objectives",

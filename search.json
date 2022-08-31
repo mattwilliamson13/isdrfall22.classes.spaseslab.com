@@ -865,7 +865,7 @@
     "href": "slides/04-slides.html#structure-of-functions-body",
     "title": "Repetitive Tasks and Functional Programming",
     "section": "Structure of functions: Body",
-    "text": "Structure of functions: Body\n\nThe body of the function appears between the {}\nThis is where the function does its work\n\n\n# Compute confidence interval around mean using normal approximation\nmean_ci <- function(x, conf = 0.95) {\n  se <- sd(x) / sqrt(length(x))\n  alpha <- 1 - conf\n  mean(x) + se * qnorm(c(alpha / 2, 1 - alpha / 2))\n}\n\nx <- runif(100)\nmean_ci(x)\n\n[1] 0.5218492 0.6361041\n\nmean_ci(x, conf = 0.99)\n\n[1] 0.5038984 0.6540549"
+    "text": "Structure of functions: Body\n\nThe body of the function appears between the {}\nThis is where the function does its work\n\n\n# Compute confidence interval around mean using normal approximation\nmean_ci <- function(x, conf = 0.95) {\n  se <- sd(x) / sqrt(length(x))\n  alpha <- 1 - conf\n  mean(x) + se * qnorm(c(alpha / 2, 1 - alpha / 2))\n}\n\nx <- runif(100)\nmean_ci(x)\n\n[1] 0.4328836 0.5415704\n\nmean_ci(x, conf = 0.99)\n\n[1] 0.4158077 0.5586463"
   },
   {
     "objectID": "slides/04-slides.html#structure-of-functions-return",
@@ -879,7 +879,7 @@
     "href": "slides/04-slides.html#structure-of-functions-return-1",
     "title": "Repetitive Tasks and Functional Programming",
     "section": "Structure of functions: Return",
-    "text": "Structure of functions: Return\n\nstr(ci_result)\n\nList of 3\n $ alpha: num 0.05\n $ ci   : num [1:2] 0.522 0.636\n $ se   : num 0.0291"
+    "text": "Structure of functions: Return\n\nstr(ci_result)\n\nList of 3\n $ alpha: num 0.05\n $ ci   : num [1:2] 0.433 0.542\n $ se   : num 0.0277"
   },
   {
     "objectID": "slides/04-slides.html#iteration",
@@ -900,7 +900,7 @@
     "href": "slides/04-slides.html#loops-1",
     "title": "Repetitive Tasks and Functional Programming",
     "section": "Loops",
-    "text": "Loops\n\nlibrary(tidyverse)\ndf <- tibble(\n  a = rnorm(10),\n  b = rnorm(10),\n  c = rnorm(10),\n  d = rnorm(10)\n)\n\noutput <- vector(\"double\", ncol(df))  # 1. output\nfor (i in seq_along(df)) {            # 2. sequence\n  output[[i]] <- median(df[[i]])      # 3. body\n}\noutput\n\n[1] -0.7281176  1.0055786 -0.6381822  0.2882859\n\n#> [1] -0.24576245 -0.28730721 -0.05669771  0.14426335"
+    "text": "Loops\n\nlibrary(tidyverse)\ndf <- tibble(\n  a = rnorm(10),\n  b = rnorm(10),\n  c = rnorm(10),\n  d = rnorm(10)\n)\n\noutput <- vector(\"double\", ncol(df))  # 1. output\nfor (i in seq_along(df)) {            # 2. sequence\n  output[[i]] <- median(df[[i]])      # 3. body\n}\noutput\n\n[1] -0.5016472 -0.3887528  0.2770325  0.2178513\n\n#> [1] -0.24576245 -0.28730721 -0.05669771  0.14426335"
   },
   {
     "objectID": "slides/04-slides.html#the-apply-family",
@@ -921,7 +921,7 @@
     "href": "slides/04-slides.html#the-apply-family-2",
     "title": "Repetitive Tasks and Functional Programming",
     "section": "The apply family",
-    "text": "The apply family\n\nlapply for lists (either input or output)\nArgs: X for the data, FUN for your function, ... for other arguments to the function\n\n\ndata <- list(item1 = 1:4, \n             item2 = rnorm(10), \n             item3 = rnorm(20, 1), \n             item4 = rnorm(100, 5))\n\n# get the mean of each list item \nlapply(data, mean)\n\n$item1\n[1] 2.5\n\n$item2\n[1] -0.6598225\n\n$item3\n[1] 0.8748926\n\n$item4\n[1] 4.988351"
+    "text": "The apply family\n\nlapply for lists (either input or output)\nArgs: X for the data, FUN for your function, ... for other arguments to the function\n\n\ndata <- list(item1 = 1:4, \n             item2 = rnorm(10), \n             item3 = rnorm(20, 1), \n             item4 = rnorm(100, 5))\n\n# get the mean of each list item \nlapply(data, mean)\n\n$item1\n[1] 2.5\n\n$item2\n[1] -0.3173127\n\n$item3\n[1] 1.294093\n\n$item4\n[1] 5.088717"
   },
   {
     "objectID": "slides/04-slides.html#the-map-family",
@@ -936,6 +936,13 @@
     "title": "Repetitive Tasks and Functional Programming",
     "section": "The map family",
     "text": "The map family\n\nmap(): output is a list\nmap_int(): output is an integer vector\nmap_lgl(): output is a logical vector\nmap_dbl(): output is a double vector\nmap_chr(): output is a character vector\nmap_df(), map_dfr(), map_dfc(): output is a dataframe (r and c specify how to combine the data)"
+  },
+  {
+    "objectID": "slides/04-slides.html#some-parting-thoughts",
+    "href": "slides/04-slides.html#some-parting-thoughts",
+    "title": "Repetitive Tasks and Functional Programming",
+    "section": "Some parting thoughts",
+    "text": "Some parting thoughts\n\nTransparency vs. speed\nTesting\nMoving forward"
   },
   {
     "objectID": "slides/06-slides.html#objectives",

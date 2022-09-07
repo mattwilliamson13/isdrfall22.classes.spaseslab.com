@@ -221,7 +221,7 @@
     "href": "content/06-content.html#objectives",
     "title": "Spatial Data is Special Data",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today, you should be able to:\n\nDescribe several ways to load spatial data into R\nDefine a coordinate reference system and describe why it is important\nIdentify the different ways projections are expressed in R and gdal\nDescribe the other key elements of spatial data"
+    "text": "Objectives\nBy the end of today, you should be able to:\n\nArticulate why we care about space\nDescribe elements of spatial data\nDefine a coordinate reference system and its importance\nDescribe several ways to load spatial data into R\nIdentify, assign, and change projections R"
   },
   {
     "objectID": "content/06-content.html#slides",
@@ -949,7 +949,147 @@
     "href": "slides/06-slides.html#objectives",
     "title": "Spatial Data is Special Data",
     "section": "Objectives",
-    "text": "Objectives\n\nDescribe several ways to load spatial data into R\nDefine a coordinate reference system and describe why it is important\nIdentify the different ways projections are expressed in R and gdal\nDescribe the other key elements of spatial data"
+    "text": "Objectives\n\nArticulate why we care about space\nDescribe elements of spatial data\nDefine a coordinate reference system and its importance\nDescribe several ways to load spatial data into R\nIdentify projections in R"
+  },
+  {
+    "objectID": "slides/06-slides.html#locations-relations-and-understanding",
+    "href": "slides/06-slides.html#locations-relations-and-understanding",
+    "title": "Spatial Data is Special Data",
+    "section": "Locations, Relations, and Understanding",
+    "text": "Locations, Relations, and Understanding\n\nGeography uses location to understand how social and physical processes give rise to the environment we experience\nGeographic Information Systems provide a structure for storing, visualizing, and describing location data.\nGeoComputation and GIScience integrate math, stats, and high-performance computing to move beyond description."
+  },
+  {
+    "objectID": "slides/06-slides.html#location-lets-us-ask",
+    "href": "slides/06-slides.html#location-lets-us-ask",
+    "title": "Spatial Data is Special Data",
+    "section": "Location lets us ask:",
+    "text": "Location lets us ask:\n\nQuestions about geographic distribution\nQuestions about geographic interaction\nQuestions about geographic change\nQuestions about geographic association\nQuestions about causation?"
+  },
+  {
+    "objectID": "slides/06-slides.html#location-vs.-place",
+    "href": "slides/06-slides.html#location-vs.-place",
+    "title": "Spatial Data is Special Data",
+    "section": "Location vs. Place",
+    "text": "Location vs. Place\n\nPlace: an area having unique physical and human characteristics interconnected with other places\nLocation: the actual position on the earth’s surface\nSense of Place: the emotions someone attaches to an area based on experiences\nPlace is location plus meaning"
+  },
+  {
+    "objectID": "slides/06-slides.html#describing-location",
+    "href": "slides/06-slides.html#describing-location",
+    "title": "Spatial Data is Special Data",
+    "section": "Describing Location",
+    "text": "Describing Location\n\nnominal: (potentially contested) place names\nabsolute: the physical location on the earth’s surface"
+  },
+  {
+    "objectID": "slides/06-slides.html#describing-absolute-locations",
+    "href": "slides/06-slides.html#describing-absolute-locations",
+    "title": "Spatial Data is Special Data",
+    "section": "Describing Absolute Locations",
+    "text": "Describing Absolute Locations\n\nCoordinates: 2 or more measurements that specify location relative to a reference system\n\n\n\n\n\nCartesian coordinate system\norigin (O) = the point at which both measurement systems intersect\nAdaptable to multiple dimensions (e.g. z for altitude)\n\n\n\n\n\n\nCartesian Coordinate System"
+  },
+  {
+    "objectID": "slides/06-slides.html#locations-on-a-globe",
+    "href": "slides/06-slides.html#locations-on-a-globe",
+    "title": "Spatial Data is Special Data",
+    "section": "Locations on a Globe",
+    "text": "Locations on a Globe\n\nThe earth is not flat…\n\n\n\n\n\n\nLatitude and Longitude\n\n\n\n\n\nGlobal Reference Systems (GRS)\nGraticule: the grid formed by the intersection of longitude and latitude\nThe graticule is based on an ellipsoid model of earth’s surface and contained in the datum"
+  },
+  {
+    "objectID": "slides/06-slides.html#global-reference-systems",
+    "href": "slides/06-slides.html#global-reference-systems",
+    "title": "Spatial Data is Special Data",
+    "section": "Global Reference Systems",
+    "text": "Global Reference Systems\n\nThe datum describes which ellipsoid to use and the precise relations between locations on earth’s surface and Cartesian coordinates\n\n\nGeodetic datums (e.g., WGS84): distance from earth’s center of gravity\nLocal data (e.g., NAD83): better models for local variation in earth’s surface"
+  },
+  {
+    "objectID": "slides/06-slides.html#the-earth-is-not-flat",
+    "href": "slides/06-slides.html#the-earth-is-not-flat",
+    "title": "Spatial Data is Special Data",
+    "section": "The Earth is Not Flat",
+    "text": "The Earth is Not Flat\n\n\n\n\nBut maps, screens, and publications are…\nProjections describe how the data should be translated to a flat surface\nRely on ‘developable surfaces’\n\n\n\n\n\n\nDevelopable Surfaces\n\n\n\n\n\nProjection necessarily induces some form of distortion (tearing, compression, or shearing("
+  },
+  {
+    "objectID": "slides/06-slides.html#choosing-projections",
+    "href": "slides/06-slides.html#choosing-projections",
+    "title": "Spatial Data is Special Data",
+    "section": "Choosing Projections",
+    "text": "Choosing Projections\n\n\n\n\n\n\nSome projections minimize distortion of angle, area, or distance\nOthers attempt to avoid extreme distortion of any kind\nParticularly challenging for raster data"
+  },
+  {
+    "objectID": "slides/06-slides.html#choosing-projections-1",
+    "href": "slides/06-slides.html#choosing-projections-1",
+    "title": "Spatial Data is Special Data",
+    "section": "Choosing Projections",
+    "text": "Choosing Projections\n\nEqual-area for thematic maps\nConformal for presentations\nMercator or equidistant for navigation and distance"
+  },
+  {
+    "objectID": "slides/06-slides.html#data-types-and-r-packages",
+    "href": "slides/06-slides.html#data-types-and-r-packages",
+    "title": "Spatial Data is Special Data",
+    "section": "Data Types and R Packages",
+    "text": "Data Types and R Packages\n\n\nData Types\n\nVector Data\n\nPoint features\nLine features\nArea features (polygons)\n\nRaster Data\n\nSpatially continuous field\nBased on pixels (not points)"
+  },
+  {
+    "objectID": "slides/06-slides.html#mapping-loaction-coordinate-reference-systems",
+    "href": "slides/06-slides.html#mapping-loaction-coordinate-reference-systems",
+    "title": "Spatial Data is Special Data",
+    "section": "Mapping loaction: Coordinate Reference Systems",
+    "text": "Mapping loaction: Coordinate Reference Systems\n\nIncludes: Datum, ellipsoid, units, and other information (e.g., False Easting, Central Meridian) to further map the projection to the GCS\nNot all projections have/require all of the parameters\nR stores these data in several formats (EPSG, Proj, and WKT)\nLots of projection info available at spatialreference.org"
+  },
+  {
+    "objectID": "slides/06-slides.html#mapping-loaction-coordinate-reference-systems-1",
+    "href": "slides/06-slides.html#mapping-loaction-coordinate-reference-systems-1",
+    "title": "Spatial Data is Special Data",
+    "section": "Mapping loaction: Coordinate Reference Systems",
+    "text": "Mapping loaction: Coordinate Reference Systems\n\nPrimarily accessed using sf::st_crs() or terra::crs()\n\n\nf <- rast(system.file(\"ex/meuse.tif\", package=\"terra\"))\nnc <- st_read(system.file(\"shape/nc.shp\", package=\"sf\"))\nst_crs(nc)\ncrs(nc)"
+  },
+  {
+    "objectID": "slides/06-slides.html#mapping-location-extent",
+    "href": "slides/06-slides.html#mapping-location-extent",
+    "title": "Spatial Data is Special Data",
+    "section": "Mapping location: Extent",
+    "text": "Mapping location: Extent\n\nExtent: The amount of the Earth’s surface represented by the mapped features\n\nR has a very specific definition of extent: the rectangular region encompassed by the data"
+  },
+  {
+    "objectID": "slides/06-slides.html#using-r-to-access-the-extent",
+    "href": "slides/06-slides.html#using-r-to-access-the-extent",
+    "title": "Spatial Data is Special Data",
+    "section": "Using R to access the extent",
+    "text": "Using R to access the extent\n\nUsing st_bbox() from the sf package\n\n\nnc.shp <- st_read(system.file(\"shape/nc.shp\", package=\"sf\")) \n\nReading layer `nc' from data source \n  `/Library/Frameworks/R.framework/Versions/4.2/Resources/library/sf/shape/nc.shp' \n  using driver `ESRI Shapefile'\nSimple feature collection with 100 features and 14 fields\nGeometry type: MULTIPOLYGON\nDimension:     XY\nBounding box:  xmin: -84.32385 ymin: 33.88199 xmax: -75.45698 ymax: 36.58965\nGeodetic CRS:  NAD27\n\nmeuse.rst <- rast(system.file(\"ex/meuse.tif\", package=\"terra\"))\nst_bbox(nc.shp)\n\n     xmin      ymin      xmax      ymax \n-84.32385  33.88199 -75.45698  36.58965 \n\nst_bbox(meuse.rst)\n\n  xmin   ymin   xmax   ymax \n178400 329400 181600 334000"
+  },
+  {
+    "objectID": "slides/06-slides.html#using-r-to-access-the-extent-1",
+    "href": "slides/06-slides.html#using-r-to-access-the-extent-1",
+    "title": "Spatial Data is Special Data",
+    "section": "Using R to access the extent",
+    "text": "Using R to access the extent\n\nUsing ext() from the terra package\n\n\next(nc.shp)\n\nSpatExtent : -84.3238525390625, -75.4569778442383, 33.8819923400879, 36.5896492004395 (xmin, xmax, ymin, ymax)\n\next(meuse.rst)\n\nSpatExtent : 178400, 181600, 329400, 334000 (xmin, xmax, ymin, ymax)"
+  },
+  {
+    "objectID": "slides/06-slides.html#mapping-location-resolution",
+    "href": "slides/06-slides.html#mapping-location-resolution",
+    "title": "Spatial Data is Special Data",
+    "section": "Mapping location: Resolution",
+    "text": "Mapping location: Resolution\n\nResolution: the accuracy that the location and shape of a map’s features can be depicted\nMinimum Mapping Unit: The minimum size and dimensions that can be reliably represented at a given map scale.\nMap scale vs. scale of analysis"
+  },
+  {
+    "objectID": "slides/06-slides.html#mapping-location-resolution-1",
+    "href": "slides/06-slides.html#mapping-location-resolution-1",
+    "title": "Spatial Data is Special Data",
+    "section": "Mapping location: Resolution",
+    "text": "Mapping location: Resolution"
+  },
+  {
+    "objectID": "slides/06-slides.html#using-r-to-access-resolution",
+    "href": "slides/06-slides.html#using-r-to-access-resolution",
+    "title": "Spatial Data is Special Data",
+    "section": "Using R to access resolution",
+    "text": "Using R to access resolution\n\nThematically defined for vector datasets (check your metadata!!)\nUsing res() in terra\n\n\nf <- rast(system.file(\"ex/meuse.tif\", package=\"terra\"))\nres(f)\n\n[1] 40 40"
+  },
+  {
+    "objectID": "slides/06-slides.html#todays-goals",
+    "href": "slides/06-slides.html#todays-goals",
+    "title": "Spatial Data is Special Data",
+    "section": "Today’s goals",
+    "text": "Today’s goals\n\nArticulate why we care about space\nDescribe elements of spatial data\nDefine a coordinate reference system and its importance\nDescribe several ways to load spatial data into R\nIdentify projections in R"
   },
   {
     "objectID": "syllabus.html",

@@ -1120,6 +1120,132 @@
     "text": "Objectives\n\nArticulate the role of the data model in geographic information systems\nDescribe the key elements of vector data\nUse the sf package to read and manipulate vector data\nDefine geometry in the context of vector objects and troubleshoot common problems"
   },
   {
+    "objectID": "slides/07-slides.html#what-is-a-data-model",
+    "href": "slides/07-slides.html#what-is-a-data-model",
+    "title": "Spatial Data as Vectors",
+    "section": "What is a data model?",
+    "text": "What is a data model?\n\n\nData: a collection of discrete values that describe phenomena\nYour brain stores millions of pieces of data\nComputers are not your brain\n\nNeed to organize data systematically\nBe able to display and access efficiently\nNeed to be able to store and access repeatedly\n\nData models solve this problem"
+  },
+  {
+    "objectID": "slides/07-slides.html#types-of-spatial-data-models",
+    "href": "slides/07-slides.html#types-of-spatial-data-models",
+    "title": "Spatial Data as Vectors",
+    "section": "2 Types of Spatial Data Models",
+    "text": "2 Types of Spatial Data Models\n\nRaster: grid-cell tessellation of an area. Each raster describes the value of a single phenomenon. More next week…\nVector: (many) attributes associated with locations defined by coordinates"
+  },
+  {
+    "objectID": "slides/07-slides.html#the-vector-data-model",
+    "href": "slides/07-slides.html#the-vector-data-model",
+    "title": "Spatial Data as Vectors",
+    "section": "The Vector Data Model",
+    "text": "The Vector Data Model\n\n\n\n\nVertices (i.e., discrete x-y locations) define the shape of the vector\nThe organization of those vertices define the shape of the vector\nGeneral types: points, lines, polygons\n\n\n\n\n\n\nImage Source: Colin Williams (NEON)"
+  },
+  {
+    "objectID": "slides/07-slides.html#vectors-in-action",
+    "href": "slides/07-slides.html#vectors-in-action",
+    "title": "Spatial Data as Vectors",
+    "section": "Vectors in Action",
+    "text": "Vectors in Action\n\n\nUseful for locations with discrete, well-defined boundaries\nVery precise (not necessarily accurate)\nNot the same as the vector data class\n\n\n\nImage Source: QGIS User’s manual"
+  },
+  {
+    "objectID": "slides/07-slides.html#representing-vector-data-in-r",
+    "href": "slides/07-slides.html#representing-vector-data-in-r",
+    "title": "Spatial Data as Vectors",
+    "section": "Representing vector data in R",
+    "text": "Representing vector data in R\n\n\n\n\n\nFrom Lovelace et al.\n\n\n\n\n\nsf hierarchy reflects increasing complexity of geometry\n\nst_point, st_linestring, st_polygon for single features\nst_multi* for multiple features of the same type\nst_geometrycollection for multiple feature types\nst_as_sfc creates the geometry list column for many sf operations"
+  },
+  {
+    "objectID": "slides/07-slides.html#points",
+    "href": "slides/07-slides.html#points",
+    "title": "Spatial Data as Vectors",
+    "section": "Points",
+    "text": "Points\n\nlibrary(sf)\nproj <- st_crs('+proj=longlat +datum=WGS84')\nlong <- c(-116.7, -120.4, -116.7, -113.5, -115.5, -120.8, -119.5, -113.7, -113.7, -110.7)\nlat <- c(45.3, 42.6, 38.9, 42.1, 35.7, 38.9, 36.2, 39, 41.6, 36.9)\nst_multipoint(cbind(long, lat)) %>% st_sfc(., crs = proj)\n\nGeometry set for 1 feature \nGeometry type: MULTIPOINT\nDimension:     XY\nBounding box:  xmin: -120.8 ymin: 35.7 xmax: -110.7 ymax: 45.3\nCRS:           +proj=longlat +datum=WGS84"
+  },
+  {
+    "objectID": "slides/07-slides.html#points-1",
+    "href": "slides/07-slides.html#points-1",
+    "title": "Spatial Data as Vectors",
+    "section": "Points",
+    "text": "Points\n\nplot(st_multipoint(cbind(long, lat)) %>% \n                   st_sfc(., crs = proj))"
+  },
+  {
+    "objectID": "slides/07-slides.html#lines",
+    "href": "slides/07-slides.html#lines",
+    "title": "Spatial Data as Vectors",
+    "section": "Lines",
+    "text": "Lines\n\nlon <- c(-116.8, -114.2, -112.9, -111.9, -114.2, -115.4, -117.7)\nlat <- c(41.3, 42.9, 42.4, 39.8, 37.6, 38.3, 37.6)\nlonlat <- cbind(lon, lat)\npts <- st_multipoint(lonlat)\n\nsfline <- st_multilinestring(list(pts[1:3,], pts[4:7,]))\nstr(sfline)\n\nList of 2\n $ : num [1:3, 1:2] -116.8 -114.2 -112.9 41.3 42.9 ...\n  ..- attr(*, \"dimnames\")=List of 2\n  .. ..$ : NULL\n  .. ..$ : chr [1:2] \"lon\" \"lat\"\n $ : num [1:4, 1:2] -111.9 -114.2 -115.4 -117.7 39.8 ...\n  ..- attr(*, \"dimnames\")=List of 2\n  .. ..$ : NULL\n  .. ..$ : chr [1:2] \"lon\" \"lat\"\n - attr(*, \"class\")= chr [1:3] \"XY\" \"MULTILINESTRING\" \"sfg\""
+  },
+  {
+    "objectID": "slides/07-slides.html#lines-1",
+    "href": "slides/07-slides.html#lines-1",
+    "title": "Spatial Data as Vectors",
+    "section": "Lines",
+    "text": "Lines\n\nplot(st_multilinestring(list(pts[1:3,], pts[4:7,])))"
+  },
+  {
+    "objectID": "slides/07-slides.html#polygons",
+    "href": "slides/07-slides.html#polygons",
+    "title": "Spatial Data as Vectors",
+    "section": "Polygons",
+    "text": "Polygons\n\nouter = matrix(c(0,0,10,0,10,10,0,10,0,0),ncol=2, byrow=TRUE)\nhole1 = matrix(c(1,1,1,2,2,2,2,1,1,1),ncol=2, byrow=TRUE)\nhole2 = matrix(c(5,5,5,6,6,6,6,5,5,5),ncol=2, byrow=TRUE)\ncoords = list(outer, hole1, hole2)\npl1 = st_polygon(coords)"
+  },
+  {
+    "objectID": "slides/07-slides.html#polygons-1",
+    "href": "slides/07-slides.html#polygons-1",
+    "title": "Spatial Data as Vectors",
+    "section": "Polygons",
+    "text": "Polygons\n\nplot(pl1)"
+  },
+  {
+    "objectID": "slides/07-slides.html#but-what-about-actual-data",
+    "href": "slides/07-slides.html#but-what-about-actual-data",
+    "title": "Spatial Data as Vectors",
+    "section": "But what about actual data?",
+    "text": "But what about actual data?\n\nConvert a data frame to sf object\n\nUseful for situations where point locations given as columns in spreadsheet\nRequires that you the projection used when the data were collected\nUsing the meuse dataset (use ?sp::meuse to learn more about it)\n\n\n\nlibrary(sp)\ndata(meuse)\nhead(meuse, n=3)[,1:10]\n\n       x      y cadmium copper lead zinc  elev       dist   om ffreq\n1 181072 333611    11.7     85  299 1022 7.909 0.00135803 13.6     1\n2 181025 333558     8.6     81  277 1141 6.983 0.01222430 14.0     1\n3 181165 333537     6.5     68  199  640 7.800 0.10302900 13.0     1"
+  },
+  {
+    "objectID": "slides/07-slides.html#plotting-sf-objects",
+    "href": "slides/07-slides.html#plotting-sf-objects",
+    "title": "Spatial Data as Vectors",
+    "section": "Plotting sf objects",
+    "text": "Plotting sf objects\n\nQuick way to check your data\nRemember that sf has geometry and attributes\n\n\nplot(meuse_sf)"
+  },
+  {
+    "objectID": "slides/07-slides.html#plotting-sf-objects-1",
+    "href": "slides/07-slides.html#plotting-sf-objects-1",
+    "title": "Spatial Data as Vectors",
+    "section": "Plotting sf objects",
+    "text": "Plotting sf objects\n\nplot(meuse_sf['lead'])"
+  },
+  {
+    "objectID": "slides/07-slides.html#plotting-sf-objects-2",
+    "href": "slides/07-slides.html#plotting-sf-objects-2",
+    "title": "Spatial Data as Vectors",
+    "section": "Plotting sf objects",
+    "text": "Plotting sf objects\n\nplot(st_geometry(meuse_sf))"
+  },
+  {
+    "objectID": "slides/07-slides.html#common-problems-with-vector-data",
+    "href": "slides/07-slides.html#common-problems-with-vector-data",
+    "title": "Spatial Data as Vectors",
+    "section": "Common Problems with Vector Data",
+    "text": "Common Problems with Vector Data\n\n\n\n\nVectors and scale\nSlivers and overlaps\nUndershoots and overshoots\nSelf-intersections and rings\n\n\n\n\n\n\nTopology Errors - Saylor Acad.\n\n\n\n\n\nWe’ll use st_is_valid() to check this, but fixing can be tricky"
+  },
+  {
+    "objectID": "slides/07-slides.html#fixing-problematic-topology",
+    "href": "slides/07-slides.html#fixing-problematic-topology",
+    "title": "Spatial Data as Vectors",
+    "section": "Fixing Problematic Topology",
+    "text": "Fixing Problematic Topology\n\nst_make_valid() for simple cases\nst_buffer with dist=0\nMore complex errors need more complex approaches"
+  },
+  {
+    "objectID": "slides/07-slides.html#a-note-on-vectors",
+    "href": "slides/07-slides.html#a-note-on-vectors",
+    "title": "Spatial Data as Vectors",
+    "section": "A Note on Vectors",
+    "text": "A Note on Vectors\n\nMoving forward we will rely primarily on the sf package for vector manipulation. Some packages require objects to be a different class. terra, for example, relies on SpatVectors. You can use as() to coerce objects from one type to another (assuming a method exists). You can also explore other packages. Many packages provide access to the ‘spatial’ backbones of R (like geos and gdal), they just differ in how the “verbs” are specified. For sf operations the st_ prefix is typical. For rgeos operations, the g prefix is common."
+  },
+  {
     "objectID": "syllabus.html",
     "href": "syllabus.html",
     "title": "Syllabus",

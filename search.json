@@ -252,6 +252,27 @@
     "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\nGeography\n\n\nProjections\n\n\nSpatial Data in R"
   },
   {
+    "objectID": "content/08-content.html",
+    "href": "content/08-content.html",
+    "title": "Operations on Vector Data I",
+    "section": "",
+    "text": "We are going to continue building on the use of the vector data model so we’ll keep working through the readings from last session.\n\n The introductory vignette for the sf package has a lot of useful info on sf objects and conventions.\n Section 2.2 on Vector Data and Sections 5.1-5.3 on Geographic Operations in Lovelace et al. (Lovelace et al. 2019) - for more details about vectors and geometric operations on vectors.\n Section 3.1 and 3.2 of Spatial Data Science, a bookdown project by Edzer Pebesma and Roger Bivand (of the sf, sp, rgeos, and rgdal packages)"
+  },
+  {
+    "objectID": "content/08-content.html#objectives",
+    "href": "content/08-content.html#objectives",
+    "title": "Operations on Vector Data I",
+    "section": "Objectives",
+    "text": "Objectives\nBy the end of today, you should be able to:\n\nDefine valid geometries and approaches for validating geometries in R\nUnderstand predicates and measures in the context of spatial operations in sf\nUse st_* to evaluate attributes of geometries and calculate measurements"
+  },
+  {
+    "objectID": "content/08-content.html#slides",
+    "href": "content/08-content.html#slides",
+    "title": "Operations on Vector Data I",
+    "section": "Slides",
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\nValid Geometries\n\n\nPredicates\n\n\nMeasurements"
+  },
+  {
     "objectID": "content/index.html",
     "href": "content/index.html",
     "title": "Readings and slides",
@@ -1244,6 +1265,76 @@
     "title": "Spatial Data as Vectors",
     "section": "A Note on Vectors",
     "text": "A Note on Vectors\n\nMoving forward we will rely primarily on the sf package for vector manipulation. Some packages require objects to be a different class. terra, for example, relies on SpatVectors. You can use as() to coerce objects from one type to another (assuming a method exists). You can also explore other packages. Many packages provide access to the ‘spatial’ backbones of R (like geos and gdal), they just differ in how the “verbs” are specified. For sf operations the st_ prefix is typical. For rgeos operations, the g prefix is common."
+  },
+  {
+    "objectID": "slides/08-slides.html#objectives",
+    "href": "slides/08-slides.html#objectives",
+    "title": "Vector Operations Part 1",
+    "section": "Objectives",
+    "text": "Objectives\nBy the end of today, you should be able to:\n\nDefine valid geometries and approaches for assessing geometries in R\nUnderstand predicates and measures in the context of spatial operations in sf\nUse st_* and sf_* to evaluate attributes of geometries and calculate measurements"
+  },
+  {
+    "objectID": "slides/08-slides.html#revisiting-simple-features",
+    "href": "slides/08-slides.html#revisiting-simple-features",
+    "title": "Vector Operations Part 1",
+    "section": "Revisiting Simple Features",
+    "text": "Revisiting Simple Features\n\n\n\n\nThe sf package relies on a simple feature data model to represent geometries\n\nhierarchical\nstandardized methods\ncomplementary binary and human-readable encoding\n\n\n\n\n\n\n\n\n\n\n\n\ntype\ndescription\n\n\n\n\nPOINT\nsingle point geometry\n\n\nMULTIPOINT\nset of points\n\n\nLINESTRING\nsingle linestring (two or more points connected by straight lines)\n\n\nMULTILINESTRING\nset of linestrings\n\n\nPOLYGON\nexterior ring with zero or more inner rings, denoting holes\n\n\nMULTIPOLYGON\nset of polygons\n\n\nGEOMETRYCOLLECTION\nset of the geometries above"
+  },
+  {
+    "objectID": "slides/08-slides.html#standaridized-methods",
+    "href": "slides/08-slides.html#standaridized-methods",
+    "title": "Vector Operations Part 1",
+    "section": "Standaridized Methods",
+    "text": "Standaridized Methods\n\nWe can categorize sf operations based on what they return and/or how many geometries they accept as input.\n\n\n\n\n\nOutput Categories\n\nPredicates: evaluate a logical statement asserting that a property is TRUE\nMeasures: return a numeric value with units based on the units of the CRS\nTransformations: create new geometries based on input geometries.\n\n\n\n\n\n\nInput Geometries\n\nUnary: operate on a single geometry at a time (meaning that if you have a MULTI* object the function works on each geometry individually)\nBinary: operate on pairs of geometries\nn-ary: operate on sets of geometries"
+  },
+  {
+    "objectID": "slides/08-slides.html#remembering-valid-geometries",
+    "href": "slides/08-slides.html#remembering-valid-geometries",
+    "title": "Vector Operations Part 1",
+    "section": "Remembering Valid Geometries",
+    "text": "Remembering Valid Geometries\n\nA linestring is simple if it does not intersect\n\n\n\n\nlibrary(sf)\n(ls = st_linestring(rbind(c(0,0), c(1,1), \n                          c(2,2), c(0,2), \n                          c(1,1), c(2,0))))\nc(is_simple = st_is_simple(ls))\n\nis_simple \n    FALSE"
+  },
+  {
+    "objectID": "slides/08-slides.html#remembering-valid-geometries-1",
+    "href": "slides/08-slides.html#remembering-valid-geometries-1",
+    "title": "Vector Operations Part 1",
+    "section": "Remembering Valid Geometries",
+    "text": "Remembering Valid Geometries\n\n\n\n\nValid polygons\n\nAre closed (i.e., the last vertex equals the first)\nHave holes (inner rings) that inside the the exterior boundary\nHave holes that touch the exterior at no more than one vertex (they don’t extend across a line)\n\nFor multipolygons, adjacent polygons touch only at points\n\nDo not repeat their own path"
+  },
+  {
+    "objectID": "slides/08-slides.html#empty-geometries",
+    "href": "slides/08-slides.html#empty-geometries",
+    "title": "Vector Operations Part 1",
+    "section": "Empty Geometries",
+    "text": "Empty Geometries\n\nEmpty geometries arise when an operation produces NULL outcomes (like looking for the intersection between two non-intersecting polygons)\nsf allows empty geometries to make sure that information about the data type is retained\nSimilar to a data.frame with no rows or a list with NULL values\nMost vector operations require simple, valid geometries"
+  },
+  {
+    "objectID": "slides/08-slides.html#using-unary-predicates",
+    "href": "slides/08-slides.html#using-unary-predicates",
+    "title": "Vector Operations Part 1",
+    "section": "Using Unary Predicates",
+    "text": "Using Unary Predicates\n\nUnary predicates accept single geometries (or geometry collections)\nProvide helpful ways to check whether your data is ready to analyze\nUse the st_ prefix and return TRUE/FALSE\n\n\n\n\n\n\n\n\n\npredicate\nasks…\n\n\n\n\nis_simple\nis the geometry self-intersecting (i.e., simple)?\n\n\nis_valid\nis the geometry valid?\n\n\nis_empty\nis the geometry column of an object empty?\n\n\nis_longlat\ndoes the object have geographic coordinates? (FALSE if coords are projected, NA if no crs)\n\n\nis(geometry, class)\nis the geometry of a particular class?"
+  },
+  {
+    "objectID": "slides/08-slides.html#using-unary-predicates-1",
+    "href": "slides/08-slides.html#using-unary-predicates-1",
+    "title": "Vector Operations Part 1",
+    "section": "Using Unary Predicates",
+    "text": "Using Unary Predicates\n\n\n\nnc <- st_read(\n  system.file(\"shape/nc.shp\", package=\"sf\"), \n  quiet=TRUE)\nplot(st_geometry(nc))\n\n\n\n\n\n\nst_is_longlat(nc)\n\n[1] TRUE\n\nany(is.na(st_is_valid(nc)))\n\n[1] FALSE"
+  },
+  {
+    "objectID": "slides/08-slides.html#checking-geometries-with-unary-predicates",
+    "href": "slides/08-slides.html#checking-geometries-with-unary-predicates",
+    "title": "Vector Operations Part 1",
+    "section": "Checking Geometries With Unary Predicates",
+    "text": "Checking Geometries With Unary Predicates\n\nBefore conducting costly analyses, it’s worth checking for:\n\n\n\nempty geometries, using any(is.na(st_dimension(x)))\ncorrupt geometries, using any(is.na(st_is_valid(x)))\ninvalid geometries, using any(na.omit(st_is_valid(x)) == FALSE); in case of corrupt and/or invalid geometries,\nin case of invalid geometries, query the reason for invalidity by st_is_valid(x, reason = TRUE)\n\n\nInvalid geometries will require transformation (next week!)"
+  },
+  {
+    "objectID": "slides/08-slides.html#binary-predicates-1",
+    "href": "slides/08-slides.html#binary-predicates-1",
+    "title": "Vector Operations Part 1",
+    "section": "Binary Predicates",
+    "text": "Binary Predicates\n\n\nAccept exactly two geometries (or collections)\nAlso return logical outcomes\n\n\n\n\n\n\n\n\n\n\n\npredicate\nmeaning\ninverse of\n\n\n\n\ncontains\nNone of the points of A are outside B\nwithin\n\n\ncontains_properly\nA contains B and B has no points in common with the boundary of A\n\n\n\ncovers\nNo points of B lie in the exterior of A\ncovered_by\n\n\ncovered_by\nInverse of covers\n\n\n\ncrosses\nA and B have some but not all interior points in common\n\n\n\ndisjoint\nA and B have no points in common\nintersects\n\n\nequals\nA and B are topologically equal: node order or number of nodes may differ; identical to A contains B AND A within B\n\n\n\nequals_exact\nA and B are geometrically equal, and have identical node order\n\n\n\nintersects\nA and B are not disjoint\ndisjoint\n\n\nis_within_distance\nA is closer to B than a given distance\n\n\n\nwithin\nNone of the points of B are outside A\ncontains\n\n\ntouches\nA and B have at least one boundary point in common, but no interior points\n\n\n\noverlaps\nA and B have some points in common; the dimension of these is identical to that of A and B\n\n\n\nrelate\ngiven a mask pattern, return whether A and B adhere to this pattern"
   },
   {
     "objectID": "syllabus.html",

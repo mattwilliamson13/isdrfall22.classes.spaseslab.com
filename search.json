@@ -1271,7 +1271,7 @@
     "href": "slides/08-slides.html#objectives",
     "title": "Vector Operations Part 1",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today, you should be able to:\n\nDefine valid geometries and approaches for assessing geometries in R\nUnderstand predicates and measures in the context of spatial operations in sf\nUse st_* and sf_* to evaluate attributes of geometries and calculate measurements"
+    "text": "Objectives\nBy the end of today, you should be able to:\n\nUnderstand predicates and measures in the context of spatial operations in sf\nDefine valid geometries and approaches for assessing geometries in R\nUse st_* and sf_* to evaluate attributes of geometries and calculate measurements"
   },
   {
     "objectID": "slides/08-slides.html#revisiting-simple-features",
@@ -1334,7 +1334,14 @@
     "href": "slides/08-slides.html#binary-predicates-1",
     "title": "Vector Operations Part 1",
     "section": "Binary Predicates",
-    "text": "Binary Predicates\n\n\nAccept exactly two geometries (or collections)\nAlso return logical outcomes\n\n\n\n\n\n\n\n\n\n\n\npredicate\nmeaning\ninverse of\n\n\n\n\ncontains\nNone of the points of A are outside B\nwithin\n\n\ncontains_properly\nA contains B and B has no points in common with the boundary of A\n\n\n\ncovers\nNo points of B lie in the exterior of A\ncovered_by\n\n\ncovered_by\nInverse of covers\n\n\n\ncrosses\nA and B have some but not all interior points in common\n\n\n\ndisjoint\nA and B have no points in common\nintersects\n\n\nequals\nA and B are topologically equal: node order or number of nodes may differ; identical to A contains B AND A within B\n\n\n\nequals_exact\nA and B are geometrically equal, and have identical node order\n\n\n\nintersects\nA and B are not disjoint\ndisjoint\n\n\nis_within_distance\nA is closer to B than a given distance\n\n\n\nwithin\nNone of the points of B are outside A\ncontains\n\n\ntouches\nA and B have at least one boundary point in common, but no interior points\n\n\n\noverlaps\nA and B have some points in common; the dimension of these is identical to that of A and B\n\n\n\nrelate\ngiven a mask pattern, return whether A and B adhere to this pattern"
+    "text": "Binary Predicates\n\n\nAccept exactly two geometries (or collections)\nAlso return logical outcomes\nBased on the Dimensionally Extended 9-Intersection Model (DE-9IM)\n\n\n\n\n\n\npredicate\nmeaning\ninverse of\n\n\n\n\ncontains\nNone of the points of A are outside B\nwithin\n\n\ncontains_properly\nA contains B and B has no points in common with the boundary of A\n\n\n\ncovers\nNo points of B lie in the exterior of A\ncovered_by\n\n\ncovered_by\nInverse of covers\n\n\n\ncrosses\nA and B have some but not all interior points in common\n\n\n\ndisjoint\nA and B have no points in common\nintersects\n\n\nequals\nA and B are topologically equal: node order or number of nodes may differ; identical to A contains B AND A within B\n\n\n\nequals_exact\nA and B are geometrically equal, and have identical node order\n\n\n\nintersects\nA and B are not disjoint\ndisjoint\n\n\nis_within_distance\nA is closer to B than a given distance\n\n\n\nwithin\nNone of the points of B are outside A\ncontains\n\n\ntouches\nA and B have at least one boundary point in common, but no interior points\n\n\n\noverlaps\nA and B have some points in common; the dimension of these is identical to that of A and B\n\n\n\nrelate\ngiven a mask pattern, return whether A and B adhere to this pattern"
+  },
+  {
+    "objectID": "slides/08-slides.html#measures-1",
+    "href": "slides/08-slides.html#measures-1",
+    "title": "Vector Operations Part 1",
+    "section": "Measures",
+    "text": "Measures\nUnary Measures\n\nReturn quantities of individual geometries\n\n\n\n\n\n\n\n\n\nmeasure\nreturns\n\n\n\n\ndimension\n0 for points, 1 for linear, 2 for polygons, possibly NA for empty geometries\n\n\narea\nthe area of a geometry\n\n\nlength\nthe length of a linear geometry\n\n\n\n\nBinary Measures\n\nst_distance returns the distance between pairs of geometries"
   },
   {
     "objectID": "syllabus.html",

@@ -273,6 +273,27 @@
     "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\nValid Geometries\n\n\nPredicates\n\n\nMeasurements"
   },
   {
+    "objectID": "content/09-content.html",
+    "href": "content/09-content.html",
+    "title": "Operations on Vector Data II",
+    "section": "",
+    "text": "We are going to continue building on the use of the vector data model so we’ll keep working through the readings from last session.\n\n The introductory vignette for the sf package has a lot of useful info on sf objects and conventions.\n Section 2.2 on Vector Data and Sections 5.1-5.3 on Geographic Operations in Lovelace et al. (Lovelace et al. 2019) - for more details about vectors and geometric operations on vectors.\n Section 3.1 and 3.2 of Spatial Data Science, a bookdown project by Edzer Pebesma and Roger Bivand (of the sf, sp, rgeos, and rgdal packages)"
+  },
+  {
+    "objectID": "content/09-content.html#objectives",
+    "href": "content/09-content.html#objectives",
+    "title": "Operations on Vector Data II",
+    "section": "Objectives",
+    "text": "Objectives\nBy the end of today, you should be able to:\n\nComplete a workflow for identifying and remedying invalid geometries\nDescribe the various unary, binary, and n-ary transformers\nUse predicates and dplyr::filter to subset spatial data"
+  },
+  {
+    "objectID": "content/09-content.html#slides",
+    "href": "content/09-content.html#slides",
+    "title": "Operations on Vector Data II",
+    "section": "Slides",
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\nFinal Project\n\n\nTransformations\n\n\nSubsetting"
+  },
+  {
     "objectID": "content/index.html",
     "href": "content/index.html",
     "title": "Readings and slides",
@@ -1342,6 +1363,97 @@
     "title": "Vector Operations Part 1",
     "section": "Measures",
     "text": "Measures\nUnary Measures\n\nReturn quantities of individual geometries\n\n\n\n\n\n\n\n\n\nmeasure\nreturns\n\n\n\n\ndimension\n0 for points, 1 for linear, 2 for polygons, possibly NA for empty geometries\n\n\narea\nthe area of a geometry\n\n\nlength\nthe length of a linear geometry\n\n\n\n\nBinary Measures\n\nst_distance returns the distance between pairs of geometries"
+  },
+  {
+    "objectID": "slides/09-slides.html#your-final-project",
+    "href": "slides/09-slides.html#your-final-project",
+    "title": "Vector Operations Part 1I",
+    "section": "Your final project",
+    "text": "Your final project\n\nAt least 5 datasets total (1 tabular, 1 vector, 1 raster, and 2 of your choosing)\nChoose 1 statistical approach to address your research question\nVisualizations - minimum of 3. 1 location map; the others should help address your question\nSubmission formats\nA note about your discussion"
+  },
+  {
+    "objectID": "slides/09-slides.html#objectives",
+    "href": "slides/09-slides.html#objectives",
+    "title": "Vector Operations Part 1I",
+    "section": "Objectives",
+    "text": "Objectives\nBy the end of today, you should be able to:\n\nComplete a workflow for identifying and remedying invalid geometries\nDescribe the various unary, binary, and n-ary transformers\nUse predicates and dplyr::filter to subset spatial data"
+  },
+  {
+    "objectID": "slides/09-slides.html#revisiting-predicates-and-measures",
+    "href": "slides/09-slides.html#revisiting-predicates-and-measures",
+    "title": "Vector Operations Part 1I",
+    "section": "Revisiting predicates and measures",
+    "text": "Revisiting predicates and measures\n\nPredicates: evaluate a logical statement asserting that a property is TRUE\nMeasures: return a numeric value with units based on the units of the CRS\nUnary, binary, and n-ary distinguish how many geometries each function accepts and returns"
+  },
+  {
+    "objectID": "slides/09-slides.html#transformations",
+    "href": "slides/09-slides.html#transformations",
+    "title": "Vector Operations Part 1I",
+    "section": "Transformations",
+    "text": "Transformations\n\n\nTransformations: create new geometries based on input geometries"
+  },
+  {
+    "objectID": "slides/09-slides.html#unary-transformations",
+    "href": "slides/09-slides.html#unary-transformations",
+    "title": "Vector Operations Part 1I",
+    "section": "Unary Transformations",
+    "text": "Unary Transformations\n\n\n\n\n\n\n\n\ntransformer\nreturns a geometry …\n\n\n\n\ncentroid\nof type POINT with the geometry’s centroid\n\n\nbuffer\nthat is this larger (or smaller) than the input geometry, depending on the buffer size\n\n\njitter\nthat was moved in space a certain amount, using a bivariate uniform distribution\n\n\nwrap_dateline\ncut into pieces that do no longer cover the dateline\n\n\nboundary\nwith the boundary of the input geometry\n\n\nconvex_hull\nthat forms the convex hull of the input geometry\n\n\nline_merge\nafter merging connecting LINESTRING elements of a MULTILINESTRING into longer LINESTRINGs.\n\n\nmake_valid\nthat is valid\n\n\nnode\nwith added nodes to linear geometries at intersections without a node; only works on individual linear geometries\n\n\npoint_on_surface\nwith a (arbitrary) point on a surface\n\n\npolygonize\nof type polygon, created from lines that form a closed ring"
+  },
+  {
+    "objectID": "slides/09-slides.html#unary-transformations-contd",
+    "href": "slides/09-slides.html#unary-transformations-contd",
+    "title": "Vector Operations Part 1I",
+    "section": "Unary Transformations (cont’d)",
+    "text": "Unary Transformations (cont’d)\n\n\n\n\n\n\n\n\ntransformer\nreturns a geometry …\n\n\n\n\nsegmentize\na (linear) geometry with nodes at a given density or minimal distance\n\n\nsimplify\nsimplified by removing vertices/nodes (lines or polygons)\n\n\nsplit\nthat has been split with a splitting linestring\n\n\ntransform\ntransformed or convert to a new coordinate reference system (chapter @ref(cs))\n\n\ntriangulate\nwith Delauney triangulated polygon(s) (figure @ref(fig:vor))\n\n\nvoronoi\nwith the Voronoi tessellation of an input geometry (figure @ref(fig:vor))\n\n\nzm\nwith removed or added Z and/or M coordinates\n\n\ncollection_extract\nwith subgeometries from a GEOMETRYCOLLECTION of a particular type\n\n\ncast\nthat is converted to another type\n\n\n+\nthat is shifted over a given vector\n\n\n*\nthat is multiplied by a scalar or matrix"
+  },
+  {
+    "objectID": "slides/09-slides.html#common-uses-of-unary-transformers",
+    "href": "slides/09-slides.html#common-uses-of-unary-transformers",
+    "title": "Vector Operations Part 1I",
+    "section": "Common uses of Unary Transformers",
+    "text": "Common uses of Unary Transformers\n\nCreating valid geometries\nReprojecting your data\nCombining or changing geometries"
+  },
+  {
+    "objectID": "slides/09-slides.html#binary-transformers",
+    "href": "slides/09-slides.html#binary-transformers",
+    "title": "Vector Operations Part 1I",
+    "section": "Binary Transformers",
+    "text": "Binary Transformers\n\n\n\n\n\n\n\n\n\nfunction\nreturns\ninfix operator\n\n\n\n\nintersection\nthe overlapping geometries for pair of geometries\n&\n\n\nunion\nthe combination of the geometries; removes internal boundaries and duplicate points, nodes or line pieces\n|\n\n\ndifference\nthe geometries of the first after removing the overlap with the second geometry\n/\n\n\nsym_difference\nthe combinations of the geometries after removing where they intersect; the negation (opposite) of intersection\n%/%\n\n\ncrop\ncrop an sf object to a specific rectangle"
+  },
+  {
+    "objectID": "slides/09-slides.html#common-uses-of-binary-transformers",
+    "href": "slides/09-slides.html#common-uses-of-binary-transformers",
+    "title": "Vector Operations Part 1I",
+    "section": "Common Uses of Binary Transformers",
+    "text": "Common Uses of Binary Transformers\n\nRelating partially overlapping datasets to each other\nReducing the extent of vector objects"
+  },
+  {
+    "objectID": "slides/09-slides.html#n-ary-transformers",
+    "href": "slides/09-slides.html#n-ary-transformers",
+    "title": "Vector Operations Part 1I",
+    "section": "N-ary Transformers",
+    "text": "N-ary Transformers\n\nSimilar to Binary (except st_crop)\nunion can be applied to a set of geometries to return its geometrical union\nintersection and difference take a single argument, but operate (sequentially) on all pairs, triples, quadruples, etc."
+  },
+  {
+    "objectID": "slides/09-slides.html#subsetting-data-1",
+    "href": "slides/09-slides.html#subsetting-data-1",
+    "title": "Vector Operations Part 1I",
+    "section": "Subsetting Data",
+    "text": "Subsetting Data\n\nOften want to restrict analyses to particular locations\nCan combine predicates with [] to subset based on geography\nCan also use dplyr::filter and dplyr::select to subset using attributes"
+  },
+  {
+    "objectID": "slides/09-slides.html#using-predicates",
+    "href": "slides/09-slides.html#using-predicates",
+    "title": "Vector Operations Part 1I",
+    "section": "Using predicates",
+    "text": "Using predicates\n\nCan combine predicates with [] to subset based on topological relations\nx[y, , op = st_intersects]\nst_filter( x = x, y = y, .predicate = st_intersects)"
+  },
+  {
+    "objectID": "slides/09-slides.html#using-dplyr",
+    "href": "slides/09-slides.html#using-dplyr",
+    "title": "Vector Operations Part 1I",
+    "section": "Using dplyr",
+    "text": "Using dplyr\n\n\nfilter returns rows that match a criteria\nselect returns columns\n\n\n\n\n\nlibrary(tidyverse)\ndurham.cty <- nc %>% \n  filter(., NAME == \"Durham\")\n## We can also use the bracket approach\ndurham.cty2 <- nc[nc$NAME == \"Durham\",]\n\nplot(st_geometry(nc))\nplot(st_geometry(durham.cty), add=TRUE, col=\"blue\")\n\n\n\n\n\n\nnc.select <- nc %>% \n  select(., c(\"BIR79\", \"SID79\"))\nplot(nc.select)"
   },
   {
     "objectID": "syllabus.html",

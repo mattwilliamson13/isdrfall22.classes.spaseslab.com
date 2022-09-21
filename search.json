@@ -1547,6 +1547,13 @@
     "text": "Rasters in R\n\n\nraster - the original workhorse package; built on sp, rgdal, and rgeos\n\nRasterLayer, RasterStack, and RasterBrick classes\n\nterra - relatively new; developed by the raster folks, but designed to be much faster\n\nSpatRaster and SpatVector classes\n\nstars - developed by sf package developers; tidyverse compatible; designed for spatio-temporal data\n\nstars class\nCrosswalk between raster and stars is available here\nOnly way to deal with rectilinear and curvilinear data"
   },
   {
+    "objectID": "slides/10-slides.html#rasters-with-terra",
+    "href": "slides/10-slides.html#rasters-with-terra",
+    "title": "Spatial Data as Matrices and Rasters",
+    "section": "Rasters with terra",
+    "text": "Rasters with terra\n\nsyntax is different for terra compared to sf\nRepresentation in Environment is also different\nCan break pipes, Be Explicit"
+  },
+  {
     "objectID": "slides/10-slides.html#rasters-by-construction",
     "href": "slides/10-slides.html#rasters-by-construction",
     "title": "Spatial Data as Matrices and Rasters",
@@ -1575,11 +1582,32 @@
     "text": "Rasters from Files\n\nBuilding rasters useful for templates\nMore common to read from files\n\n\nr <- rast(system.file(\"ex/elev.tif\", package=\"terra\"))\nr\n\nclass       : SpatRaster \ndimensions  : 90, 95, 1  (nrow, ncol, nlyr)\nresolution  : 0.008333333, 0.008333333  (x, y)\nextent      : 5.741667, 6.533333, 49.44167, 50.19167  (xmin, xmax, ymin, ymax)\ncoord. ref. : lon/lat WGS 84 (EPSG:4326) \nsource      : elev.tif \nname        : elevation \nmin value   :       141 \nmax value   :       547"
   },
   {
-    "objectID": "slides/10-slides.html#accessing-raster-attributes",
-    "href": "slides/10-slides.html#accessing-raster-attributes",
+    "objectID": "slides/10-slides.html#accessing-raster-attributes-coordinate-reference-system",
+    "href": "slides/10-slides.html#accessing-raster-attributes-coordinate-reference-system",
     "title": "Spatial Data as Matrices and Rasters",
-    "section": "Accessing Raster Attributes",
-    "text": "Accessing Raster Attributes\n\nsyntax is different for terra compared to sf"
+    "section": "Accessing Raster Attributes: Coordinate Reference System",
+    "text": "Accessing Raster Attributes: Coordinate Reference System\n\nterra stores CRS in WKT format\nCan set and access using EPSG and proj (deprecated)\nPay attention to case\n\n\nr <- rast(system.file(\"ex/elev.tif\", package=\"terra\"))\ncrs(r)\n\n[1] \"GEOGCRS[\\\"WGS 84\\\",\\n    DATUM[\\\"World Geodetic System 1984\\\",\\n        ELLIPSOID[\\\"WGS 84\\\",6378137,298.257223563,\\n            LENGTHUNIT[\\\"metre\\\",1]]],\\n    PRIMEM[\\\"Greenwich\\\",0,\\n        ANGLEUNIT[\\\"degree\\\",0.0174532925199433]],\\n    CS[ellipsoidal,2],\\n        AXIS[\\\"geodetic latitude (Lat)\\\",north,\\n            ORDER[1],\\n            ANGLEUNIT[\\\"degree\\\",0.0174532925199433]],\\n        AXIS[\\\"geodetic longitude (Lon)\\\",east,\\n            ORDER[2],\\n            ANGLEUNIT[\\\"degree\\\",0.0174532925199433]],\\n    ID[\\\"EPSG\\\",4326]]\""
+  },
+  {
+    "objectID": "slides/10-slides.html#accessing-raster-attributes-coordinate-reference-system-1",
+    "href": "slides/10-slides.html#accessing-raster-attributes-coordinate-reference-system-1",
+    "title": "Spatial Data as Matrices and Rasters",
+    "section": "Accessing Raster Attributes: Coordinate Reference System",
+    "text": "Accessing Raster Attributes: Coordinate Reference System\n\nr <- rast(system.file(\"ex/elev.tif\", package=\"terra\"))\ncrs(r, describe=TRUE)\n\n    name authority code area         extent\n1 WGS 84      EPSG 4326 <NA> NA, NA, NA, NA\n\ncrs(r, proj=TRUE)\n\n[1] \"+proj=longlat +datum=WGS84 +no_defs\"\n\ncrs(r, parse=TRUE)\n\n [1] \"GEOGCRS[\\\"WGS 84\\\",\"                                   \n [2] \"    DATUM[\\\"World Geodetic System 1984\\\",\"             \n [3] \"        ELLIPSOID[\\\"WGS 84\\\",6378137,298.257223563,\"   \n [4] \"            LENGTHUNIT[\\\"metre\\\",1]]],\"                \n [5] \"    PRIMEM[\\\"Greenwich\\\",0,\"                           \n [6] \"        ANGLEUNIT[\\\"degree\\\",0.0174532925199433]],\"    \n [7] \"    CS[ellipsoidal,2],\"                                \n [8] \"        AXIS[\\\"geodetic latitude (Lat)\\\",north,\"       \n [9] \"            ORDER[1],\"                                 \n[10] \"            ANGLEUNIT[\\\"degree\\\",0.0174532925199433]],\"\n[11] \"        AXIS[\\\"geodetic longitude (Lon)\\\",east,\"       \n[12] \"            ORDER[2],\"                                 \n[13] \"            ANGLEUNIT[\\\"degree\\\",0.0174532925199433]],\"\n[14] \"    ID[\\\"EPSG\\\",4326]]\""
+  },
+  {
+    "objectID": "slides/10-slides.html#accessing-raster-attributes-bounding-box",
+    "href": "slides/10-slides.html#accessing-raster-attributes-bounding-box",
+    "title": "Spatial Data as Matrices and Rasters",
+    "section": "Accessing Raster Attributes: Bounding box",
+    "text": "Accessing Raster Attributes: Bounding box\n\n\nterra uses ext() to get or set the extent/bounding box\nFills cells with NA\n\n\n\n\n\next(r)\n\nSpatExtent : 5.74166666666667, 6.53333333333333, 49.4416666666667, 50.1916666666667 (xmin, xmax, ymin, ymax)\n\nr2 <- r\next(r2) <- c(5, 7, 48, 52)\next(r2)\n\nSpatExtent : 5, 7, 48, 52 (xmin, xmax, ymin, ymax)"
+  },
+  {
+    "objectID": "slides/10-slides.html#converting-vectors-to-rasters",
+    "href": "slides/10-slides.html#converting-vectors-to-rasters",
+    "title": "Spatial Data as Matrices and Rasters",
+    "section": "Converting vectors to rasters",
+    "text": "Converting vectors to rasters\n\nSometimes necessary to convert between data models\nraster::rasterize, terra::rasterize, stars::st_rasterize, and fasterize::fasterize all will convert polygons to raster data\nstars::st_polygonize will work in the opposite direction\nterra::vect will read in vectors as SpatVectors or coerce sf to SpatVector"
   },
   {
     "objectID": "syllabus.html",

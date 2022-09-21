@@ -294,6 +294,27 @@
     "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\nFinal Project\n\n\nTransformations\n\n\nSubsetting"
   },
   {
+    "objectID": "content/10-content.html",
+    "href": "content/10-content.html",
+    "title": "Spatial data as matrices and rasters",
+    "section": "",
+    "text": "Today we’ll be exploring the raster data model and how it is implemented within the spatial packages in the R computing environment. These chapters are not ‘prerequisite’ reading for the week, but provide a lot of helpful background for raster proccessing in R.\n\n The raster package vignette has a number of helpful examples for different workflows with raster objects in R.\n The terra package vignette describes the new raster functions available in terra, their relationship to those in the raster package, and the changes in syntax between the two.\n The Functional Programming and Measuring performance from Advanced R (Wickham 2019) provide an excellent introduction to developing your own functions for repeated operations and ways to optimise code for large problems. Raster data processing often involves repeating (sometimes multiple) steps 100s of times. These chapters introduce strategies for developing functions for repeated operations and identfying and fixing bottlenecks in those functions."
+  },
+  {
+    "objectID": "content/10-content.html#objectives",
+    "href": "content/10-content.html#objectives",
+    "title": "Spatial data as matrices and rasters",
+    "section": "Objectives",
+    "text": "Objectives\nBy the end of today, you should be able to:\n\nDescribe the raster data model and its representation in R\nAccess the elements that define a raster\nBuild rasters from scratch using matrix operations and terra"
+  },
+  {
+    "objectID": "content/10-content.html#slides",
+    "href": "content/10-content.html#slides",
+    "title": "Spatial data as matrices and rasters",
+    "section": "Slides",
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\nThe Raster Data Model\n\n\nComponents of Rasters in R\n\n\nBuilding Rasters"
+  },
+  {
     "objectID": "content/index.html",
     "href": "content/index.html",
     "title": "Readings and slides",
@@ -1421,6 +1442,13 @@
     "text": "Binary Transformers\n\n\n\n\n\n\n\n\n\nfunction\nreturns\ninfix operator\n\n\n\n\nintersection\nthe overlapping geometries for pair of geometries\n&\n\n\nunion\nthe combination of the geometries; removes internal boundaries and duplicate points, nodes or line pieces\n|\n\n\ndifference\nthe geometries of the first after removing the overlap with the second geometry\n/\n\n\nsym_difference\nthe combinations of the geometries after removing where they intersect; the negation (opposite) of intersection\n%/%\n\n\ncrop\ncrop an sf object to a specific rectangle"
   },
   {
+    "objectID": "slides/09-slides.html#binary-transformers-1",
+    "href": "slides/09-slides.html#binary-transformers-1",
+    "title": "Vector Operations Part 1I",
+    "section": "Binary Transformers",
+    "text": "Binary Transformers"
+  },
+  {
     "objectID": "slides/09-slides.html#common-uses-of-binary-transformers",
     "href": "slides/09-slides.html#common-uses-of-binary-transformers",
     "title": "Vector Operations Part 1I",
@@ -1454,6 +1482,104 @@
     "title": "Vector Operations Part 1I",
     "section": "Using dplyr",
     "text": "Using dplyr\n\n\nfilter returns rows that match a criteria\nselect returns columns\n\n\n\n\n\nlibrary(tidyverse)\ndurham.cty <- nc %>% \n  filter(., NAME == \"Durham\")\n## We can also use the bracket approach\ndurham.cty2 <- nc[nc$NAME == \"Durham\",]\n\nplot(st_geometry(nc))\nplot(st_geometry(durham.cty), add=TRUE, col=\"blue\")\n\n\n\n\n\n\nnc.select <- nc %>% \n  select(., c(\"BIR79\", \"SID79\"))\nplot(nc.select)"
+  },
+  {
+    "objectID": "slides/10-slides.html#objectives",
+    "href": "slides/10-slides.html#objectives",
+    "title": "Spatial Data as Matrices and Rasters",
+    "section": "Objectives",
+    "text": "Objectives\n\nBy the end of today, you should be able to:\n\nDescribe the raster data model and its representation in R\nAccess the elements that define a raster\nBuild rasters from scratch using matrix operations and terra"
+  },
+  {
+    "objectID": "slides/10-slides.html#defining-the-raster-data-model-1",
+    "href": "slides/10-slides.html#defining-the-raster-data-model-1",
+    "title": "Spatial Data as Matrices and Rasters",
+    "section": "Defining the Raster Data Model",
+    "text": "Defining the Raster Data Model\n\n\n\n\nVector data describe the “exact” locations of features on a landscape (including a Cartesian landscape)\nRaster data represent spatially continuous phenomena (NA is possible)\nDepict the alignment of data on a regular lattice (often a square)\n\nOperations mimic those for matrix objects in R\n\nGeometry is implicit; the spatial extent and number of rows and columns define the cell size"
+  },
+  {
+    "objectID": "slides/10-slides.html#types-of-raster-data",
+    "href": "slides/10-slides.html#types-of-raster-data",
+    "title": "Spatial Data as Matrices and Rasters",
+    "section": "Types of Raster Data",
+    "text": "Types of Raster Data\n\n\n\n\n\n\n\n\n\n\nRegular: constant cell size; axes aligned with Easting and Northing\nRotated: constant cell size; axes not aligned with Easting and Northing\nSheared: constant cell size; axes not parallel\nRectilinear: cell size varies along a dimension\nCurvilinear: cell size and orientation dependent on the other dimension"
+  },
+  {
+    "objectID": "slides/10-slides.html#types-of-raster-data-1",
+    "href": "slides/10-slides.html#types-of-raster-data-1",
+    "title": "Spatial Data as Matrices and Rasters",
+    "section": "Types of Raster Data",
+    "text": "Types of Raster Data\n\nContinuous: numeric data representing a measurement (e.g., elevation, precipitation)\nCategorical: integer data representing factors (e.g., land use, land cover)"
+  },
+  {
+    "objectID": "slides/10-slides.html#continuous-rasters",
+    "href": "slides/10-slides.html#continuous-rasters",
+    "title": "Spatial Data as Matrices and Rasters",
+    "section": "Continuous Rasters",
+    "text": "Continuous Rasters\n\n\n\nmintemp <- rast(\"ftp://ftp.hafro.is/pub/data/rasters/Iceland_minbtemp.tif\")\nmintemp\n\nclass       : SpatRaster \ndimensions  : 340, 375, 1  (nrow, ncol, nlyr)\nresolution  : 2000, 2000  (x, y)\nextent      : -1050226, -300225.9, -699984.3, -19984.32  (xmin, xmax, ymin, ymax)\ncoord. ref. : +proj=laea +lat_0=69 +lon_0=-4 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs \nsource      : Iceland_minbtemp.tif \nname        : Iceland_minbtemp \nmin value   :       -0.9982879 \nmax value   :        8.6031137"
+  },
+  {
+    "objectID": "slides/10-slides.html#categorical-rasters",
+    "href": "slides/10-slides.html#categorical-rasters",
+    "title": "Spatial Data as Matrices and Rasters",
+    "section": "Categorical Rasters",
+    "text": "Categorical Rasters\n\n\n\n\nRequires a classification matrix and coercion to factor\nlevels allows you to define the categories\n\n\n\n# Create classification matrix\ncm <- matrix(c(\n  -2, 2, 0,\n  2, 4, 1,\n  4, 10, 2), ncol = 3, byrow = TRUE)\n\n# Create a raster with integers\ntemp_reclass <- classify(mintemp, cm)\ntempcats <- c(\"cold\", \"mild\", \"warm\")\nlevels(temp_reclass) <- tempcats\ncats(temp_reclass)\n\n[[1]]\n  value category\n1     0     cold\n2     1     mild\n3     2     warm"
+  },
+  {
+    "objectID": "slides/10-slides.html#adding-dimensions",
+    "href": "slides/10-slides.html#adding-dimensions",
+    "title": "Spatial Data as Matrices and Rasters",
+    "section": "Adding Dimensions",
+    "text": "Adding Dimensions\n\nWhen data are aligned in space and/or time, more efficient to process as ‘cubes’ or ‘stacks’\nBands of satellite imagery, multiple predictors, spatio-temporal data"
+  },
+  {
+    "objectID": "slides/10-slides.html#a-note-about-support",
+    "href": "slides/10-slides.html#a-note-about-support",
+    "title": "Spatial Data as Matrices and Rasters",
+    "section": "A note about support",
+    "text": "A note about support\n\n\nWe talked briefly about the agr option in the st_sf() function\nagr refers to the attribute-geometry-relationship which can be:\n\nconstant = applies to every point in the geometry (lines and polygons are just lots of points)\nidentity = a value unique to a geometry\naggregate = a single value that integrates data across the geometry\n\nSupport is the area to which an attribute applies.\nRasters can have point (attribute refers to the cell center) or cell (attribute refers to an area similar to the pixel) support"
+  },
+  {
+    "objectID": "slides/10-slides.html#rasters-in-r-1",
+    "href": "slides/10-slides.html#rasters-in-r-1",
+    "title": "Spatial Data as Matrices and Rasters",
+    "section": "Rasters in R",
+    "text": "Rasters in R\n\n\nraster - the original workhorse package; built on sp, rgdal, and rgeos\n\nRasterLayer, RasterStack, and RasterBrick classes\n\nterra - relatively new; developed by the raster folks, but designed to be much faster\n\nSpatRaster and SpatVector classes\n\nstars - developed by sf package developers; tidyverse compatible; designed for spatio-temporal data\n\nstars class\nCrosswalk between raster and stars is available here\nOnly way to deal with rectilinear and curvilinear data"
+  },
+  {
+    "objectID": "slides/10-slides.html#rasters-by-construction",
+    "href": "slides/10-slides.html#rasters-by-construction",
+    "title": "Spatial Data as Matrices and Rasters",
+    "section": "Rasters by Construction",
+    "text": "Rasters by Construction\n\n\n\nmtx <- matrix(1:16, nrow=4)\nmtx\n\n     [,1] [,2] [,3] [,4]\n[1,]    1    5    9   13\n[2,]    2    6   10   14\n[3,]    3    7   11   15\n[4,]    4    8   12   16\n\nrstr <- terra::rast(mtx)\nrstr\n\nclass       : SpatRaster \ndimensions  : 4, 4, 1  (nrow, ncol, nlyr)\nresolution  : 1, 1  (x, y)\nextent      : 0, 4, 0, 4  (xmin, xmax, ymin, ymax)\ncoord. ref. :  \nsource      : memory \nname        : lyr.1 \nmin value   :     1 \nmax value   :    16 \n\n\n\n\n\n\n\n\n\n\n\nNote: you must have raster or terra loaded for plot() to work on Rast* objects; otherwise you get Error in as.double(y) : cannot coerce type 'S4' to vector of type 'double'"
+  },
+  {
+    "objectID": "slides/10-slides.html#rasters-by-construction-origin",
+    "href": "slides/10-slides.html#rasters-by-construction-origin",
+    "title": "Spatial Data as Matrices and Rasters",
+    "section": "Rasters by Construction: Origin",
+    "text": "Rasters by Construction: Origin\n\nOrigin defines the location of the intersection of the x and y axes\n\n\n\n\nr <- rast(xmin=-4, xmax = 9.5, ncols=10)\nr[] <- runif(ncell(r))\norigin(r)\n\n[1] 0.05 0.00\n\nr2 <- r\norigin(r2) <- c(2,2)"
+  },
+  {
+    "objectID": "slides/10-slides.html#rasters-by-construction-resolution",
+    "href": "slides/10-slides.html#rasters-by-construction-resolution",
+    "title": "Spatial Data as Matrices and Rasters",
+    "section": "Rasters by Construction: Resolution",
+    "text": "Rasters by Construction: Resolution\n\n\nGeometry is implicit; the spatial extent and number of rows and columns define the cell size\nResolution (res) defines the length and width of an individual pixel\n\n\n\n\n\nr <- rast(xmin=-4, xmax = 9.5, \n          ncols=10)\nres(r)\n\n[1] 1.35 1.00\n\nr2 <- rast(xmin=-4, xmax = 5, \n           ncols=10)\nres(r2)\n\n[1] 0.9 1.0\n\n\n\n\nr <- rast(xmin=-4, xmax = 9.5, \n          res=c(0.5,0.5))\nncol(r)\n\n[1] 27\n\nr2 <- rast(xmin=-4, xmax = 9.5, \n           res=c(5,5))\nncol(r2)\n\n[1] 3"
+  },
+  {
+    "objectID": "slides/10-slides.html#rasters-from-files",
+    "href": "slides/10-slides.html#rasters-from-files",
+    "title": "Spatial Data as Matrices and Rasters",
+    "section": "Rasters from Files",
+    "text": "Rasters from Files\n\nBuilding rasters useful for templates\nMore common to read from files\n\n\nr <- rast(system.file(\"ex/elev.tif\", package=\"terra\"))\nr\n\nclass       : SpatRaster \ndimensions  : 90, 95, 1  (nrow, ncol, nlyr)\nresolution  : 0.008333333, 0.008333333  (x, y)\nextent      : 5.741667, 6.533333, 49.44167, 50.19167  (xmin, xmax, ymin, ymax)\ncoord. ref. : lon/lat WGS 84 (EPSG:4326) \nsource      : elev.tif \nname        : elevation \nmin value   :       141 \nmax value   :       547"
+  },
+  {
+    "objectID": "slides/10-slides.html#accessing-raster-attributes",
+    "href": "slides/10-slides.html#accessing-raster-attributes",
+    "title": "Spatial Data as Matrices and Rasters",
+    "section": "Accessing Raster Attributes",
+    "text": "Accessing Raster Attributes\n\nsyntax is different for terra compared to sf"
   },
   {
     "objectID": "syllabus.html",

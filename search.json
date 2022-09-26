@@ -315,6 +315,27 @@
     "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\nThe Raster Data Model\n\n\nComponents of Rasters in R\n\n\nBuilding Rasters"
   },
   {
+    "objectID": "content/11-content.html",
+    "href": "content/11-content.html",
+    "title": "Operations With Raster Data I",
+    "section": "",
+    "text": "Now that we’ve learned a bit about the raster data model, we’ll begin using terra to manage and manipulate rasters. We’ll start with some of the predicate and measure functions and build up to more complex transformations.\n\n The terra package vignette describes the new raster functions available in terra, their relationship to those in the raster package, and the changes in syntax between the two.\n The Raster GIS Operations in R with terra chapter from Jasper Slingsby’s “A Minimal Introduction to GIS (in R)” bookdown project has worked examples of many of the operations we’ll learn today."
+  },
+  {
+    "objectID": "content/11-content.html#objectives",
+    "href": "content/11-content.html#objectives",
+    "title": "Operations With Raster Data I",
+    "section": "Objectives",
+    "text": "Objectives\nBy the end of today, you should be able to:\n\nEvaluate logical conditions with raster data\nCalculate different measures of raster data\nAlign rasters for spatial processing"
+  },
+  {
+    "objectID": "content/11-content.html#slides",
+    "href": "content/11-content.html#slides",
+    "title": "Operations With Raster Data I",
+    "section": "Slides",
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\nPredicates\n\n\nMeasures\n\n\nAligning Rasters"
+  },
+  {
     "objectID": "content/index.html",
     "href": "content/index.html",
     "title": "Readings and slides",
@@ -1608,6 +1629,111 @@
     "title": "Spatial Data as Matrices and Rasters",
     "section": "Converting vectors to rasters",
     "text": "Converting vectors to rasters\n\nSometimes necessary to convert between data models\nraster::rasterize, terra::rasterize, stars::st_rasterize, and fasterize::fasterize all will convert polygons to raster data\nstars::st_polygonize will work in the opposite direction\nterra::vect will read in vectors as SpatVectors or coerce sf to SpatVector"
+  },
+  {
+    "objectID": "slides/11-slides.html#objectives",
+    "href": "slides/11-slides.html#objectives",
+    "title": "Operations With Raster Data I",
+    "section": "Objectives",
+    "text": "Objectives\n\nBy the end of today, you should be able to:\n\nEvaluate logical conditions with raster data\nCalculate different measures of raster data\nAlign rasters for spatial processing"
+  },
+  {
+    "objectID": "slides/11-slides.html#revisitng-the-raster-data-model",
+    "href": "slides/11-slides.html#revisitng-the-raster-data-model",
+    "title": "Operations With Raster Data I",
+    "section": "Revisitng the Raster Data Model",
+    "text": "Revisitng the Raster Data Model\n\n\n\n\nRaster data represent spatially continuous phenomena (NA is possible)\nDepict the alignment of data on a regular lattice (often a square)\n\nOperations mimic those for matrix objects in R\n\nGeometry is implicit; the spatial extent and number of rows and columns define the cell size"
+  },
+  {
+    "objectID": "slides/11-slides.html#extending-predicates",
+    "href": "slides/11-slides.html#extending-predicates",
+    "title": "Operations With Raster Data I",
+    "section": "Extending predicates",
+    "text": "Extending predicates\n\nPredicates: evaluate a logical statement asserting that a property is TRUE\nterra does not follow the same hierarchy as sf so a little trickier"
+  },
+  {
+    "objectID": "slides/11-slides.html#unary-predicates-in-terra",
+    "href": "slides/11-slides.html#unary-predicates-in-terra",
+    "title": "Operations With Raster Data I",
+    "section": "Unary predicates in terra",
+    "text": "Unary predicates in terra\n\nCan tell us qualities of a raster dataset\nMany similar operations for SpatVector class (note use of .)\n\n\n\n\n\n\n\n\n\npredicate\nasks…\n\n\n\n\nis.lonlat\nDoes the object have a longitude/latitude CRS?\n\n\ninMemory\nis the object stored in memory?\n\n\nis.factor\nAre there categorical layers?\n\n\nhasValues\nDo the cells have values?"
+  },
+  {
+    "objectID": "slides/11-slides.html#unary-predicates-in-terra-1",
+    "href": "slides/11-slides.html#unary-predicates-in-terra-1",
+    "title": "Operations With Raster Data I",
+    "section": "Unary predicates in terra",
+    "text": "Unary predicates in terra\n\n\n\n\nglobal: tests if the raster covers all longitudes (from -180 to 180 degrees) such that the extreme columns are in fact adjacent\n\n\nr <- rast()\nis.lonlat(r)\n\n[1] TRUE\n\nis.lonlat(r, global=TRUE)\n\n[1] TRUE\n\n\n\n\n\n\nperhaps: If TRUE and the crs is unknown, the method returns TRUE if the coordinates are plausible for longitude/latitude\n\n\ncrs(r) <- \"\"\nis.lonlat(r)\n\n[1] NA\n\nis.lonlat(r, perhaps=TRUE, warn=FALSE)\n\n[1] TRUE\n\n\n\ncrs(r) <- \"+proj=lcc +lat_1=48 +lat_2=33 +lon_0=-100 +ellps=WGS84\"\nis.lonlat(r)\n\n[1] FALSE"
+  },
+  {
+    "objectID": "slides/11-slides.html#binary-predicates-in-terra",
+    "href": "slides/11-slides.html#binary-predicates-in-terra",
+    "title": "Operations With Raster Data I",
+    "section": "Binary predicates in terra",
+    "text": "Binary predicates in terra\n\nTake exactly 2 inputs, return 1 matrix of cell locs where value is TRUE\nadjacent: identifies cells adajcent to a set of raster cells"
+  },
+  {
+    "objectID": "slides/11-slides.html#unary-measures-in-terra",
+    "href": "slides/11-slides.html#unary-measures-in-terra",
+    "title": "Operations With Raster Data I",
+    "section": "Unary measures in terra",
+    "text": "Unary measures in terra\n\nSlightly more flexible than sf\nOne result for each layer in a stack\n\n\n\n\n\n\n\n\n\nmeasure\nreturns\n\n\n\n\ncellSize\narea of individual cells\n\n\nexpanse\nsummed area of all cells\n\n\nvalues\nreturns all cell values\n\n\nncol\nnumber of columns\n\n\nnrow\nnumber of rows\n\n\nncell\nnumber of cells\n\n\nres\nresolution\n\n\next\nminimum and maximum of x and y coords\n\n\norigin\nthe orgin of a SpatRaster\n\n\ncrs\nthe coordinate reference system\n\n\ncats\ncategories of a categorical raster"
+  },
+  {
+    "objectID": "slides/11-slides.html#binary-measures-in-terra",
+    "href": "slides/11-slides.html#binary-measures-in-terra",
+    "title": "Operations With Raster Data I",
+    "section": "Binary measures in terra",
+    "text": "Binary measures in terra\n\nReturns a SpatRaster describing the measure\n\n\n\n\n\n\n\n\n\nmeasure\nreturns\n\n\n\n\ndistance\nshortest distance to non-NA or vector object\n\n\ngridDistance\nshortest distance through adjacent grid cells\n\n\ncostDistance\nShortest distance considering cell-varying friction\n\n\ndirection\nazimuth to cells that are not NA"
+  },
+  {
+    "objectID": "slides/11-slides.html#projecting-raster-data",
+    "href": "slides/11-slides.html#projecting-raster-data",
+    "title": "Operations With Raster Data I",
+    "section": "Projecting raster data",
+    "text": "Projecting raster data\n\n\n\n\nTransformation from lat/long to planar CRS involves some loss of precision\nNew cell values estimated using overlap with original cells\nInterpolation for continuous data, nearest neighbor for categorical data\nEqual-area projections are preferred; especially for large areas\n\n\n\n\n\nr <- rast(xmin=-110, xmax=-90, ymin=40, ymax=60, ncols=40, nrows=40)\nvalues(r) <- 1:ncell(r)\nplot(r)"
+  },
+  {
+    "objectID": "slides/11-slides.html#projecting-raster-data-1",
+    "href": "slides/11-slides.html#projecting-raster-data-1",
+    "title": "Operations With Raster Data I",
+    "section": "Projecting raster data",
+    "text": "Projecting raster data\n\n\n\nsimple method; alignment not guaranteed\n\n\nnewcrs <- \"+proj=robin +datum=WGS84\"\npr1 <- terra::project(r, newcrs)\nplot(pr1)\n\n\n\n\n\n\nproviding a template to ensure alignment"
+  },
+  {
+    "objectID": "slides/11-slides.html#changing-resolutions",
+    "href": "slides/11-slides.html#changing-resolutions",
+    "title": "Operations With Raster Data I",
+    "section": "Changing resolutions",
+    "text": "Changing resolutions\n\naggregate, disaggregate, resample allow changes in cell size\naggregate requires a function (e.g., mean() or min()) to determine what to do with the grouped values\nresample allows changes in cell size and shifting of cell centers (slower)"
+  },
+  {
+    "objectID": "slides/11-slides.html#changing-resolutions-aggregate",
+    "href": "slides/11-slides.html#changing-resolutions-aggregate",
+    "title": "Operations With Raster Data I",
+    "section": "Changing resolutions: aggregate",
+    "text": "Changing resolutions: aggregate\n\n\n\nr <- rast()\nvalues(r) <- 1:ncell(r)\nplot(r)\n\n\n\n\n]\n\n\nra <- aggregate(r, 20)\nplot(ra)"
+  },
+  {
+    "objectID": "slides/11-slides.html#changing-resolutions-disagg",
+    "href": "slides/11-slides.html#changing-resolutions-disagg",
+    "title": "Operations With Raster Data I",
+    "section": "Changing resolutions: disagg",
+    "text": "Changing resolutions: disagg\n\n\n\nra <- aggregate(r, 20)\nplot(ra)\n\n\n\n\n\n\nrd <- disagg(r, 20)\nplot(rd)"
+  },
+  {
+    "objectID": "slides/11-slides.html#changing-resolutions-resample",
+    "href": "slides/11-slides.html#changing-resolutions-resample",
+    "title": "Operations With Raster Data I",
+    "section": "Changing Resolutions: resample",
+    "text": "Changing Resolutions: resample\n\nr <- rast(nrow=3, ncol=3, xmin=0, xmax=10, ymin=0, ymax=10)\nvalues(r) <- 1:ncell(r)\ns <- rast(nrow=25, ncol=30, xmin=1, xmax=11, ymin=-1, ymax=11)\nx <- resample(r, s, method=\"bilinear\")"
+  },
+  {
+    "objectID": "slides/11-slides.html#on-weds",
+    "href": "slides/11-slides.html#on-weds",
+    "title": "Operations With Raster Data I",
+    "section": "On Weds",
+    "text": "On Weds\n\nTransformations of data and coverage\nRaster math\nCell-based functions"
   },
   {
     "objectID": "syllabus.html",

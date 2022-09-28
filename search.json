@@ -336,6 +336,27 @@
     "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\nPredicates\n\n\nMeasures\n\n\nAligning Rasters"
   },
   {
+    "objectID": "content/12-content.html",
+    "href": "content/12-content.html",
+    "title": "Operations With Raster Data II",
+    "section": "",
+    "text": "One of the most attractive reasons for using the raster data model (and terra, specifically) is the relative ease and speed with which you can manipulate values within a raster or combine multiple rasters to generate new data. We’ll focus on that today.\n\n The terra package vignette describes the new raster functions available in terra, their relationship to those in the raster package, and the changes in syntax between the two.\n The Raster GIS Operations in R with terra chapter from Jasper Slingsby’s “A Minimal Introduction to GIS (in R)” bookdown project has worked examples of many of the operations we’ll learn today."
+  },
+  {
+    "objectID": "content/12-content.html#objectives",
+    "href": "content/12-content.html#objectives",
+    "title": "Operations With Raster Data II",
+    "section": "Objectives",
+    "text": "Objectives\nBy the end of today, you should be able to:\n\nAccess and manipulate cell values of a raster\nGenerate new rasters using mathematical functions\nSummarize rasters using global functions\nGenerate new rasters describing the spatial context of individual cells"
+  },
+  {
+    "objectID": "content/12-content.html#slides",
+    "href": "content/12-content.html#slides",
+    "title": "Operations With Raster Data II",
+    "section": "Slides",
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\nRevisiting Projections\n\n\nCell-based operations\n\n\nGlobal operations\n\n\nContext methods"
+  },
+  {
     "objectID": "content/index.html",
     "href": "content/index.html",
     "title": "Readings and slides",
@@ -1684,7 +1705,7 @@
     "href": "slides/11-slides.html#binary-measures-in-terra",
     "title": "Operations With Raster Data I",
     "section": "Binary measures in terra",
-    "text": "Binary measures in terra\n\nReturns a SpatRaster describing the measure\n\n\n\n\n\n\n\n\n\nmeasure\nreturns\n\n\n\n\ndistance\nshortest distance to non-NA or vector object\n\n\ngridDistance\nshortest distance through adjacent grid cells\n\n\ncostDistance\nShortest distance considering cell-varying friction\n\n\ndirection\nazimuth to cells that are not NA"
+    "text": "Binary measures in terra\n\nReturns a matrix or SpatRaster describing the measure\n\n\n\n\n\n\n\n\n\nmeasure\nreturns\n\n\n\n\ndistance\nshortest distance to non-NA or vector object\n\n\ngridDistance\nshortest distance through adjacent grid cells\n\n\ncostDistance\nShortest distance considering cell-varying friction\n\n\ndirection\nazimuth to cells that are not NA"
   },
   {
     "objectID": "slides/11-slides.html#projecting-raster-data",
@@ -1734,6 +1755,104 @@
     "title": "Operations With Raster Data I",
     "section": "On Weds",
     "text": "On Weds\n\nTransformations of data and coverage\nRaster math\nCell-based functions"
+  },
+  {
+    "objectID": "slides/12-slides.html#objectives",
+    "href": "slides/12-slides.html#objectives",
+    "title": "Operations With Raster Data II",
+    "section": "Objectives",
+    "text": "Objectives\n\nBy the end of today, you should be able to:\n\nAccess and manipulate cell values\nGenerate new rasters using mathematical functions\nSummarize rasters using global functions\nGenerate new rasters describing the spatial context of individual cells"
+  },
+  {
+    "objectID": "slides/12-slides.html#revisiting-projections",
+    "href": "slides/12-slides.html#revisiting-projections",
+    "title": "Operations With Raster Data II",
+    "section": "Revisiting Projections",
+    "text": "Revisiting Projections\n\nproject changes the entire coordinate reference system\n\n\n\n\n\nlibrary(terra)\na <- rast(ncols=40, nrows=40, xmin=-110, xmax=-90, ymin=40, ymax=60, \n          crs=\"+proj=longlat +datum=WGS84\")\nvalues(a) <- 1:ncell(a)\nnewcrs=\"+proj=lcc +lat_1=48 +lat_2=33 +lon_0=-100 +datum=WGS84\"\nb <- rast(ncols=94, nrows=124, xmin=-944881, xmax=935118, ymin=4664377, ymax=7144377, crs=newcrs)\nw <- project(a, b)\n\n\n\n\n\n\n\n\n\norigin(a)\n\n[1] 0 0\n\norigin(w)\n\n[1] -4881.5  4377.0\n\next(a)\n\nSpatExtent : -110, -90, 40, 60 (xmin, xmax, ymin, ymax)\n\next(w)\n\nSpatExtent : -944881, 935118, 4664377, 7144377 (xmin, xmax, ymin, ymax)\n\nres(a)\n\n[1] 0.5 0.5\n\nres(w)\n\n[1] 19999.99 20000.00"
+  },
+  {
+    "objectID": "slides/12-slides.html#revisiting-projections-1",
+    "href": "slides/12-slides.html#revisiting-projections-1",
+    "title": "Operations With Raster Data II",
+    "section": "Revisiting Projections",
+    "text": "Revisiting Projections\n\n\nresample transfers values between SpatRaster objects that do not align\nMust have same crs\n\n\n\n\n\n\na <- rast(ncols=40, nrows=40, xmin=-110, xmax=-90, ymin=40, ymax=60, \n          crs=\"+proj=longlat +datum=WGS84\")\nvalues(a) <- 1:ncell(a)\n\nb <- rast(ncols=94, nrows=124, xmin=-111, xmax=-80, ymin=45, ymax=65)\nw <- resample(a, b)\n\n\n\n\n\n\n\n\n\n\norigin(a)\n\n[1] 0 0\n\norigin(b)\n\n[1] 0.1382979 0.0000000\n\norigin(w)\n\n[1] 0.1382979 0.0000000\n\nres(a)\n\n[1] 0.5 0.5\n\nres(b)\n\n[1] 0.3297872 0.1612903\n\nres(w)\n\n[1] 0.3297872 0.1612903"
+  },
+  {
+    "objectID": "slides/12-slides.html#revisiting-projections-2",
+    "href": "slides/12-slides.html#revisiting-projections-2",
+    "title": "Operations With Raster Data II",
+    "section": "Revisiting Projections",
+    "text": "Revisiting Projections\n\nif origin and extent are the same consider using aggregate, disagg, extend or crop"
+  },
+  {
+    "objectID": "slides/12-slides.html#accessing-cell-values",
+    "href": "slides/12-slides.html#accessing-cell-values",
+    "title": "Operations With Raster Data II",
+    "section": "Accessing Cell Values",
+    "text": "Accessing Cell Values\n\nWe can extract or change cell values using []\n\n\na <- rast(ncols=10, nrows=10, xmin=-110, xmax=-100, ymin=40, ymax=50, \n          crs=\"+proj=longlat +datum=WGS84\")\nvalues(a) <- 1\nb1 <- a\nb2 <- a\nb1[5,5] <- 10\nb2[1, 1:10 ] <- runif(10,4,10)"
+  },
+  {
+    "objectID": "slides/12-slides.html#raster-math",
+    "href": "slides/12-slides.html#raster-math",
+    "title": "Operations With Raster Data II",
+    "section": "Raster Math",
+    "text": "Raster Math\n\nPerforms cell-wise calculations on 1 (or more) SpatRasters\nGenerally works the same as matrix operations\nAll layers must be aligned"
+  },
+  {
+    "objectID": "slides/12-slides.html#raster-math-1",
+    "href": "slides/12-slides.html#raster-math-1",
+    "title": "Operations With Raster Data II",
+    "section": "Raster Math",
+    "text": "Raster Math\n\nr <- rast(ncol=5, nrow=5)\nvalues(r) <- 1:ncell(r)\nr2 <- r*2\nr3 <- t(r)\nr4 <- r + r2"
+  },
+  {
+    "objectID": "slides/12-slides.html#cell-wise-operations-1",
+    "href": "slides/12-slides.html#cell-wise-operations-1",
+    "title": "Operations With Raster Data II",
+    "section": "Cell-wise operations",
+    "text": "Cell-wise operations\n\nterra has a special set of apply functions\napp, lapp, tapp\napp applies a function to the values of each cell\nlapp applies a function using the layer as the value\ntapp applies the function to a subset of layers"
+  },
+  {
+    "objectID": "slides/12-slides.html#cell-wise-operations-2",
+    "href": "slides/12-slides.html#cell-wise-operations-2",
+    "title": "Operations With Raster Data II",
+    "section": "Cell-wise operations",
+    "text": "Cell-wise operations\n\nr <- rast(ncols=10, nrows=10)\nvalues(r) <- 1:ncell(r)\nf <- function(i) (i+1) * 2 * i + sqrt(i)\ns <- app(r, f)"
+  },
+  {
+    "objectID": "slides/12-slides.html#cell-wise-operations-3",
+    "href": "slides/12-slides.html#cell-wise-operations-3",
+    "title": "Operations With Raster Data II",
+    "section": "Cell-wise Operations",
+    "text": "Cell-wise Operations\n\ns <- rast(system.file(\"ex/logo.tif\", package=\"terra\")) + 1  \nss <- s[[2:1]]\n\nfvi <- function(x, y){ (x - y ) / (x + y) } \nx <- lapp(ss, fun=fvi)"
+  },
+  {
+    "objectID": "slides/12-slides.html#global-methods",
+    "href": "slides/12-slides.html#global-methods",
+    "title": "Operations With Raster Data II",
+    "section": "Global Methods",
+    "text": "Global Methods\n\nProvide summaries of 1 or more layers\nUse zonal to extract values from one layer based on categorical layer\n\n\n\n\nr <- rast(ncols=10, nrows=10)\nvalues(r) <- 1:ncell(r)\nz <- rast(r)\nvalues(z) <- rep(c(1:2, NA, 3:4), each=20)\nnames(z) <- \"zone\"\na <-  zonal(r, z, \"sum\", na.rm=TRUE)\nb <- zonal(r, z, \"sum\", na.rm=TRUE, as.raster=TRUE)\nplot(b)"
+  },
+  {
+    "objectID": "slides/12-slides.html#context-specific-functions",
+    "href": "slides/12-slides.html#context-specific-functions",
+    "title": "Operations With Raster Data II",
+    "section": "Context-specific Functions",
+    "text": "Context-specific Functions\n\ndistance and relatives are based on relationships between cells\nfocal provides moving windows for smoothing data\nterrain allows calculation of slope, ruggedness, aspect using elevation rasters\nshade calculates hillshade based on terrain"
+  },
+  {
+    "objectID": "slides/12-slides.html#using-focal",
+    "href": "slides/12-slides.html#using-focal",
+    "title": "Operations With Raster Data II",
+    "section": "Using focal",
+    "text": "Using focal\n\nfocal requires a window (w) or weights matrix\nna.policy determines how to deal with NAs in the smoother\nfillvalue and expand tell terra what to do at the edges\n\n\nr <- rast(ncols=10, nrows=10, ext(0, 10, 0, 10))\nvalues(r) <- 1:ncell(r)\n\nf <- focal(r, w=3, fun=function(x, ...) quantile(x, c(.25, .5, .75), ...), na.rm=TRUE) \nplot(f)"
+  },
+  {
+    "objectID": "slides/12-slides.html#using-focal-1",
+    "href": "slides/12-slides.html#using-focal-1",
+    "title": "Operations With Raster Data II",
+    "section": "Using focal",
+    "text": "Using focal"
   },
   {
     "objectID": "syllabus.html",

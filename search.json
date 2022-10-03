@@ -357,6 +357,27 @@
     "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\nRevisiting Projections\n\n\nCell-based operations\n\n\nGlobal operations\n\n\nContext methods"
   },
   {
+    "objectID": "content/13-content.html",
+    "href": "content/13-content.html",
+    "title": "Combining Raster and Vector Data",
+    "section": "",
+    "text": "As we move towards a complete geospatial statistical workflow, we’ll need to be able to combine data from both raster and vector datasets. Sometimes that will mean simply converting from one format to another. In other cases, we’ll need to create new datasets based on calculations that integrate different data models. We’ll do some of that today.\n\n The Integrating rasters and vectors chapter of Michael Dorman’s Introduction to Spatial Data Programming with R online textbook has a number of worked examples combining vector and raster data.\n Raster-vector interactions Chapter 6 in Lovelace et al., Geocomputation with R (Lovelace et al. 2019) has a great description of why you might do some of these things in your analysis."
+  },
+  {
+    "objectID": "content/13-content.html#objectives",
+    "href": "content/13-content.html#objectives",
+    "title": "Combining Raster and Vector Data",
+    "section": "Objectives",
+    "text": "Objectives\nBy the end of today, you should be able to:\n\nClip, crop, or extend vector and raster data so that extents align\nConvert between raster and vector datasets\nGenerate new rasters describing the spatial arrangement of vector data\nExtract raster values as attributes of vector data"
+  },
+  {
+    "objectID": "content/13-content.html#slides",
+    "href": "content/13-content.html#slides",
+    "title": "Combining Raster and Vector Data",
+    "section": "Slides",
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\nModifying the extent\n\n\nConversions\n\n\nDistance\n\n\nExtractions"
+  },
+  {
     "objectID": "content/index.html",
     "href": "content/index.html",
     "title": "Readings and slides",
@@ -1853,6 +1874,132 @@
     "title": "Operations With Raster Data II",
     "section": "Using focal",
     "text": "Using focal"
+  },
+  {
+    "objectID": "slides/13-slides.html#objectives",
+    "href": "slides/13-slides.html#objectives",
+    "title": "Combining Raster and Vector Data",
+    "section": "Objectives",
+    "text": "Objectives\n\nBy the end of today, you should be able to:\n\nClip, crop, or extend vector and raster data so that extents align\nConvert between raster and vector datasets\nGenerate new rasters describing the spatial arrangement of vector data\nExtract raster values as attributes of vector data"
+  },
+  {
+    "objectID": "slides/13-slides.html#dealing-with-different-extents",
+    "href": "slides/13-slides.html#dealing-with-different-extents",
+    "title": "Combining Raster and Vector Data",
+    "section": "Dealing with Different Extents",
+    "text": "Dealing with Different Extents\n\n\n\nRaster extents often larger than our analysis\nReducing memory and computational resources\nMaking attractive maps"
+  },
+  {
+    "objectID": "slides/13-slides.html#using-terracrop",
+    "href": "slides/13-slides.html#using-terracrop",
+    "title": "Combining Raster and Vector Data",
+    "section": "Using terra::crop()",
+    "text": "Using terra::crop()\n\n\n\n\n\n\n\n\n\n\nCoordinate Reference System must be the same for both objects\nCrop is based on the (converted) SpatExtent of the 2nd object\nsnap describes how y will be aligned to the raster\nReturns all data within the extent"
+  },
+  {
+    "objectID": "slides/13-slides.html#using-terracrop-1",
+    "href": "slides/13-slides.html#using-terracrop-1",
+    "title": "Combining Raster and Vector Data",
+    "section": "Using terra::crop()",
+    "text": "Using terra::crop()\n\n\n\n\nlibrary(sf)\nlibrary(terra)\nlibrary(spDataLarge)\nsrtm = rast(system.file(\"raster/srtm.tif\", package = \"spDataLarge\"))\nzion = read_sf(system.file(\"vector/zion.gpkg\", package = \"spDataLarge\"))\nzion = st_transform(zion, crs(srtm))\n\ncrs(srtm) == crs(zion)\n\n[1] TRUE\n\nsrtm.crop <- crop(x=srtm, y=zion, snap=\"near\")"
+  },
+  {
+    "objectID": "slides/13-slides.html#using-mask",
+    "href": "slides/13-slides.html#using-mask",
+    "title": "Combining Raster and Vector Data",
+    "section": "Using mask()",
+    "text": "Using mask()\n\n\nOften want to get rid of all values outside of vector\nCan set mask=TRUE in crop() (y must be SpatVector)\nOr use mask()\n\n\n\n\n\nsrtm.crop.msk <- crop(x=srtm, y=vect(zion), snap=\"near\", mask=TRUE)\nplot(srtm.crop.msk)\n\n\n\n\n\n\nsrtm.msk <- mask(srtm.crop, vect(zion))\nplot(srtm.msk)"
+  },
+  {
+    "objectID": "slides/13-slides.html#using-mask-1",
+    "href": "slides/13-slides.html#using-mask-1",
+    "title": "Combining Raster and Vector Data",
+    "section": "Using mask()",
+    "text": "Using mask()\n\n\nAllows more control over what the mask does\nCan set maskvalues and updatevalues to change the resulting raster\nCan also use inverse to mask out the vector\n\n\n\n\n\nsrtm.msk <- mask(srtm.crop, vect(zion), updatevalue=-1000)\nplot(srtm.msk)\n\n\n\n\n\n\nsrtm.msk <- mask(srtm.crop, vect(zion), inverse=TRUE, updatevalue=0)\nplot(srtm.msk)"
+  },
+  {
+    "objectID": "slides/13-slides.html#extending-boundaries",
+    "href": "slides/13-slides.html#extending-boundaries",
+    "title": "Combining Raster and Vector Data",
+    "section": "Extending boundaries",
+    "text": "Extending boundaries\n\n\nVector slightly larger than raster\nEspecially when using buffered datasets\nCan use extend\nNot exact; depends on snap()\n\n\n\n\n\nzion.buff <-  zion %>% \n  st_buffer(., 10000)\nsrtm.ext <- extend(srtm, vect(zion.buff))\next(srtm.ext)\n\nSpatExtent : -113.343749879444, -112.74791654615, 37.0479167631968, 37.5979167631601 (xmin, xmax, ymin, ymax)\n\next(vect(zion.buff))\n\nSpatExtent : -113.343652923976, -112.747986193365, 37.0477357596604, 37.5977812137969 (xmin, xmax, ymin, ymax)"
+  },
+  {
+    "objectID": "slides/13-slides.html#converting-between-formats-1",
+    "href": "slides/13-slides.html#converting-between-formats-1",
+    "title": "Combining Raster and Vector Data",
+    "section": "Converting Between Formats",
+    "text": "Converting Between Formats\n\nUsing coercion (as, rast, vect) can change class, but not data model\nSometimes we need to actually change the data model"
+  },
+  {
+    "objectID": "slides/13-slides.html#converting-vectors-to-rasters-using-rasterize",
+    "href": "slides/13-slides.html#converting-vectors-to-rasters-using-rasterize",
+    "title": "Combining Raster and Vector Data",
+    "section": "Converting Vectors to Rasters Using rasterize",
+    "text": "Converting Vectors to Rasters Using rasterize\n\nA special kind of data aggregation\nx is your SpatVector object\ny is a template raster with the appropriate CRS, resolution, and extent\nfun allows you to specify the value of the resulting raster"
+  },
+  {
+    "objectID": "slides/13-slides.html#using-rasterize",
+    "href": "slides/13-slides.html#using-rasterize",
+    "title": "Combining Raster and Vector Data",
+    "section": "Using rasterize",
+    "text": "Using rasterize\n\n\nPresence/Absence\nfield specifies which value should be returned to non-empty cells\n\n\n\n\n\n\ncycle_hire_osm = spData::cycle_hire_osm\ncycle_hire_osm_projected = st_transform(cycle_hire_osm, \"EPSG:27700\")\nraster_template = rast(ext(cycle_hire_osm_projected), resolution = 1000,\n                       crs = st_crs(cycle_hire_osm_projected)$wkt)\nch_raster1 = rasterize(cycle_hire_osm_projected, raster_template,\n                       field = 1)"
+  },
+  {
+    "objectID": "slides/13-slides.html#using-rasterize-1",
+    "href": "slides/13-slides.html#using-rasterize-1",
+    "title": "Combining Raster and Vector Data",
+    "section": "Using rasterize",
+    "text": "Using rasterize\n\n\nThe fun argument specifies how we aggregate the data\nUseful for counting occurrences (using length)\n\n\n\n\n\n\nch_raster2 = rasterize(cycle_hire_osm_projected, raster_template, \n                       fun = \"length\")"
+  },
+  {
+    "objectID": "slides/13-slides.html#using-rasterize-2",
+    "href": "slides/13-slides.html#using-rasterize-2",
+    "title": "Combining Raster and Vector Data",
+    "section": "Using rasterize",
+    "text": "Using rasterize\n\n\nThe fun argument specifies how we aggregate the data\nCan use a variety of functions\n\n\n\n\n\n\nch_raster3 = rasterize(cycle_hire_osm_projected, raster_template, \n                       field = \"capacity\", fun = sum)"
+  },
+  {
+    "objectID": "slides/13-slides.html#lines-and-polygons",
+    "href": "slides/13-slides.html#lines-and-polygons",
+    "title": "Combining Raster and Vector Data",
+    "section": "Lines and Polygons",
+    "text": "Lines and Polygons\n\nCan use rasterize or stars::st_rasterize\nResult depends on the touches argument"
+  },
+  {
+    "objectID": "slides/13-slides.html#converting-rasters-to-vectors",
+    "href": "slides/13-slides.html#converting-rasters-to-vectors",
+    "title": "Combining Raster and Vector Data",
+    "section": "Converting rasters to vectors",
+    "text": "Converting rasters to vectors\n\nLess common, but can convert to vector data\nas.points, as.countour, and polygonize\n\n\n\n\n\ndem = rast(system.file(\"raster/dem.tif\", package = \"spDataLarge\"))\ncl = as.contour(dem)"
+  },
+  {
+    "objectID": "slides/13-slides.html#generating-new-data-1",
+    "href": "slides/13-slides.html#generating-new-data-1",
+    "title": "Combining Raster and Vector Data",
+    "section": "Generating New Data",
+    "text": "Generating New Data\n\nSometimes we want a raster describing the spatial context of vector data\ndistance is a simple method\nWe’ll use interpolation in the next few weeks"
+  },
+  {
+    "objectID": "slides/13-slides.html#generating-distance-rasters",
+    "href": "slides/13-slides.html#generating-distance-rasters",
+    "title": "Combining Raster and Vector Data",
+    "section": "Generating Distance Rasters",
+    "text": "Generating Distance Rasters\n\nreturns a distance matrix or SpatRaster\n\n\ncycle_hire_osm = spData::cycle_hire_osm\ncycle_hire_osm_projected = st_transform(cycle_hire_osm, \"EPSG:27700\")\n\ncycle_dist <- distance(vect(cycle_hire_osm_projected))\nhead(as.matrix(cycle_dist))[1:5, 1:5]\n\n          1         2        3         4         5\n1    0.0000 2550.9619 1736.118  407.1558 1922.3728\n2 2550.9619    0.0000 1072.401 2820.4804  725.2172\n3 1736.1178 1072.4011    0.000 1908.1413  360.7490\n4  407.1558 2820.4804 1908.141    0.0000 2148.0087\n5 1922.3728  725.2172  360.749 2148.0087    0.0000"
+  },
+  {
+    "objectID": "slides/13-slides.html#generating-distance-rasters-1",
+    "href": "slides/13-slides.html#generating-distance-rasters-1",
+    "title": "Combining Raster and Vector Data",
+    "section": "Generating Distance Rasters",
+    "text": "Generating Distance Rasters\n\nreturns a distance matrix or SpatRaster\n\n\nraster_template = rast(ext(cycle_hire_osm_projected), resolution = 100,\n                       crs = st_crs(cycle_hire_osm_projected)$wkt)\nch_raster1 = rasterize(cycle_hire_osm_projected, raster_template,\n                       field = 1)\n\nch_dist_rast <- distance(ch_raster1)\nplot(ch_dist_rast)"
+  },
+  {
+    "objectID": "slides/13-slides.html#creating-vector-data-by-extraction",
+    "href": "slides/13-slides.html#creating-vector-data-by-extraction",
+    "title": "Combining Raster and Vector Data",
+    "section": "Creating Vector Data by Extraction",
+    "text": "Creating Vector Data by Extraction\n\nSometimes we want to use rasters to create new attributes\nfun controls how the cells are aggregated\n\n\ncycle_hire_osm = spData::cycle_hire_osm\ncycle_hire_osm_proj_buff <- st_transform(cycle_hire_osm, \"EPSG:27700\") %>% \n  st_buffer(., 5000) %>% \n  as(., \"SpatVector\")\n\ncycle_ext <- extract(ch_dist_rast, cycle_hire_osm_proj_buff)\nhead(cycle_ext)\n\n  ID    lyr.1\n1  1 1360.147\n2  1 1280.625\n3  1 1204.159\n4  1 1131.371\n5  1 1063.015\n6  1 1000.000"
   },
   {
     "objectID": "syllabus.html",

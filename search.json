@@ -378,6 +378,27 @@
     "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\nModifying the extent\n\n\nConversions\n\n\nDistance\n\n\nExtractions"
   },
   {
+    "objectID": "content/14-content.html",
+    "href": "content/14-content.html",
+    "title": "Building Spatial Databases with Attributes",
+    "section": "",
+    "text": "Today we’ll begin exploring typical workflows for spatial analysis by working with attribute data. Attributes generally provide additional information about a location that we can use for visualization and analysis. Unlike spatial operations that we’ll explore next week, attribute data do not all require geographic information (but they do need some means of relating to a geography). These chapters are not ‘prerequisite’ reading for the week, but provide a lot of helpful background for attribute operations in R.\n\n The Tidy Data and Relational Data sections from R For Data Science (Wickham and Grolemund 2016) provide a great overview to data cleaning and manipulation functions available in the tidyverse.\n Doing things with multiple tables has a lot of nice visual examples of for using the _join functions in dplyr.\n This article (Di Minin et al. 2021) provides a recent recap of a variety of reasons why we may need to combine data from multiple, often disparate, sources."
+  },
+  {
+    "objectID": "content/14-content.html#objectives",
+    "href": "content/14-content.html#objectives",
+    "title": "Building Spatial Databases with Attributes",
+    "section": "Objectives",
+    "text": "Objectives\nBy the end of today, you should be able to:\n\nDefine spatial analysis\nDescribe the steps in planning a spatial analysis\nUnderstand the structure of relational databases\nBegin building a database for spatial analysis"
+  },
+  {
+    "objectID": "content/14-content.html#slides",
+    "href": "content/14-content.html#slides",
+    "title": "Building Spatial Databases with Attributes",
+    "section": "Slides",
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\nBuilding spatial databases based on attributes\n\n\nWorkflows for spatial analysis\n\n\nDatabases and attributes\n\n\nCommon attribute operations\n\n\nJoining (a)spatial data"
+  },
+  {
     "objectID": "content/index.html",
     "href": "content/index.html",
     "title": "Readings and slides",
@@ -2000,6 +2021,55 @@
     "title": "Combining Raster and Vector Data",
     "section": "Creating Vector Data by Extraction",
     "text": "Creating Vector Data by Extraction\n\nSometimes we want to use rasters to create new attributes\nfun controls how the cells are aggregated\n\n\ncycle_hire_osm = spData::cycle_hire_osm\ncycle_hire_osm_proj_buff <- st_transform(cycle_hire_osm, \"EPSG:27700\") %>% \n  st_buffer(., 5000) %>% \n  as(., \"SpatVector\")\n\ncycle_ext <- extract(ch_dist_rast, cycle_hire_osm_proj_buff)\nhead(cycle_ext)\n\n  ID    lyr.1\n1  1 1360.147\n2  1 1280.625\n3  1 1204.159\n4  1 1131.371\n5  1 1063.015\n6  1 1000.000"
+  },
+  {
+    "objectID": "slides/14-slides.html#objectives",
+    "href": "slides/14-slides.html#objectives",
+    "title": "Building Spatial Databases with Attributes",
+    "section": "Objectives",
+    "text": "Objectives\n\nBy the end of today, you should be able to:\n\nDefine spatial analysis\nDescribe the steps in planning a spatial analysis\nUnderstand the structure of relational databases\nBegin building a database for spatial analysis"
+  },
+  {
+    "objectID": "slides/14-slides.html#what-is-spatial-analysis-1",
+    "href": "slides/14-slides.html#what-is-spatial-analysis-1",
+    "title": "Building Spatial Databases with Attributes",
+    "section": "What is spatial analysis?",
+    "text": "What is spatial analysis?\n\n“The process of examining the locations, attributes, and relationships of features in spatial data through overlay and other analytical techniques in order to address a question or gain useful knowledge. Spatial analysis extracts or creates new information from spatial data”.\n\n— ESRI Dictionary"
+  },
+  {
+    "objectID": "slides/14-slides.html#what-is-spatial-analysis-2",
+    "href": "slides/14-slides.html#what-is-spatial-analysis-2",
+    "title": "Building Spatial Databases with Attributes",
+    "section": "What is spatial analysis?",
+    "text": "What is spatial analysis?\n\n\n\nThe process of turning maps into information\nAny- or everything we do with GIS\nThe use of computational and statistical algorithms to understand the relations between things that co-occur in space.\n\n\n\n\n\nJohn Snow’s cholera outbreak map"
+  },
+  {
+    "objectID": "slides/14-slides.html#common-goals-for-spatial-analysis",
+    "href": "slides/14-slides.html#common-goals-for-spatial-analysis",
+    "title": "Building Spatial Databases with Attributes",
+    "section": "Common goals for spatial analysis",
+    "text": "Common goals for spatial analysis\n\n\n\n\n\ncourtesy of NatureServe\n\n\n\n\nDescribe and visualize locations or events\nQuantify patterns\nCharacterize ‘suitability’\nDetermine (statistical) relations"
+  },
+  {
+    "objectID": "slides/14-slides.html#common-pitfalls-of-spatial-analysis",
+    "href": "slides/14-slides.html#common-pitfalls-of-spatial-analysis",
+    "title": "Building Spatial Databases with Attributes",
+    "section": "Common pitfalls of spatial analysis",
+    "text": "Common pitfalls of spatial analysis\n\nLocational Fallacy: Error due to the spatial characterization chosen for elements of study\nAtomic Fallacy: Applying conclusions from individuals to entire spatial units\nEcological Fallacy: Applying conclusions from aggregated information to individuals\n\n\n\nSpatial analysis is an inherently complex endeavor and one that is advancing rapidly. So-called “best practices” for addressing many of these issues are still being developed and debated. This doesn’t mean you shouldn’t do spatial analysis, but you should keep these things in mind as you design, implement, and interpret your analyses"
+  },
+  {
+    "objectID": "slides/14-slides.html#workflows-for-spatial-analysis-1",
+    "href": "slides/14-slides.html#workflows-for-spatial-analysis-1",
+    "title": "Building Spatial Databases with Attributes",
+    "section": "Workflows for spatial analysis",
+    "text": "Workflows for spatial analysis\n\n\n\nAcquisition (not really a focus, but see Resources)\nGeoprocessing\nAnalysis\nVisualization\n\n\n\n\n\ncourtesy of University of Illinois"
+  },
+  {
+    "objectID": "slides/14-slides.html#geoprocessing",
+    "href": "slides/14-slides.html#geoprocessing",
+    "title": "Building Spatial Databases with Attributes",
+    "section": "Geoprocessing",
+    "text": "Geoprocessing\nManipulation of data for subsequent use\n\nAlignment (projections, cropping)\nData cleaning and transformation (measures, transformers)\nCombination of multiple datasets (overlays, raster maths)\nSelection and subsetting (predicates, measures)"
   },
   {
     "objectID": "syllabus.html",

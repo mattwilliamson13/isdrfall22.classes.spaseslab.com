@@ -2069,7 +2069,119 @@
     "href": "slides/14-slides.html#geoprocessing",
     "title": "Building Spatial Databases with Attributes",
     "section": "Geoprocessing",
-    "text": "Geoprocessing\nManipulation of data for subsequent use\n\nAlignment (projections, cropping)\nData cleaning and transformation (measures, transformers)\nCombination of multiple datasets (overlays, raster maths)\nSelection and subsetting (predicates, measures)"
+    "text": "Geoprocessing\nManipulation of data for subsequent use\n\nAlignment\nData cleaning and transformation\nCombination of multiple datasets\nSelection and subsetting"
+  },
+  {
+    "objectID": "slides/14-slides.html#databases-and-attributes-1",
+    "href": "slides/14-slides.html#databases-and-attributes-1",
+    "title": "Building Spatial Databases with Attributes",
+    "section": "Databases and attributes",
+    "text": "Databases and attributes\n\n\n\n\n\ncourtesy of Giscommons\n\n\n\n\n\nPrevious focus has been largely on location\nGeographic data often also includes non-spatial data\nAttributes: Non-spatial information that further describes a spatial feature\nTypically stored in tables where each row represents a spatial feature\n\nWide vs. long format"
+  },
+  {
+    "objectID": "slides/14-slides.html#common-attribute-operations",
+    "href": "slides/14-slides.html#common-attribute-operations",
+    "title": "Building Spatial Databases with Attributes",
+    "section": "Common attribute operations",
+    "text": "Common attribute operations\n\nsf designed to work with tidyverse\nAllows use of dplyr data manipulation verbs\nCan use scales package for units\nAlso allows %>% to chain together multiple steps\ngeometries are “sticky”\nPay attention to masking!!"
+  },
+  {
+    "objectID": "slides/14-slides.html#revisiting-the-tidyverse",
+    "href": "slides/14-slides.html#revisiting-the-tidyverse",
+    "title": "Building Spatial Databases with Attributes",
+    "section": "Revisiting the tidyverse",
+    "text": "Revisiting the tidyverse\n\nFields contain individual attributes\nSelecting fields\n\n\n\n\ncolnames(world)\n\n [1] \"iso_a2\"    \"name_long\" \"continent\" \"region_un\" \"subregion\" \"type\"     \n [7] \"area_km2\"  \"pop\"       \"lifeExp\"   \"gdpPercap\" \"geom\"     \n\nhead(world)[,1:3] %>% \n  st_drop_geometry()\n\n# A tibble: 6 × 3\n  iso_a2 name_long      continent    \n* <chr>  <chr>          <chr>        \n1 FJ     Fiji           Oceania      \n2 TZ     Tanzania       Africa       \n3 EH     Western Sahara Africa       \n4 CA     Canada         North America\n5 US     United States  North America\n6 KZ     Kazakhstan     Asia         \n\n\n\n\nworld %>%\n  dplyr::select(name_long, continent) %>%\n  st_drop_geometry() %>% \n  head(.) \n\n# A tibble: 6 × 2\n  name_long      continent    \n  <chr>          <chr>        \n1 Fiji           Oceania      \n2 Tanzania       Africa       \n3 Western Sahara Africa       \n4 Canada         North America\n5 United States  North America\n6 Kazakhstan     Asia"
+  },
+  {
+    "objectID": "slides/14-slides.html#revisiting-the-tidyverse-1",
+    "href": "slides/14-slides.html#revisiting-the-tidyverse-1",
+    "title": "Building Spatial Databases with Attributes",
+    "section": "Revisiting the tidyverse",
+    "text": "Revisiting the tidyverse\n\nFeatures refer to the individual observations in the dataset\nSelecting features\n\n\n\n\nhead(world)[1:3, 1:3] %>% \n  st_drop_geometry()\n\n# A tibble: 3 × 3\n  iso_a2 name_long      continent\n* <chr>  <chr>          <chr>    \n1 FJ     Fiji           Oceania  \n2 TZ     Tanzania       Africa   \n3 EH     Western Sahara Africa   \n\n\n\n\nworld %>%\n  filter(continent == \"Asia\") %>% \n    dplyr::select(name_long, continent) %>%\n  st_drop_geometry() %>% \n  head(.)\n\n# A tibble: 6 × 2\n  name_long   continent\n  <chr>       <chr>    \n1 Kazakhstan  Asia     \n2 Uzbekistan  Asia     \n3 Indonesia   Asia     \n4 Timor-Leste Asia     \n5 Israel      Asia     \n6 Lebanon     Asia"
+  },
+  {
+    "objectID": "slides/14-slides.html#revisiting-the-tidyverse-2",
+    "href": "slides/14-slides.html#revisiting-the-tidyverse-2",
+    "title": "Building Spatial Databases with Attributes",
+    "section": "Revisiting the tidyverse",
+    "text": "Revisiting the tidyverse\n\nCreating new fields\n\n\nworld %>%\n  filter(continent == \"Asia\") %>% \n    dplyr::select(name_long, continent, pop, gdpPercap ,area_km2) %>%\n  mutate(., dens = pop/area_km2,\n         totGDP = gdpPercap * pop) %>%\n  st_drop_geometry() %>% \n  head(.)\n\n# A tibble: 6 × 7\n  name_long   continent       pop gdpPercap area_km2   dens  totGDP\n  <chr>       <chr>         <dbl>     <dbl>    <dbl>  <dbl>   <dbl>\n1 Kazakhstan  Asia       17288285    23587. 2729811.   6.33 4.08e11\n2 Uzbekistan  Asia       30757700     5371.  461410.  66.7  1.65e11\n3 Indonesia   Asia      255131116    10003. 1819251. 140.   2.55e12\n4 Timor-Leste Asia        1212814     6263.   14715.  82.4  7.60e 9\n5 Israel      Asia        8215700    31702.   22991. 357.   2.60e11\n6 Lebanon     Asia        5603279    13831.   10099. 555.   7.75e10"
+  },
+  {
+    "objectID": "slides/14-slides.html#revisiting-the-tidyverse-3",
+    "href": "slides/14-slides.html#revisiting-the-tidyverse-3",
+    "title": "Building Spatial Databases with Attributes",
+    "section": "Revisiting the tidyverse",
+    "text": "Revisiting the tidyverse\n\nCreating new fields"
+  },
+  {
+    "objectID": "slides/14-slides.html#revisiting-the-tidyverse-4",
+    "href": "slides/14-slides.html#revisiting-the-tidyverse-4",
+    "title": "Building Spatial Databases with Attributes",
+    "section": "Revisiting the tidyverse",
+    "text": "Revisiting the tidyverse\n\nAggregating data\n\n\n\n\nworld %>%\n  st_drop_geometry(.) %>% \n  group_by(continent) %>%\n  summarize(pop = sum(pop, na.rm = TRUE))\n\n# A tibble: 8 × 2\n  continent                      pop\n  <chr>                        <dbl>\n1 Africa                  1154946633\n2 Antarctica                       0\n3 Asia                    4311408059\n4 Europe                   669036256\n5 North America            565028684\n6 Oceania                   37757833\n7 Seven seas (open ocean)          0\n8 South America            412060811"
+  },
+  {
+    "objectID": "slides/14-slides.html#joining-aspatial-data-1",
+    "href": "slides/14-slides.html#joining-aspatial-data-1",
+    "title": "Building Spatial Databases with Attributes",
+    "section": "Joining (a)spatial data",
+    "text": "Joining (a)spatial data\n\n\n\nRequires a “key” field\nMultiple outcomes possible\nThink about your final data form"
+  },
+  {
+    "objectID": "slides/14-slides.html#left-join",
+    "href": "slides/14-slides.html#left-join",
+    "title": "Building Spatial Databases with Attributes",
+    "section": "Left Join",
+    "text": "Left Join\n\nUseful for adding other attributes not in your spatial data\nReturns all of the records in x attributed with y\nPay attention to the number of rows!"
+  },
+  {
+    "objectID": "slides/14-slides.html#left-join-1",
+    "href": "slides/14-slides.html#left-join-1",
+    "title": "Building Spatial Databases with Attributes",
+    "section": "Left Join",
+    "text": "Left Join"
+  },
+  {
+    "objectID": "slides/14-slides.html#left-join-2",
+    "href": "slides/14-slides.html#left-join-2",
+    "title": "Building Spatial Databases with Attributes",
+    "section": "Left Join",
+    "text": "Left Join\n\n\n\nhead(coffee_data)\n\n# A tibble: 6 × 3\n  name_long                coffee_production_2016 coffee_production_2017\n  <chr>                                     <int>                  <int>\n1 Angola                                       NA                     NA\n2 Bolivia                                       3                      4\n3 Brazil                                     3277                   2786\n4 Burundi                                      37                     38\n5 Cameroon                                      8                      6\n6 Central African Republic                     NA                     NA\n\n\n\n\nworld_coffee = left_join(world, coffee_data)\nnrow(world_coffee)\n\n[1] 177"
+  },
+  {
+    "objectID": "slides/14-slides.html#left-join-3",
+    "href": "slides/14-slides.html#left-join-3",
+    "title": "Building Spatial Databases with Attributes",
+    "section": "Left Join",
+    "text": "Left Join"
+  },
+  {
+    "objectID": "slides/14-slides.html#inner-join",
+    "href": "slides/14-slides.html#inner-join",
+    "title": "Building Spatial Databases with Attributes",
+    "section": "Inner Join",
+    "text": "Inner Join\n\nUseful for subsetting to “complete” records\nReturns all of the records in x with matching y\nPay attention to the number of rows!"
+  },
+  {
+    "objectID": "slides/14-slides.html#inner-join-1",
+    "href": "slides/14-slides.html#inner-join-1",
+    "title": "Building Spatial Databases with Attributes",
+    "section": "Inner Join",
+    "text": "Inner Join"
+  },
+  {
+    "objectID": "slides/14-slides.html#inner-join-2",
+    "href": "slides/14-slides.html#inner-join-2",
+    "title": "Building Spatial Databases with Attributes",
+    "section": "Inner Join",
+    "text": "Inner Join\n\n\n\nworld_coffee_inner = inner_join(world, coffee_data)\nnrow(world_coffee_inner)\n\n[1] 45\n\n\n\n\nsetdiff(coffee_data$name_long, world$name_long)\n\n[1] \"Congo, Dem. Rep. of\" \"Others\""
+  },
+  {
+    "objectID": "slides/14-slides.html#inner-join-3",
+    "href": "slides/14-slides.html#inner-join-3",
+    "title": "Building Spatial Databases with Attributes",
+    "section": "Inner Join",
+    "text": "Inner Join"
   },
   {
     "objectID": "syllabus.html",

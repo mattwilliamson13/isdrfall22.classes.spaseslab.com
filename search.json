@@ -478,30 +478,44 @@
   {
     "objectID": "content/18-content.html",
     "href": "content/18-content.html",
-    "title": "Multivariate Analysis I",
+    "title": "Overlays",
     "section": "",
     "text": "Now that you have some experience with analyzing point patterns, we’ll extend those ideas to begin developing new multivariate algorithms. We’ll start with some simple additions of covariates to our kernel density estimators. Then we’ll move into overlay analysis to set the stage for more complicated regression models."
   },
   {
     "objectID": "content/18-content.html#resources",
     "href": "content/18-content.html#resources",
-    "title": "Multivariate Analysis I",
+    "title": "Overlays",
     "section": "Resources",
     "text": "Resources\n\n Overlay analysis provides an overview of the logic of overlay analysis.\n Spatial Operations and Vector Overlays from Manual Gimond provides an intro to using vector data in overlays. Easily converable to sf syntax.\n Predicting site location with simple additive raster sensitivity analysis using R from Ben Markwick has a complete example of using a weights of evidence approach to overlays."
   },
   {
     "objectID": "content/18-content.html#objectives",
     "href": "content/18-content.html#objectives",
-    "title": "Multivariate Analysis I",
+    "title": "Overlays",
     "section": "Objectives",
     "text": "Objectives\nBy the end of today you should be able to:\n\nintegrate a covariate into KDE’s\nDescribe the utility and shortcomings of overlay analysis\nDescribe and implement different overlay approaches"
   },
   {
     "objectID": "content/18-content.html#slides",
     "href": "content/18-content.html#slides",
-    "title": "Multivariate Analysis I",
+    "title": "Overlays",
     "section": "Slides",
     "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\nCovariates and Density\n\n\nBoolean Overlays\n\n\nWeighted Linear Combinations\n\n\nWeights of Evidence"
+  },
+  {
+    "objectID": "content/19-content.html",
+    "href": "content/19-content.html",
+    "title": "Multivariate Analysis II",
+    "section": "",
+    "text": "Much of the motivation for this course stems from the need to develop spatially explicit predictions about the likelihood that a species or event occurs in places we haven’t sampled. In ecology, we call these models by several different names: species distribution models, resource selection functions, habitat selection models. More generally we might call these ‘event occurrence models’, statistical models that describe the relations between a number of predictors and the occurrence of any event of interest (e.g., presence of crimes, species, conservation actions, etc. )"
+  },
+  {
+    "objectID": "content/19-content.html#resources",
+    "href": "content/19-content.html#resources",
+    "title": "Multivariate Analysis II",
+    "section": "Resources",
+    "text": "Resources\n\n Logistic regression: a brief primer by (Stoltzfus 2011) is a nice introduction to logistic regression.\n Point process models for presence-only analysis by (Renner et al. 2015) provides a comprehensive overview and comparision of methods for analyzing presence-background datasets.\n Estimating site occupancy rates when detection probabilities are less than one by (MacKenzie et al. 2002) is one of the foundational papers describing the use of occupancy modelling to account for situations where absences are ambiguous.\n Is my species distribution model fit for purpose? Matching data and models to applications by (Guillera-Arroita et al. 2015) is an excellent, concise description of the relations between data collection, statistical models, and inference.\n Predicting species distributions for conservation decisions by (Guisan et al. 2013) is a foundational paper describing some of the challenges with making conservation decisions based on the outcomes of species distribution models.\n\n\n View all slides in new window  Download PDF of all slides\n\n\n\nFavorability Again\n\n\nLogistic Regression\n\n\nPresence-Only Data"
   },
   {
     "objectID": "content/index.html",
@@ -2802,135 +2816,163 @@
   {
     "objectID": "slides/18-slides.html#re-visiting-density-methods",
     "href": "slides/18-slides.html#re-visiting-density-methods",
-    "title": "Multivariate Analysis I",
+    "title": "Overlays",
     "section": "Re-visiting Density Methods",
     "text": "Re-visiting Density Methods\n\n\n\nThe overall intensity of a point pattern is a crude density estimate\n\n\\[\n\\begin{equation}\n\\hat{\\lambda} = \\frac{\\#(S \\in A )}{a}\n\\end{equation}\n\\]\n\nLocal density = quadrat counts"
   },
   {
     "objectID": "slides/18-slides.html#kernel-density-estimates-kde",
     "href": "slides/18-slides.html#kernel-density-estimates-kde",
-    "title": "Multivariate Analysis I",
+    "title": "Overlays",
     "section": "Kernel Density Estimates (KDE)",
     "text": "Kernel Density Estimates (KDE)\n\\[\n\\begin{equation}\n\\hat{f}(x) = \\frac{1}{nh_xh_y} \\sum_{i=1}^n k\\bigg(\\frac{{x-x_i}}{h_x},\\frac{{y-y_i}}{h_y} \\bigg)\n\\end{equation}\n\\]\n\n\nAssume each location in \\(\\mathbf{s_i}\\) drawn from unknown distribution\nDistribution has probability density \\(f(\\mathbf{x})\\)\nEstimate \\(f(\\mathbf{x})\\) by averaging probability “bumps” around each location\nNeed different object types for most operations in R (as.ppp)"
   },
   {
     "objectID": "slides/18-slides.html#kernel-density-estimates-kde-1",
     "href": "slides/18-slides.html#kernel-density-estimates-kde-1",
-    "title": "Multivariate Analysis I",
+    "title": "Overlays",
     "section": "Kernel Density Estimates (KDE)",
     "text": "Kernel Density Estimates (KDE)\n\n\n\\(h\\) is the bandwidth and \\(k\\) is the kernel\nWe can use stats::density to explore\nkernel: defines the shape, size, and weight assigned to observations in the window\nbandwidth often assigned based on distance from the window center"
   },
   {
     "objectID": "slides/18-slides.html#kernel-density-estimates-kde-2",
     "href": "slides/18-slides.html#kernel-density-estimates-kde-2",
-    "title": "Multivariate Analysis I",
+    "title": "Overlays",
     "section": "Kernel Density Estimates (KDE)",
     "text": "Kernel Density Estimates (KDE)\n\nWhat if we imagine intensity is a function of another covariate"
   },
   {
     "objectID": "slides/18-slides.html#adding-a-covariate-to-kde",
     "href": "slides/18-slides.html#adding-a-covariate-to-kde",
-    "title": "Multivariate Analysis I",
+    "title": "Overlays",
     "section": "Adding a Covariate to KDE",
     "text": "Adding a Covariate to KDE\n\nrhohat computes nonparametric intensity \\(\\rho\\) as a function of a covariate\n\n\\[\n\\begin{equation}\n\\lambda(u) = \\rho(Z(u))\n\\end{equation}\n\\]"
   },
   {
     "objectID": "slides/18-slides.html#adding-a-covariate-to-kde-1",
     "href": "slides/18-slides.html#adding-a-covariate-to-kde-1",
-    "title": "Multivariate Analysis I",
+    "title": "Overlays",
     "section": "Adding a Covariate to KDE",
     "text": "Adding a Covariate to KDE"
   },
   {
     "objectID": "slides/18-slides.html#adding-a-covariate-to-kde-2",
     "href": "slides/18-slides.html#adding-a-covariate-to-kde-2",
-    "title": "Multivariate Analysis I",
+    "title": "Overlays",
     "section": "Adding a Covariate to KDE",
     "text": "Adding a Covariate to KDE\n\nWe can also think more generatively\nModel explicitly as a Poisson Point Process using ppm\n\n\\[\n\\begin{equation}\n\\lambda(u) = \\exp^{Int + \\beta X}\n\\end{equation}\n\\]\n\n# Create the Poisson point process model\nPPM1 <- ppm(starbucks.km ~ pop.lg.km)\n# Plot the relationship"
   },
   {
     "objectID": "slides/18-slides.html#adding-a-covariate-to-kde-3",
     "href": "slides/18-slides.html#adding-a-covariate-to-kde-3",
-    "title": "Multivariate Analysis I",
+    "title": "Overlays",
     "section": "Adding a Covariate to KDE",
     "text": "Adding a Covariate to KDE\n\n\n\n\nNonstationary Poisson process\n\nLog intensity:  ~pop.lg.km\n\nFitted trend coefficients:\n(Intercept)   pop.lg.km \n -13.710551    1.279928 \n\n              Estimate       S.E.    CI95.lo    CI95.hi Ztest      Zval\n(Intercept) -13.710551 0.46745489 -14.626746 -12.794356   *** -29.33021\npop.lg.km     1.279928 0.05626785   1.169645   1.390211   ***  22.74705\nProblem:\n Values of the covariate 'pop.lg.km' were NA or undefined at 0.57% (4 out of \n699) of the quadrature points"
   },
   {
     "objectID": "slides/18-slides.html#overlays-1",
     "href": "slides/18-slides.html#overlays-1",
-    "title": "Multivariate Analysis I",
+    "title": "Overlays",
     "section": "Overlays",
     "text": "Overlays\n\nMethods for identifying optimal site selection or suitability\nApply a common scale to diverse or disimilar outputs"
   },
   {
     "objectID": "slides/18-slides.html#getting-started",
     "href": "slides/18-slides.html#getting-started",
-    "title": "Multivariate Analysis I",
+    "title": "Overlays",
     "section": "Getting Started",
     "text": "Getting Started\n\n\nDefine the problem.\nBreak the problem into submodels.\nDetermine significant layers.\nReclassify or transform the data within a layer.\nAdd or combine the layers.\nVerify"
   },
   {
     "objectID": "slides/18-slides.html#boolean-overlays",
     "href": "slides/18-slides.html#boolean-overlays",
-    "title": "Multivariate Analysis I",
+    "title": "Overlays",
     "section": "Boolean Overlays",
     "text": "Boolean Overlays\n\n\n\nSuccessive disqualification of areas\nSeries of “yes/no” questions\n“Sieve” mapping"
   },
   {
     "objectID": "slides/18-slides.html#boolean-overlays-1",
     "href": "slides/18-slides.html#boolean-overlays-1",
-    "title": "Multivariate Analysis I",
+    "title": "Overlays",
     "section": "Boolean Overlays",
     "text": "Boolean Overlays\n\nReclassifying\nWhich types of land are appropriate\n\n\nnlcd <-  rast(system.file(\"raster/nlcd.tif\", package = \"spDataLarge\"))\nplot(nlcd)"
   },
   {
     "objectID": "slides/18-slides.html#boolean-overlays-2",
     "href": "slides/18-slides.html#boolean-overlays-2",
-    "title": "Multivariate Analysis I",
+    "title": "Overlays",
     "section": "Boolean Overlays",
     "text": "Boolean Overlays\n\nWhich types of land are appropriate?\n\n\nnlcd.segments <- segregate(nlcd)\nnames(nlcd.segments) <- levels(nlcd)[[1]][-1,2]\nplot(nlcd.segments)"
   },
   {
     "objectID": "slides/18-slides.html#boolean-overlays-3",
     "href": "slides/18-slides.html#boolean-overlays-3",
-    "title": "Multivariate Analysis I",
+    "title": "Overlays",
     "section": "Boolean Overlays",
     "text": "Boolean Overlays\n\nWhich types of land are appropriate?"
   },
   {
     "objectID": "slides/18-slides.html#boolean-overlays-4",
     "href": "slides/18-slides.html#boolean-overlays-4",
-    "title": "Multivariate Analysis I",
+    "title": "Overlays",
     "section": "Boolean Overlays",
     "text": "Boolean Overlays\n\nMake sure data is aligned!\n\n\nsuit.slope <- slope < 10\nsuit.landcov <- nlcd.segments[\"Shrubland\"]\nsuit.slope.match <- project(suit.slope, suit.landcov)\nsuit <- suit.slope.match + suit.landcov"
   },
   {
     "objectID": "slides/18-slides.html#boolean-overlays-5",
     "href": "slides/18-slides.html#boolean-overlays-5",
-    "title": "Multivariate Analysis I",
+    "title": "Overlays",
     "section": "Boolean Overlays",
     "text": "Boolean Overlays"
   },
   {
     "objectID": "slides/18-slides.html#challenges-with-boolean-overlays",
     "href": "slides/18-slides.html#challenges-with-boolean-overlays",
-    "title": "Multivariate Analysis I",
+    "title": "Overlays",
     "section": "Challenges with Boolean Overlays",
     "text": "Challenges with Boolean Overlays\n\nAssume relationships are really Boolean\nNo measurement error\nCategorical measurements are known exactly\nBoundaries are well-represented"
   },
   {
     "objectID": "slides/18-slides.html#a-more-general-approach",
     "href": "slides/18-slides.html#a-more-general-approach",
-    "title": "Multivariate Analysis I",
+    "title": "Overlays",
     "section": "A more general approach",
-    "text": "A more general approach\n\nDefine a favorability metric\n\n\\[\n\\begin{equation}\nF(\\mathbf{s}) = \\prod_{M-1}^{m}X_m(\\mathbf{s})\n\\end{equation}\n\\]"
+    "text": "A more general approach\n\nDefine a favorability metric\n\n\\[\n\\begin{equation}\nF(\\mathbf{s}) = \\prod_{M=1}^{m}X_m(\\mathbf{s})\n\\end{equation}\n\\]"
   },
   {
     "objectID": "slides/18-slides.html#weighted-linear-combinations",
     "href": "slides/18-slides.html#weighted-linear-combinations",
-    "title": "Multivariate Analysis I",
+    "title": "Overlays",
     "section": "Weighted Linear Combinations",
     "text": "Weighted Linear Combinations\n\\[\n\\begin{equation}\nF(\\mathbf{s}) = \\frac{\\sum_{M=1}^{m}w_mX_m}{\\sum_{M=1}^{m}w_i}\n\\end{equation}\n\\]"
+  },
+  {
+    "objectID": "slides/19-slides.html#estimating-favorability",
+    "href": "slides/19-slides.html#estimating-favorability",
+    "title": "Multivariate Analysis I",
+    "section": "Estimating favorability",
+    "text": "Estimating favorability\n\\[\n\\begin{equation}\nF(\\mathbf{s}) = \\prod_{M=1}^{m}X_m(\\mathbf{s})\n\\end{equation}\n\\]\n\nTreat \\(F(\\mathbf{s})\\) as binary\nThen \\(F(\\mathbf{s}) = 1\\) if all inputs (\\(X_m(\\mathbf{s})\\)) are suitable\nThen \\(F(\\mathbf{s}) = 0\\) if not"
+  },
+  {
+    "objectID": "slides/19-slides.html#estimating-favorability-1",
+    "href": "slides/19-slides.html#estimating-favorability-1",
+    "title": "Multivariate Analysis I",
+    "section": "Estimating favorability",
+    "text": "Estimating favorability\n\\[\n\\begin{equation}\nF(\\mathbf{s}) = f(w_1X_1(\\mathbf{s}), w_2X_2(\\mathbf{s}), w_3X_3(\\mathbf{s}), ..., w_mX_m(\\mathbf{s}))\n\\end{equation}\n\\]\n\n\\(F(\\mathbf{s})\\) does not have to be binary (could be ordinal or continuous)\n\\(X_m(\\mathbf{s})\\) could also be extended beyond simply ‘suitable/not suitable’\nAdding weights allows incorporation of relative importance\nOther functions for combining inputs (\\(X_m(\\mathbf{s})\\))"
+  },
+  {
+    "objectID": "slides/19-slides.html#weighted-linear-combinations",
+    "href": "slides/19-slides.html#weighted-linear-combinations",
+    "title": "Multivariate Analysis I",
+    "section": "Weighted Linear Combinations",
+    "text": "Weighted Linear Combinations\n\\[\n\\begin{equation}\nF(\\mathbf{s}) = \\frac{\\sum_{i=1}^{m}w_iX_i(\\mathbf{s})}{\\sum_{i=1}^{m}w_i}\n\\end{equation}\n\\]\n\n\\(F(s)\\) is now an index based of the values of \\(X_m(\\mathbf{s})\\)\n\\(w_i\\) can incorporate weights of evidence, uncertainty, or different participant preferences\nDividing by \\(\\sum_{i=1}^{m}w_i\\) normalizes by the sum of weights"
+  },
+  {
+    "objectID": "slides/19-slides.html#model-driven-overlay",
+    "href": "slides/19-slides.html#model-driven-overlay",
+    "title": "Multivariate Analysis I",
+    "section": "Model-driven overlay",
+    "text": "Model-driven overlay\n\\[\n\\begin{equation}\nF(\\mathbf{s}) = w_0 + \\sum_{i=1}^{m}w_iX_i(\\mathbf{s}) + \\epsilon\n\\end{equation}\n\\]\n\nIf we estimate \\(w_i\\) using data, we specify \\(F(s)\\) as the outcome of regression\nWhen \\(F(s)\\) is binary → logistic regression\nWhen \\(F(s)\\) is continuous → linear (gamma) regression\nWhen \\(F(s)\\) is discrete → Poisson regression\nAssumptions about \\(\\epsilon\\) matter!!"
   },
   {
     "objectID": "syllabus.html",

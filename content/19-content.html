@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Intro to Spatial Data in R - Multivariate Analysis II</title>
+<title>Intro to Spatial Data in R - Multivariate Analysis I</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -76,12 +76,12 @@ div.csl-indent {
 }</script>
 
 
-<meta property="og:title" content="Intro to Spatial Data in R - Multivariate Analysis II">
+<meta property="og:title" content="Intro to Spatial Data in R - Multivariate Analysis I">
 <meta property="og:description" content="Much of the motivation for this course stems from the need to develop spatially explicit predictions about the likelihood that a species or event occurs in places we haven’t sampled.">
 <meta property="og:image" content="https://isdrfall22.classes.spaseslab.com/files/social-image-f22.png">
 <meta property="og:site-name" content="Intro to Spatial Data in R">
 <meta property="og:locale" content="en_US">
-<meta name="twitter:title" content="Intro to Spatial Data in R - Multivariate Analysis II">
+<meta name="twitter:title" content="Intro to Spatial Data in R - Multivariate Analysis I">
 <meta name="twitter:description" content="Much of the motivation for this course stems from the need to develop spatially explicit predictions about the likelihood that a species or event occurs in places we haven’t sampled.">
 <meta name="twitter:image" content="https://isdrfall22.classes.spaseslab.com/files/social-image-f22.png">
 <meta name="twitter:creator" content="@MwilliamsonMatt">
@@ -142,7 +142,7 @@ div.csl-indent {
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Multivariate Analysis II</h1>
+      <h1 class="quarto-secondary-nav-title">Multivariate Analysis I</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -330,6 +330,7 @@ div.csl-indent {
    
   <ul>
   <li><a href="#resources" id="toc-resources" class="nav-link active" data-scroll-target="#resources">Resources</a></li>
+  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
   </ul>
 </nav>
     </div>
@@ -337,7 +338,7 @@ div.csl-indent {
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header">
-<h1 class="title d-none d-lg-block display-7">Multivariate Analysis II</h1>
+<h1 class="title d-none d-lg-block display-7">Multivariate Analysis I</h1>
 
 <div class="date-block bg-content text-white p-2">
   <p class="date">Content for Wednesday, October 26, 2022</p>
@@ -353,6 +354,15 @@ div.csl-indent {
 <li><p><i class="fas fa-external-link-square-alt"></i> <a href="https://esajournals.onlinelibrary.wiley.com/doi/full/10.1890/0012-9658%282002%29083%5B2248%3AESORWD%5D2.0.CO%3B2">Estimating site occupancy rates when detection probabilities are less than one</a> by <span class="citation" data-cites="MacKenzie2002">(<a href="#ref-MacKenzie2002" role="doc-biblioref">MacKenzie et al. 2002</a>)</span> is one of the foundational papers describing the use of occupancy modelling to account for situations where absences are ambiguous.</p></li>
 <li><p><i class="fas fa-external-link-square-alt"></i> <a href="https://onlinelibrary.wiley.com/doi/full/10.1111/geb.12268">Is my species distribution model fit for purpose? Matching data and models to applications</a> by <span class="citation" data-cites="Guillera-Arroita2015">(<a href="#ref-Guillera-Arroita2015" role="doc-biblioref">Guillera-Arroita et al. 2015</a>)</span> is an excellent, concise description of the relations between data collection, statistical models, and inference.</p></li>
 <li><p><i class="fas fa-external-link-square-alt"></i> <a href="https://onlinelibrary.wiley.com/doi/full/10.1111/ele.12189">Predicting species distributions for conservation decisions</a> by <span class="citation" data-cites="Guisan2013">(<a href="#ref-Guisan2013" role="doc-biblioref">Guisan et al. 2013</a>)</span> is a foundational paper describing some of the challenges with making conservation decisions based on the outcomes of species distribution models.</p></li>
+</ul>
+</section>
+<section id="objectives" class="level2">
+<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
+<p>By the end of today you should be able to:</p>
+<ul>
+<li><p>Recognize the link between regression analysis and overlay analysis</p></li>
+<li><p>Generate spatial predictions based on regression analysis</p></li>
+<li><p>Extend logistic regression to presence-only data models</p></li>
 </ul>
 <p>
 <a class="btn btn-danger" target="_blank" href="../slides/19-slides.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> View all slides in new window</a> <a class="btn btn-danger" target="_blank" href="../slides/19-slides.pdf" role="button"><i class="fa-solid fa-file-pdf"></i> Download PDF of all slides</a>

@@ -506,16 +506,23 @@
   {
     "objectID": "content/19-content.html",
     "href": "content/19-content.html",
-    "title": "Multivariate Analysis II",
+    "title": "Multivariate Analysis I",
     "section": "",
     "text": "Much of the motivation for this course stems from the need to develop spatially explicit predictions about the likelihood that a species or event occurs in places we haven’t sampled. In ecology, we call these models by several different names: species distribution models, resource selection functions, habitat selection models. More generally we might call these ‘event occurrence models’, statistical models that describe the relations between a number of predictors and the occurrence of any event of interest (e.g., presence of crimes, species, conservation actions, etc. )"
   },
   {
     "objectID": "content/19-content.html#resources",
     "href": "content/19-content.html#resources",
-    "title": "Multivariate Analysis II",
+    "title": "Multivariate Analysis I",
     "section": "Resources",
-    "text": "Resources\n\n Logistic regression: a brief primer by (Stoltzfus 2011) is a nice introduction to logistic regression.\n Point process models for presence-only analysis by (Renner et al. 2015) provides a comprehensive overview and comparision of methods for analyzing presence-background datasets.\n Estimating site occupancy rates when detection probabilities are less than one by (MacKenzie et al. 2002) is one of the foundational papers describing the use of occupancy modelling to account for situations where absences are ambiguous.\n Is my species distribution model fit for purpose? Matching data and models to applications by (Guillera-Arroita et al. 2015) is an excellent, concise description of the relations between data collection, statistical models, and inference.\n Predicting species distributions for conservation decisions by (Guisan et al. 2013) is a foundational paper describing some of the challenges with making conservation decisions based on the outcomes of species distribution models.\n\n\n View all slides in new window  Download PDF of all slides\n\n\n\nFavorability Again\n\n\nLogistic Regression\n\n\nPresence-Only Data"
+    "text": "Resources\n\n Logistic regression: a brief primer by (Stoltzfus 2011) is a nice introduction to logistic regression.\n Point process models for presence-only analysis by (Renner et al. 2015) provides a comprehensive overview and comparision of methods for analyzing presence-background datasets.\n Estimating site occupancy rates when detection probabilities are less than one by (MacKenzie et al. 2002) is one of the foundational papers describing the use of occupancy modelling to account for situations where absences are ambiguous.\n Is my species distribution model fit for purpose? Matching data and models to applications by (Guillera-Arroita et al. 2015) is an excellent, concise description of the relations between data collection, statistical models, and inference.\n Predicting species distributions for conservation decisions by (Guisan et al. 2013) is a foundational paper describing some of the challenges with making conservation decisions based on the outcomes of species distribution models."
+  },
+  {
+    "objectID": "content/19-content.html#objectives",
+    "href": "content/19-content.html#objectives",
+    "title": "Multivariate Analysis I",
+    "section": "Objectives",
+    "text": "Objectives\nBy the end of today you should be able to:\n\nRecognize the link between regression analysis and overlay analysis\nGenerate spatial predictions based on regression analysis\nExtend logistic regression to presence-only data models\n\n\n View all slides in new window  Download PDF of all slides\n\n\n\nFavorability Again\n\n\nLogistic Regression\n\n\nPresence-Only Data"
   },
   {
     "objectID": "content/index.html",
@@ -2973,6 +2980,167 @@
     "title": "Multivariate Analysis I",
     "section": "Model-driven overlay",
     "text": "Model-driven overlay\n\\[\n\\begin{equation}\nF(\\mathbf{s}) = w_0 + \\sum_{i=1}^{m}w_iX_i(\\mathbf{s}) + \\epsilon\n\\end{equation}\n\\]\n\nIf we estimate \\(w_i\\) using data, we specify \\(F(s)\\) as the outcome of regression\nWhen \\(F(s)\\) is binary → logistic regression\nWhen \\(F(s)\\) is continuous → linear (gamma) regression\nWhen \\(F(s)\\) is discrete → Poisson regression\nAssumptions about \\(\\epsilon\\) matter!!"
+  },
+  {
+    "objectID": "slides/19-slides.html#why-do-we-create-distribution-models",
+    "href": "slides/19-slides.html#why-do-we-create-distribution-models",
+    "title": "Multivariate Analysis I",
+    "section": "Why do we create distribution models?",
+    "text": "Why do we create distribution models?\n\n\n\n\nTo identify important correlations between predictors and the occurrence of an event\nGenerate maps of the ‘range’ or ‘niche’ of events\nUnderstand spatial patterns of event co-occurrence\nForecast changes in event distributions\n\n\n\n\n\n\nFrom Wiens et al. 2009"
+  },
+  {
+    "objectID": "slides/19-slides.html#general-analysis-situation",
+    "href": "slides/19-slides.html#general-analysis-situation",
+    "title": "Multivariate Analysis I",
+    "section": "General analysis situation",
+    "text": "General analysis situation\n\nFrom Long\n\nSpatially referenced locations of events \\((\\mathbf{y})\\) sampled from the study extent\nA matrix of predictors \\((\\mathbf{X})\\) that can be assigned to each event based on spatial location\n\n\nGoal: Estimate the probability of occurrence of events across unsampled regions of the study area based on correlations with predictors"
+  },
+  {
+    "objectID": "slides/19-slides.html#modeling-presence-absence-data",
+    "href": "slides/19-slides.html#modeling-presence-absence-data",
+    "title": "Multivariate Analysis I",
+    "section": "Modeling Presence-Absence Data",
+    "text": "Modeling Presence-Absence Data\n\n\n\nRandom or systematic sample of the study region\nThe presence (or absence) of the event is recorded for each point\nHypothesized predictors of occurrence are measured (or extracted) at each point\n\n\n\n\n\nFrom By Ragnvald - Own work, CC BY-SA 3.0"
+  },
+  {
+    "objectID": "slides/19-slides.html#logistic-regression",
+    "href": "slides/19-slides.html#logistic-regression",
+    "title": "Multivariate Analysis I",
+    "section": "Logistic regression",
+    "text": "Logistic regression\n\n\n\n\nWe can model favorability as the probability of occurrence using a logistic regression\nA link function maps the linear predictor \\((\\mathbf{x_i}'\\beta + \\alpha)\\) onto the support (0-1) for probabilities\nEstimates of \\(\\beta\\) can then be used to generate ‘wall-to-wall’ spatial predictions\n\n\n\n\\[\n\\begin{equation}\ny_{i} \\sim \\text{Bern}(p_i)\\\\\n\\text{link}(p_i) = \\mathbf{x_i}'\\beta + \\alpha\n\\end{equation}\n\\]\n\n\n\nFrom Mendoza"
+  },
+  {
+    "objectID": "slides/19-slides.html#an-example",
+    "href": "slides/19-slides.html#an-example",
+    "title": "Multivariate Analysis I",
+    "section": "An Example",
+    "text": "An Example\nInputs from the dismo package"
+  },
+  {
+    "objectID": "slides/19-slides.html#an-example-1",
+    "href": "slides/19-slides.html#an-example-1",
+    "title": "Multivariate Analysis I",
+    "section": "An Example",
+    "text": "An Example\nThe sample data\n\n\n\nhead(pres.abs)\n\nSimple feature collection with 6 features and 1 field\nGeometry type: POINT\nDimension:     XY\nBounding box:  xmin: -106.75 ymin: 31.25 xmax: -98.75 ymax: 37.75\nGeodetic CRS:  GCS_unknown\n  y              geometry\n1 0  POINT (-99.25 35.25)\n2 1  POINT (-98.75 36.25)\n3 1 POINT (-106.75 35.25)\n4 0 POINT (-100.75 31.25)\n5 1  POINT (-99.75 37.75)\n6 1 POINT (-104.25 36.75)"
+  },
+  {
+    "objectID": "slides/19-slides.html#an-example-2",
+    "href": "slides/19-slides.html#an-example-2",
+    "title": "Multivariate Analysis I",
+    "section": "An Example",
+    "text": "An Example\nBuilding our dataframe\n\npts.df <- terra::extract(pred.stack, vect(pres.abs), df=TRUE)\nhead(pts.df)\n\n  ID MeanAnnTemp TotalPrecip PrecipWetQuarter PrecipDryQuarter MinTempCold\n1  1         155         667              253               71         350\n2  2         147         678              266               66         351\n3  3         123         261              117               40         329\n4  4         181         533              198               69         348\n5  5         127         589              257               48         338\n6  6          83         438              213               38         278\n  TempRange\n1       -45\n2       -58\n3       -64\n4        -5\n5       -81\n6      -107"
+  },
+  {
+    "objectID": "slides/19-slides.html#an-example-3",
+    "href": "slides/19-slides.html#an-example-3",
+    "title": "Multivariate Analysis I",
+    "section": "An Example",
+    "text": "An Example\nBuilding our dataframe\n\npts.df[,2:7] <- scale(pts.df[,2:7])\nsummary(pts.df)\n\n       ID          MeanAnnTemp       TotalPrecip      PrecipWetQuarter \n Min.   :  1.00   Min.   :-3.3729   Min.   :-1.3377   Min.   :-1.6926  \n 1st Qu.: 25.75   1st Qu.:-0.4594   1st Qu.:-0.7980   1st Qu.:-0.6895  \n Median : 50.50   Median : 0.2282   Median :-0.2373   Median :-0.2224  \n Mean   : 50.50   Mean   : 0.0000   Mean   : 0.0000   Mean   : 0.0000  \n 3rd Qu.: 75.25   3rd Qu.: 0.7118   3rd Qu.: 0.7140   3rd Qu.: 0.6508  \n Max.   :100.00   Max.   : 1.4285   Max.   : 2.4843   Max.   : 2.2713  \n PrecipDryQuarter   MinTempCold        TempRange      \n Min.   :-1.0828   Min.   :-3.9919   Min.   :-2.7924  \n 1st Qu.:-0.7013   1st Qu.:-0.0598   1st Qu.:-0.5216  \n Median :-0.3770   Median : 0.3582   Median : 0.2075  \n Mean   : 0.0000   Mean   : 0.0000   Mean   : 0.0000  \n 3rd Qu.: 0.4290   3rd Qu.: 0.5495   3rd Qu.: 0.6450  \n Max.   : 3.1713   Max.   : 1.1092   Max.   : 2.0407"
+  },
+  {
+    "objectID": "slides/19-slides.html#an-example-4",
+    "href": "slides/19-slides.html#an-example-4",
+    "title": "Multivariate Analysis I",
+    "section": "An Example",
+    "text": "An Example\nLooking at correlations\n\npairs(pts.df[,2:7])"
+  },
+  {
+    "objectID": "slides/19-slides.html#an-example-5",
+    "href": "slides/19-slides.html#an-example-5",
+    "title": "Multivariate Analysis I",
+    "section": "An Example",
+    "text": "An Example\nLooking at correlations\n\ncorrplot(cor(pts.df[,2:7]), method = \"number\")"
+  },
+  {
+    "objectID": "slides/19-slides.html#an-example-6",
+    "href": "slides/19-slides.html#an-example-6",
+    "title": "Multivariate Analysis I",
+    "section": "An Example",
+    "text": "An Example\nFitting some models\n\npts.df <- cbind(pts.df, pres.abs$y)\ncolnames(pts.df)[8] <- \"y\"\nlogistic.global <- glm(y~., family=binomial(link=\"logit\"), data=pts.df[,2:8])\nlogistic.simple <- glm(y ~ MeanAnnTemp + TotalPrecip, family=binomial(link=\"logit\"), data=pts.df[,2:8])\nlogistic.rich <- glm(y ~ MeanAnnTemp + PrecipWetQuarter + PrecipDryQuarter, family=binomial(link=\"logit\"), data=pts.df[,2:8])"
+  },
+  {
+    "objectID": "slides/19-slides.html#an-example-7",
+    "href": "slides/19-slides.html#an-example-7",
+    "title": "Multivariate Analysis I",
+    "section": "An Example",
+    "text": "An Example\nChecking out the results\n\nsummary(logistic.global)\n\n\nCall:\nglm(formula = y ~ ., family = binomial(link = \"logit\"), data = pts.df[, \n    2:8])\n\nDeviance Residuals: \n    Min       1Q   Median       3Q      Max  \n-2.1235  -0.3850  -0.1145   0.1300   2.5491  \n\nCoefficients:\n                 Estimate Std. Error z value Pr(>|z|)   \n(Intercept)       -1.4461     0.5096  -2.837  0.00455 **\nMeanAnnTemp       -6.3578     6.1645  -1.031  0.30237   \nTotalPrecip        7.1453     4.5577   1.568  0.11694   \nPrecipWetQuarter  -5.4207     3.0432  -1.781  0.07487 . \nPrecipDryQuarter  -1.3110     2.2482  -0.583  0.55981   \nMinTempCold        3.0890     2.6334   1.173  0.24080   \nTempRange         -0.6213     4.5470  -0.137  0.89131   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 125.374  on 99  degrees of freedom\nResidual deviance:  51.764  on 93  degrees of freedom\nAIC: 65.764\n\nNumber of Fisher Scoring iterations: 7"
+  },
+  {
+    "objectID": "slides/19-slides.html#an-example-8",
+    "href": "slides/19-slides.html#an-example-8",
+    "title": "Multivariate Analysis I",
+    "section": "An Example",
+    "text": "An Example\nChecking out the results\n\nsummary(logistic.simple)\n\n\nCall:\nglm(formula = y ~ MeanAnnTemp + TotalPrecip, family = binomial(link = \"logit\"), \n    data = pts.df[, 2:8])\n\nDeviance Residuals: \n    Min       1Q   Median       3Q      Max  \n-1.6826  -0.5206  -0.2557   0.1504   2.2043  \n\nCoefficients:\n            Estimate Std. Error z value Pr(>|z|)    \n(Intercept)  -0.9880     0.3145  -3.141  0.00168 ** \nMeanAnnTemp  -2.9990     0.6647  -4.512 6.42e-06 ***\nTotalPrecip   0.3924     0.3827   1.025  0.30517    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 125.374  on 99  degrees of freedom\nResidual deviance:  68.108  on 97  degrees of freedom\nAIC: 74.108\n\nNumber of Fisher Scoring iterations: 6"
+  },
+  {
+    "objectID": "slides/19-slides.html#an-example-9",
+    "href": "slides/19-slides.html#an-example-9",
+    "title": "Multivariate Analysis I",
+    "section": "An Example",
+    "text": "An Example\nChecking out the results\n\nsummary(logistic.rich)\n\n\nCall:\nglm(formula = y ~ MeanAnnTemp + PrecipWetQuarter + PrecipDryQuarter, \n    family = binomial(link = \"logit\"), data = pts.df[, 2:8])\n\nDeviance Residuals: \n    Min       1Q   Median       3Q      Max  \n-1.7377  -0.5354  -0.2714   0.1615   2.1928  \n\nCoefficients:\n                 Estimate Std. Error z value Pr(>|z|)    \n(Intercept)      -0.96504    0.35650  -2.707  0.00679 ** \nMeanAnnTemp      -2.85446    0.66142  -4.316 1.59e-05 ***\nPrecipWetQuarter  0.03212    0.43102   0.075  0.94060    \nPrecipDryQuarter  0.16759    0.64935   0.258  0.79634    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 125.374  on 99  degrees of freedom\nResidual deviance:  69.006  on 96  degrees of freedom\nAIC: 77.006\n\nNumber of Fisher Scoring iterations: 6"
+  },
+  {
+    "objectID": "slides/19-slides.html#an-example-10",
+    "href": "slides/19-slides.html#an-example-10",
+    "title": "Multivariate Analysis I",
+    "section": "An Example",
+    "text": "An Example\nComparing models\n\nAIC(logistic.global, logistic.simple, logistic.rich)\n\n                df      AIC\nlogistic.global  7 65.76394\nlogistic.simple  3 74.10760\nlogistic.rich    4 77.00622"
+  },
+  {
+    "objectID": "slides/19-slides.html#an-example-11",
+    "href": "slides/19-slides.html#an-example-11",
+    "title": "Multivariate Analysis I",
+    "section": "An Example",
+    "text": "An Example\nGenerating predictions\n\npreds <- predict(object=pred.stack, model=logistic.simple)\nplot(preds)\nplot(pres.pts$geometry, add=TRUE, pch=3, col=\"blue\")\nplot(abs.pts$geometry, add=TRUE, pch =\"-\", col=\"red\")"
+  },
+  {
+    "objectID": "slides/19-slides.html#an-example-12",
+    "href": "slides/19-slides.html#an-example-12",
+    "title": "Multivariate Analysis I",
+    "section": "An Example",
+    "text": "An Example\nGenerating predictions\n\npreds <- predict(object=pred.stack, model=logistic.simple, type=\"response\")\nplot(preds)\nplot(pres.pts$geometry, add=TRUE, pch=3, col=\"blue\")\nplot(abs.pts$geometry, add=TRUE, pch =\"-\", col=\"red\")"
+  },
+  {
+    "objectID": "slides/19-slides.html#an-example-13",
+    "href": "slides/19-slides.html#an-example-13",
+    "title": "Multivariate Analysis I",
+    "section": "An Example",
+    "text": "An Example\nGenerating predictions\n\npreds <- predict(object=pred.stack, model=logistic.global, type=\"response\")\nplot(preds)\nplot(pres.pts$geometry, add=TRUE, pch=3, col=\"blue\")\nplot(abs.pts$geometry, add=TRUE, pch =\"-\", col=\"red\")"
+  },
+  {
+    "objectID": "slides/19-slides.html#an-example-14",
+    "href": "slides/19-slides.html#an-example-14",
+    "title": "Multivariate Analysis I",
+    "section": "An Example",
+    "text": "An Example\nGenerating predictions\n\npreds <- predict(object=pred.stack, model=logistic.rich, type=\"response\")\nplot(preds)\nplot(pres.pts$geometry, add=TRUE, pch=3, col=\"blue\")\nplot(abs.pts$geometry, add=TRUE, pch =\"-\", col=\"red\")"
+  },
+  {
+    "objectID": "slides/19-slides.html#key-assumptions-of-logistic-regression",
+    "href": "slides/19-slides.html#key-assumptions-of-logistic-regression",
+    "title": "Multivariate Analysis I",
+    "section": "Key assumptions of logistic regression",
+    "text": "Key assumptions of logistic regression\n\nDependent variable must be binary\nObservations must be independent (important for spatial analyses)\nPredictors should not be collinear\nPredictors should be linearly related to the log-odds\nSample Size"
+  },
+  {
+    "objectID": "slides/19-slides.html#the-sampling-situation",
+    "href": "slides/19-slides.html#the-sampling-situation",
+    "title": "Multivariate Analysis I",
+    "section": "The sampling situation",
+    "text": "The sampling situation\n\n\n\n\n\nFrom Lentz et al. 2008\n\n\n\n\nOpportunistic collection of presences only\nHypothesized predictors of occurrence are measured (or extracted) at each presence\nBackground points (or pseudoabsences) generated for comparison"
+  },
+  {
+    "objectID": "slides/19-slides.html#the-challenge-with-background-points",
+    "href": "slides/19-slides.html#the-challenge-with-background-points",
+    "title": "Multivariate Analysis I",
+    "section": "The Challenge with Background Points",
+    "text": "The Challenge with Background Points\n\nWhat constitutes background?\nNot measuring probability, but relative likelihood of occurrence\nSampling bias affects estimation\nThe intercept\n\n\\[\n\\begin{equation}\ny_{i} \\sim \\text{Bern}(p_i)\\\\\n\\text{link}(p_i) = \\mathbf{x_i}'\\beta + \\alpha\n\\end{equation}\n\\]"
+  },
+  {
+    "objectID": "slides/19-slides.html#point-process-models",
+    "href": "slides/19-slides.html#point-process-models",
+    "title": "Multivariate Analysis I",
+    "section": "Point Process Models",
+    "text": "Point Process Models\n\nPoisson Point Process Models model location (not \\(y\\))\nNumber of points expected is given by a rate \\(\\lambda\\)\nModel \\(\\lambda\\) using Poisson regression"
   },
   {
     "objectID": "syllabus.html",

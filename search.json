@@ -3182,7 +3182,105 @@
     "href": "slides/20-slides.html#classification-trees",
     "title": "Multivariate Analysis II",
     "section": "Classification Trees",
-    "text": "Classification Trees\n\nUse decision rules to segment the predictor space\nSeries of consecutive decision rules form a ‘tree’"
+    "text": "Classification Trees\n\nUse decision rules to segment the predictor space\nSeries of consecutive decision rules form a ‘tree’\nTerminal nodes (leaves) are the outcome; internal nodes (branches) the splits"
+  },
+  {
+    "objectID": "slides/20-slides.html#classification-trees-1",
+    "href": "slides/20-slides.html#classification-trees-1",
+    "title": "Multivariate Analysis II",
+    "section": "Classification Trees",
+    "text": "Classification Trees\n\nDivide the predictor space (\\(R\\)) into \\(J\\) non-overlapping regions\nEvery observation in \\(R_j\\) gets the same prediction\nRecursive binary splitting\nPruning and over-fitting"
+  },
+  {
+    "objectID": "slides/20-slides.html#an-example",
+    "href": "slides/20-slides.html#an-example",
+    "title": "Multivariate Analysis II",
+    "section": "An Example",
+    "text": "An Example\nInputs from the dismo package"
+  },
+  {
+    "objectID": "slides/20-slides.html#an-example-1",
+    "href": "slides/20-slides.html#an-example-1",
+    "title": "Multivariate Analysis II",
+    "section": "An Example",
+    "text": "An Example\nThe sample data\n\n\n\nhead(pres.abs)\n\nSimple feature collection with 6 features and 1 field\nGeometry type: POINT\nDimension:     XY\nBounding box:  xmin: -106.75 ymin: 31.25 xmax: -98.75 ymax: 37.75\nGeodetic CRS:  GCS_unknown\n  y              geometry\n1 0  POINT (-99.25 35.25)\n2 1  POINT (-98.75 36.25)\n3 1 POINT (-106.75 35.25)\n4 0 POINT (-100.75 31.25)\n5 1  POINT (-99.75 37.75)\n6 1 POINT (-104.25 36.75)"
+  },
+  {
+    "objectID": "slides/20-slides.html#an-example-2",
+    "href": "slides/20-slides.html#an-example-2",
+    "title": "Multivariate Analysis II",
+    "section": "An Example",
+    "text": "An Example\nBuilding our dataframe\n\npts.df <- terra::extract(pred.stack, vect(pres.abs), df=TRUE)\nhead(pts.df)\n\n  ID MeanAnnTemp TotalPrecip PrecipWetQuarter PrecipDryQuarter MinTempCold\n1  1         155         667              253               71         350\n2  2         147         678              266               66         351\n3  3         123         261              117               40         329\n4  4         181         533              198               69         348\n5  5         127         589              257               48         338\n6  6          83         438              213               38         278\n  TempRange\n1       -45\n2       -58\n3       -64\n4        -5\n5       -81\n6      -107"
+  },
+  {
+    "objectID": "slides/20-slides.html#an-example-3",
+    "href": "slides/20-slides.html#an-example-3",
+    "title": "Multivariate Analysis II",
+    "section": "An Example",
+    "text": "An Example\nBuilding our dataframe\n\npts.df[,2:7] <- scale(pts.df[,2:7])\nsummary(pts.df)\n\n       ID          MeanAnnTemp       TotalPrecip      PrecipWetQuarter \n Min.   :  1.00   Min.   :-3.3729   Min.   :-1.3377   Min.   :-1.6926  \n 1st Qu.: 25.75   1st Qu.:-0.4594   1st Qu.:-0.7980   1st Qu.:-0.6895  \n Median : 50.50   Median : 0.2282   Median :-0.2373   Median :-0.2224  \n Mean   : 50.50   Mean   : 0.0000   Mean   : 0.0000   Mean   : 0.0000  \n 3rd Qu.: 75.25   3rd Qu.: 0.7118   3rd Qu.: 0.7140   3rd Qu.: 0.6508  \n Max.   :100.00   Max.   : 1.4285   Max.   : 2.4843   Max.   : 2.2713  \n PrecipDryQuarter   MinTempCold        TempRange      \n Min.   :-1.0828   Min.   :-3.9919   Min.   :-2.7924  \n 1st Qu.:-0.7013   1st Qu.:-0.0598   1st Qu.:-0.5216  \n Median :-0.3770   Median : 0.3582   Median : 0.2075  \n Mean   : 0.0000   Mean   : 0.0000   Mean   : 0.0000  \n 3rd Qu.: 0.4290   3rd Qu.: 0.5495   3rd Qu.: 0.6450  \n Max.   : 3.1713   Max.   : 1.1092   Max.   : 2.0407"
+  },
+  {
+    "objectID": "slides/20-slides.html#an-example-4",
+    "href": "slides/20-slides.html#an-example-4",
+    "title": "Multivariate Analysis II",
+    "section": "An example",
+    "text": "An example\n\nFitting the classification tree\n\n\n\n\nlibrary(tree)\npts.df <- cbind(pts.df, pres.abs$y)\ncolnames(pts.df)[8] <- \"y\"\npts.df$y <- as.factor(ifelse(pts.df$y == 1, \"Yes\", \"No\"))\ntree.model <- tree(y ~ . , pts.df)\n\n\n\nplot(tree.model)\ntext(tree.model, pretty=0)"
+  },
+  {
+    "objectID": "slides/20-slides.html#an-example-5",
+    "href": "slides/20-slides.html#an-example-5",
+    "title": "Multivariate Analysis II",
+    "section": "An example",
+    "text": "An example\n\nFitting the classification tree\n\n\nsummary(tree.model)\n\n\nClassification tree:\ntree(formula = y ~ ., data = pts.df)\nVariables actually used in tree construction:\n[1] \"TempRange\"        \"PrecipWetQuarter\" \"ID\"               \"MeanAnnTemp\"     \nNumber of terminal nodes:  8 \nResidual mean deviance:  0.3164 = 29.11 / 92 \nMisclassification error rate: 0.07 = 7 / 100"
+  },
+  {
+    "objectID": "slides/20-slides.html#benefits-and-drawbacks",
+    "href": "slides/20-slides.html#benefits-and-drawbacks",
+    "title": "Multivariate Analysis II",
+    "section": "Benefits and drawbacks",
+    "text": "Benefits and drawbacks\n\n\nBenefits\n\nEasy to explain\nLinks to human decision-making\nGraphical displays\nEasy handling of qualitative predictors\n\n\nCosts\n\nLower predictive accuracy than other methods\nNot necessarily robust"
+  },
+  {
+    "objectID": "slides/20-slides.html#random-forests",
+    "href": "slides/20-slides.html#random-forests",
+    "title": "Multivariate Analysis II",
+    "section": "Random Forests",
+    "text": "Random Forests\n\n\n\n\nGrow 100(000s) of trees using bootstrapping\nRandom sample of predictors considered at each split\nAvoids correlation amongst multiple predictions\nAverage of trees improves overall outcome (usually)\nLots of extensions"
+  },
+  {
+    "objectID": "slides/20-slides.html#an-example-6",
+    "href": "slides/20-slides.html#an-example-6",
+    "title": "Multivariate Analysis II",
+    "section": "An example",
+    "text": "An example\n\nFitting the Random Forest\n\n\n\n\nlibrary(randomForest)\nclass.model <- y ~ .\nrf2 <- randomForest(class.model, data=pts.df)\n\n\n\nvarImpPlot(rf2)"
+  },
+  {
+    "objectID": "slides/20-slides.html#maxent",
+    "href": "slides/20-slides.html#maxent",
+    "title": "Multivariate Analysis II",
+    "section": "MaxEnt",
+    "text": "MaxEnt\n\n\n\n\n\nFrom Lentz et al. 2008\n\n\n\n\nOpportunistic collection of presences only\nHypothesized predictors of occurrence are measured (or extracted) at each presence\nBackground points (or pseudoabsences) generated for comparison"
+  },
+  {
+    "objectID": "slides/20-slides.html#maximum-entropy-models",
+    "href": "slides/20-slides.html#maximum-entropy-models",
+    "title": "Multivariate Analysis II",
+    "section": "Maximum Entropy models",
+    "text": "Maximum Entropy models\n\n\n\n\nMaxEnt (after the original software)\nNeed plausible background points across the remainder of the study area\nIterative fitting to maximize the distance between predictions generated by a spatially uniform model\nTuning parameters to account for differences in sampling effort, placement of background points, etc\nDevelopment of the model beyond the scope of this course, but see Elith et al. 2010\n\n\n\n\n\n\nFrom Elith et al. 2010"
+  },
+  {
+    "objectID": "slides/20-slides.html#challenges-with-maxent",
+    "href": "slides/20-slides.html#challenges-with-maxent",
+    "title": "Multivariate Analysis II",
+    "section": "Challenges with MaxEnt",
+    "text": "Challenges with MaxEnt\n\nNot measuring probability, but relative likelihood of occurrence\nSampling bias affects estimation (but can be mitigated using tuning parameters)\nTheoretical issues with background points and the intercept\nRecent developments relate MaxEnt (with cloglog links) to Inhomogenous Point Process models"
+  },
+  {
+    "objectID": "slides/20-slides.html#extensions",
+    "href": "slides/20-slides.html#extensions",
+    "title": "Multivariate Analysis II",
+    "section": "Extensions",
+    "text": "Extensions\n\nPolynomial, splines, piece-wise regression\nNeural nets, Support Vector Machines, many many more"
   },
   {
     "objectID": "syllabus.html",

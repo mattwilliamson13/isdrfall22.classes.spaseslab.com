@@ -525,6 +525,27 @@
     "text": "Objectives\nBy the end of today you should be able to:\n\nRecognize the link between regression analysis and overlay analysis\nGenerate spatial predictions based on regression analysis\nExtend logistic regression to presence-only data models\n\n\n View all slides in new window  Download PDF of all slides\n\n\n\nFavorability Again\n\n\nLogistic Regression\n\n\nPresence-Only Data"
   },
   {
+    "objectID": "content/20-content.html",
+    "href": "content/20-content.html",
+    "title": "Multivariate Analysis II",
+    "section": "",
+    "text": "Last class we spent some time extending the idea of Favorability to build a foundation for treating overlay analysis as a logistic regression. Although logistic regression has a number of properties that make it desirable for inference, a number of recently developed statistical learning approaches have greatly improved our ability to take advantage a wide variety of available data and generate spatially explicit predictions. These methods may make interpretation and inference more challenging, but can improve the predictive ability of your models. We’ll explore some of those today."
+  },
+  {
+    "objectID": "content/20-content.html#resources",
+    "href": "content/20-content.html#resources",
+    "title": "Multivariate Analysis II",
+    "section": "Resources",
+    "text": "Resources\n\n An Introduction to Statistical Learning by (James et al. 2021) is a comprehensive introduction to a number of statistical learning techniques with examples in R. Although these examples are not necessarily spatial, the chapters provide a lot of the background necessary for understanding what the models are doing.\n A statistical explanation of MaxEnt for ecologists by (Elith et al. 2011) provides a relatively accessible description of the details of MaxEnt species distribution modeling.\n Random forests for Classification in Ecology by (Cutler et al. 2007) provides an introduction to the utility of Random Forests for ecologists."
+  },
+  {
+    "objectID": "content/20-content.html#objectives",
+    "href": "content/20-content.html#objectives",
+    "title": "Multivariate Analysis II",
+    "section": "Objectives",
+    "text": "Objectives\nBy the end of today you should be able to:\n\nArticulate the differences between statisitical learning classifiers and logistic regression\nDescribe several classification trees and their relationship to Random Forests\nDescribe MaxEnt models for presence-only data\n\n\n View all slides in new window  Download PDF of all slides\n\n\n\nAlternatives to Logistic Regression\n\n\nClassification Trees\n\n\nMaximum Entropy"
+  },
+  {
     "objectID": "content/index.html",
     "href": "content/index.html",
     "title": "Readings and slides",
@@ -3141,6 +3162,27 @@
     "title": "Multivariate Analysis I",
     "section": "Point Process Models",
     "text": "Point Process Models\n\nPoisson Point Process Models model location (not \\(y\\))\nNumber of points expected is given by a rate \\(\\lambda\\)\nModel \\(\\lambda\\) using Poisson regression"
+  },
+  {
+    "objectID": "slides/20-slides.html#favorability-in-general",
+    "href": "slides/20-slides.html#favorability-in-general",
+    "title": "Multivariate Analysis II",
+    "section": "Favorability in General",
+    "text": "Favorability in General\n\\[\n\\begin{equation}\nF(\\mathbf{s}) = f(w_1X_1(\\mathbf{s}), w_2X_2(\\mathbf{s}), w_3X_3(\\mathbf{s}), ..., w_mX_m(\\mathbf{s}))\n\\end{equation}\n\\]\n\nLogistic regression treats \\(f(x)\\) as a (generalized) linear function\nAllows for multiple qualitative classes\nEnsures that estimates of \\(F(\\mathbf{s})\\) are [0,1]"
+  },
+  {
+    "objectID": "slides/20-slides.html#beyond-linearity",
+    "href": "slides/20-slides.html#beyond-linearity",
+    "title": "Multivariate Analysis II",
+    "section": "Beyond Linearity",
+    "text": "Beyond Linearity\n\nLogistic (and other generalized linear models) are relatively interpretable\nProbability theory allows robust inference of effects\nPredictive power can be low\nRelaxing the linearity assumption can help"
+  },
+  {
+    "objectID": "slides/20-slides.html#classification-trees",
+    "href": "slides/20-slides.html#classification-trees",
+    "title": "Multivariate Analysis II",
+    "section": "Classification Trees",
+    "text": "Classification Trees\n\nUse decision rules to segment the predictor space\nSeries of consecutive decision rules form a ‘tree’"
   },
   {
     "objectID": "syllabus.html",

@@ -564,7 +564,42 @@
     "href": "content/21-content.html#objectives",
     "title": "Multivariate Analysis III",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today you should be able to:\n\nArticulate three different reasons for modeling and how they link to assessments of fit\nDescribe and implement several test statistics for assessing model fit\nDescribe and implement several assessments of classification\nDescribe and implement resampling techniques to estimate predictive performance\n\n\n View all slides in new window  Download PDF of all slides\n\n\n\nRoles of Models\n\n\nTest Statistics\n\n\nMisclassification\n\n\nCross-validation"
+    "text": "Objectives\nBy the end of today you should be able to:\n\nArticulate three different reasons for modeling and how they link to assessments of fit\nDescribe and implement several test statistics for assessing model fit\nDescribe and implement several assessments of classification\nDescribe and implement resampling techniques to estimate predictive performance"
+  },
+  {
+    "objectID": "content/21-content.html#slides",
+    "href": "content/21-content.html#slides",
+    "title": "Multivariate Analysis III",
+    "section": "Slides",
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\nRoles of Models\n\n\nTest Statistics\n\n\nMisclassification\n\n\nCross-validation"
+  },
+  {
+    "objectID": "content/22-content.html",
+    "href": "content/22-content.html",
+    "title": "Basic Data Visualization Principles",
+    "section": "",
+    "text": "We’ve spent the last few weeks learning about operations to compile geographic information into databases for visualization and analysis. Because analysis requires you to know something about your data and because visualization is a great way to explore your data (especially when there’s a lot of it), we’ll turn to that next. For the next few weeks, we’ll be looking at different ways to visualize spatial data and the associated approaches in R. Note that this could be an entire course by itself, but hopefully you’ll get enough to get started making publication quality maps by the time we’re done"
+  },
+  {
+    "objectID": "content/22-content.html#resources",
+    "href": "content/22-content.html#resources",
+    "title": "Basic Data Visualization Principles",
+    "section": "Resources",
+    "text": "Resources\n\n The Introduction and Visualizing Geospatial Data chapters Principles of Figure Design section in (Wilke 2019) provide a useful set of general introductions to data visualization principles and practce that is “platform agnostic” (though much of Wilke’s work is done in R).\n The Look at Data and Draw Maps chapters in (Healy 2018) revisits many of the same ideas, but focuses specifically on R and ggplot2.\n This post on making maps people want to look at from ESRI is a nice, concise depiction of some core principles for planning a cartographic project."
+  },
+  {
+    "objectID": "content/22-content.html#objectives",
+    "href": "content/22-content.html#objectives",
+    "title": "Basic Data Visualization Principles",
+    "section": "Objectives",
+    "text": "Objectives\nBy the end of today you should be able to:\n\nDescribe some basic principles of data visualization\nExtend principles of data visualization to the development of maps\nDistinguish between several common types of spatial data visualization"
+  },
+  {
+    "objectID": "content/22-content.html#slides",
+    "href": "content/22-content.html#slides",
+    "title": "Basic Data Visualization Principles",
+    "section": "Slides",
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\nTruth and Cartography\n\n\nIntroduction to data visualization principles\n\n\nExtending those principles to maps\n\n\nCommon geographic visualizations\n\n\nLooking ahead"
   },
   {
     "objectID": "content/index.html",
@@ -3329,7 +3364,7 @@
     "href": "slides/21-slides.html#inference-presenceabsence-data",
     "title": "Multivariate Analysis III",
     "section": "Inference & Presence/Absence Data",
-    "text": "Inference & Presence/Absence Data\n\n\n\ncoef(mod1)\n\n(Intercept)          x1          x2 \n  0.5691254   0.7762803  -0.1023257 \n\ncoef(mod2)\n\n(Intercept)          x1          x2          x3 \n  1.1130384   1.8148022  -0.1829173  -3.2945825 \n\n\n\n\nprd1 <- predict(mod1, df, \"response\")\ndif1 <- plogis(linpred) - prd1\nprd2 <- predict(mod2, df, \"response\")\ndif2 <- plogis(linpred) - prd2\n\n\n\n\n\n\n\n\n\nInferring coefficient effects requires that your model fit the data well"
+    "text": "Inference & Presence/Absence Data\n\n\n\ncoef(mod1)\n\n(Intercept)          x1          x2 \n  0.3150958   0.8372942  -0.1462847 \n\ncoef(mod2)\n\n(Intercept)          x1          x2          x3 \n  0.7497998   2.1907584  -0.1345431  -3.6454057 \n\n\n\n\nprd1 <- predict(mod1, df, \"response\")\ndif1 <- plogis(linpred) - prd1\nprd2 <- predict(mod2, df, \"response\")\ndif2 <- plogis(linpred) - prd2\n\n\n\n\n\n\n\n\n\nInferring coefficient effects requires that your model fit the data well"
   },
   {
     "objectID": "slides/21-slides.html#using-test-statistics",
@@ -3420,7 +3455,7 @@
     "href": "slides/21-slides.html#confusion-matrices-in-r",
     "title": "Multivariate Analysis III",
     "section": "Confusion Matrices in R",
-    "text": "Confusion Matrices in R\n\n\n\ntrain.log <- glm(y ~ ., \n                 family=\"binomial\", \n                 data=training[,2:8])\n\npredicted.log <- predict(train.log, \n                         newdata=testing[,2:8], \n                         type=\"response\")\n\npred <- as.factor(\n  ifelse(predicted.log > 0.5, \n                         \"Yes\",\n                         \"No\"))\n\n\n\n\nconfusionMatrix(testing$y, pred)\n\nConfusion Matrix and Statistics\n\n          Reference\nPrediction No Yes\n       No  24   3\n       Yes  2  10\n                                         \n               Accuracy : 0.8718         \n                 95% CI : (0.7257, 0.957)\n    No Information Rate : 0.6667         \n    P-Value [Acc > NIR] : 0.003321       \n                                         \n                  Kappa : 0.7059         \n                                         \n Mcnemar's Test P-Value : 1.000000       \n                                         \n            Sensitivity : 0.9231         \n            Specificity : 0.7692         \n         Pos Pred Value : 0.8889         \n         Neg Pred Value : 0.8333         \n             Prevalence : 0.6667         \n         Detection Rate : 0.6154         \n   Detection Prevalence : 0.6923         \n      Balanced Accuracy : 0.8462         \n                                         \n       'Positive' Class : No"
+    "text": "Confusion Matrices in R\n\n\n\ntrain.log <- glm(y ~ ., \n                 family=\"binomial\", \n                 data=training[,2:8])\n\npredicted.log <- predict(train.log, \n                         newdata=testing[,2:8], \n                         type=\"response\")\n\npred <- as.factor(\n  ifelse(predicted.log > 0.5, \n                         \"Yes\",\n                         \"No\"))\n\n\n\n\nconfusionMatrix(testing$y, pred)\n\nConfusion Matrix and Statistics\n\n          Reference\nPrediction No Yes\n       No  26   1\n       Yes  2  10\n                                          \n               Accuracy : 0.9231          \n                 95% CI : (0.7913, 0.9838)\n    No Information Rate : 0.7179          \n    P-Value [Acc > NIR] : 0.001672        \n                                          \n                  Kappa : 0.8152          \n                                          \n Mcnemar's Test P-Value : 1.000000        \n                                          \n            Sensitivity : 0.9286          \n            Specificity : 0.9091          \n         Pos Pred Value : 0.9630          \n         Neg Pred Value : 0.8333          \n             Prevalence : 0.7179          \n         Detection Rate : 0.6667          \n   Detection Prevalence : 0.6923          \n      Balanced Accuracy : 0.9188          \n                                          \n       'Positive' Class : No"
   },
   {
     "objectID": "slides/21-slides.html#confusion-matrices",
@@ -3434,14 +3469,14 @@
     "href": "slides/21-slides.html#confusion-matrices-in-r-1",
     "title": "Multivariate Analysis III",
     "section": "Confusion Matrices in R",
-    "text": "Confusion Matrices in R\n\n\n\nlibrary(tree)\ntree.model <- tree(y ~ . , training[,2:8])\npredict.tree <- predict(tree.model, newdata=testing[,2:8], type=\"class\")\n\n\n\n\nconfusionMatrix(testing$y, predict.tree)\n\nConfusion Matrix and Statistics\n\n          Reference\nPrediction No Yes\n       No  24   3\n       Yes  4   8\n                                          \n               Accuracy : 0.8205          \n                 95% CI : (0.6647, 0.9246)\n    No Information Rate : 0.7179          \n    P-Value [Acc > NIR] : 0.1031          \n                                          \n                  Kappa : 0.5687          \n                                          \n Mcnemar's Test P-Value : 1.0000          \n                                          \n            Sensitivity : 0.8571          \n            Specificity : 0.7273          \n         Pos Pred Value : 0.8889          \n         Neg Pred Value : 0.6667          \n             Prevalence : 0.7179          \n         Detection Rate : 0.6154          \n   Detection Prevalence : 0.6923          \n      Balanced Accuracy : 0.7922          \n                                          \n       'Positive' Class : No"
+    "text": "Confusion Matrices in R\n\n\n\nlibrary(tree)\ntree.model <- tree(y ~ . , training[,2:8])\npredict.tree <- predict(tree.model, newdata=testing[,2:8], type=\"class\")\n\n\n\n\nconfusionMatrix(testing$y, predict.tree)\n\nConfusion Matrix and Statistics\n\n          Reference\nPrediction No Yes\n       No  24   3\n       Yes  3   9\n                                          \n               Accuracy : 0.8462          \n                 95% CI : (0.6947, 0.9414)\n    No Information Rate : 0.6923          \n    P-Value [Acc > NIR] : 0.02323         \n                                          \n                  Kappa : 0.6389          \n                                          \n Mcnemar's Test P-Value : 1.00000         \n                                          \n            Sensitivity : 0.8889          \n            Specificity : 0.7500          \n         Pos Pred Value : 0.8889          \n         Neg Pred Value : 0.7500          \n             Prevalence : 0.6923          \n         Detection Rate : 0.6154          \n   Detection Prevalence : 0.6923          \n      Balanced Accuracy : 0.8194          \n                                          \n       'Positive' Class : No"
   },
   {
     "objectID": "slides/21-slides.html#confusion-matrices-in-r-2",
     "href": "slides/21-slides.html#confusion-matrices-in-r-2",
     "title": "Multivariate Analysis III",
     "section": "Confusion Matrices in R",
-    "text": "Confusion Matrices in R\n\n\n\nlibrary(randomForest)\nclass.model <- y ~ .\nrf <- randomForest(class.model, data=training[,2:8])\npredict.rf <- predict(rf, newdata=testing[,2:8], type=\"class\")\n\n\n\n\nconfusionMatrix(testing$y, predict.rf)\n\nConfusion Matrix and Statistics\n\n          Reference\nPrediction No Yes\n       No  25   2\n       Yes  4   8\n                                          \n               Accuracy : 0.8462          \n                 95% CI : (0.6947, 0.9414)\n    No Information Rate : 0.7436          \n    P-Value [Acc > NIR] : 0.09529         \n                                          \n                  Kappa : 0.6214          \n                                          \n Mcnemar's Test P-Value : 0.68309         \n                                          \n            Sensitivity : 0.8621          \n            Specificity : 0.8000          \n         Pos Pred Value : 0.9259          \n         Neg Pred Value : 0.6667          \n             Prevalence : 0.7436          \n         Detection Rate : 0.6410          \n   Detection Prevalence : 0.6923          \n      Balanced Accuracy : 0.8310          \n                                          \n       'Positive' Class : No"
+    "text": "Confusion Matrices in R\n\n\n\nlibrary(randomForest)\nclass.model <- y ~ .\nrf <- randomForest(class.model, data=training[,2:8])\npredict.rf <- predict(rf, newdata=testing[,2:8], type=\"class\")\n\n\n\n\nconfusionMatrix(testing$y, predict.rf)\n\nConfusion Matrix and Statistics\n\n          Reference\nPrediction No Yes\n       No  27   0\n       Yes  3   9\n                                          \n               Accuracy : 0.9231          \n                 95% CI : (0.7913, 0.9838)\n    No Information Rate : 0.7692          \n    P-Value [Acc > NIR] : 0.01174         \n                                          \n                  Kappa : 0.806           \n                                          \n Mcnemar's Test P-Value : 0.24821         \n                                          \n            Sensitivity : 0.9000          \n            Specificity : 1.0000          \n         Pos Pred Value : 1.0000          \n         Neg Pred Value : 0.7500          \n             Prevalence : 0.7692          \n         Detection Rate : 0.6923          \n   Detection Prevalence : 0.6923          \n      Balanced Accuracy : 0.9500          \n                                          \n       'Positive' Class : No"
   },
   {
     "objectID": "slides/21-slides.html#threshold-free-methods",
@@ -3512,6 +3547,125 @@
     "title": "Multivariate Analysis III",
     "section": "Spatial predictions",
     "text": "Spatial predictions"
+  },
+  {
+    "objectID": "slides/22-slides.html#telling-a-story",
+    "href": "slides/22-slides.html#telling-a-story",
+    "title": "Basics of Data Visualization",
+    "section": "Telling a story",
+    "text": "Telling a story\n\nOrder of information can evoke emotional connections\nThat reaction helps make your analysis memorable\nThe Shape of Stories"
+  },
+  {
+    "objectID": "slides/22-slides.html#what-is-a-story",
+    "href": "slides/22-slides.html#what-is-a-story",
+    "title": "Basics of Data Visualization",
+    "section": "What is a story?",
+    "text": "What is a story?\n\n\n\nObservations, events, facts\nTold in order to elicit an emotional response\nPreempt others making up your story"
+  },
+  {
+    "objectID": "slides/22-slides.html#common-story-forms",
+    "href": "slides/22-slides.html#common-story-forms",
+    "title": "Basics of Data Visualization",
+    "section": "Common story forms",
+    "text": "Common story forms\n\nOpening → Challenge → Action → Resolution\n\n\n“Let me tell you a story about the theoretical physicist Stephen Hawking. He was diagnosed with motor neuron disease at age 21—one year into his PhD—and was given two years to live. Hawking did not accept this predicament and started pouring all his energy into doing science. Hawking ended up living to be 76, became one of the most influential physicists of his time, and did all of his seminal work while being severely disabled.”\n\n— Claus Wilke"
+  },
+  {
+    "objectID": "slides/22-slides.html#common-story-forms-1",
+    "href": "slides/22-slides.html#common-story-forms-1",
+    "title": "Basics of Data Visualization",
+    "section": "Common story forms",
+    "text": "Common story forms\n\nLead → Development → Resolution\n\n\n“The influential physicist Stephen Hawking, who revolutionized our understanding of black holes and of cosmology, outlived his doctors’ prognosis by 53 years and did all of his most influential work while being severely disabled…”\n\n— Claus Wilke"
+  },
+  {
+    "objectID": "slides/22-slides.html#common-story-forms-2",
+    "href": "slides/22-slides.html#common-story-forms-2",
+    "title": "Basics of Data Visualization",
+    "section": "Common story forms",
+    "text": "Common story forms\n\nAction → Background → Development → Climax → Ending\n\n\n“The young Stephen Hawking, facing a debilitating disability and the prospect of an early death, decided to pour all his efforts into his science, determined to make his mark while he still could…”\n\n— Claus Wilke"
+  },
+  {
+    "objectID": "slides/22-slides.html#principles-vs.-rules",
+    "href": "slides/22-slides.html#principles-vs.-rules",
+    "title": "Basics of Data Visualization",
+    "section": "Principles vs. Rules",
+    "text": "Principles vs. Rules\n\n\n\nLots of examples of good and bad data visualization\nWhat makes a graphic good (or bad)?\nWho decides?\n\n\n\n\nRule: externally compels you, through force, threat or punishment, to do the things someone else has deemed good or right.\nPrinciple: internally motivating because it is a good practice; a general statement describing a philosophy that good rules should satisfy\nRules contribute to the design process, but do not guarantee a satisfactory outcome"
+  },
+  {
+    "objectID": "slides/22-slides.html#ugly-wrong-and-bad",
+    "href": "slides/22-slides.html#ugly-wrong-and-bad",
+    "title": "Basics of Data Visualization",
+    "section": "Ugly, Wrong, and Bad",
+    "text": "Ugly, Wrong, and Bad\n\n\n\nUgly: graphic is clear and informative, but has aesthetic issues\nBad: graphic is unclear, confusing, or decieving\nWrong: the figure is objectively incorrect\n\n\n\n\n\nMonstrous Costs’ by Nigel Holmes from Healy 2018"
+  },
+  {
+    "objectID": "slides/22-slides.html#bad-and-wrong",
+    "href": "slides/22-slides.html#bad-and-wrong",
+    "title": "Basics of Data Visualization",
+    "section": "Bad and Wrong",
+    "text": "Bad and Wrong\n\nPresentation of the data is (intentionally?) decieving\nPresentation is just incorrect\n\n\n\n\n\n\nTricky (from Healy 2018)\n\n\n\n\n\n\nWrong"
+  },
+  {
+    "objectID": "slides/22-slides.html#grammar-of-graphics-wilkinson-2005",
+    "href": "slides/22-slides.html#grammar-of-graphics-wilkinson-2005",
+    "title": "Basics of Data Visualization",
+    "section": "Grammar of Graphics (Wilkinson 2005)",
+    "text": "Grammar of Graphics (Wilkinson 2005)\n\nGrammar: A set of structural rules that help establish the components of a language\nSystem and structure of language consist of syntax and semantics\nGrammar of Graphics: a framework that allows us to concisely describe the components of any graphic\nFollows a layered approach by using defined components to build a visualization\nggplot2 is a formal implementation in R"
+  },
+  {
+    "objectID": "slides/22-slides.html#aesthetics-mapping-data-to-visual-elements",
+    "href": "slides/22-slides.html#aesthetics-mapping-data-to-visual-elements",
+    "title": "Basics of Data Visualization",
+    "section": "Aesthetics: Mapping Data to Visual Elements",
+    "text": "Aesthetics: Mapping Data to Visual Elements\n\n\n\n\nDefine the systematic conversion of data into elements of the visualization\nAre either categorical or continuous (exclusively)\nExamples include x, y, fill, color, and alpha\n\n\n\n\n\n\nFrom Wilke 2019"
+  },
+  {
+    "objectID": "slides/22-slides.html#scales",
+    "href": "slides/22-slides.html#scales",
+    "title": "Basics of Data Visualization",
+    "section": "Scales",
+    "text": "Scales\n\nScales map data values to their aesthetics\nMust be a one-to-one relationship; each specific data value should map to only one aesthetic"
+  },
+  {
+    "objectID": "slides/22-slides.html#principles-of-data-visualization",
+    "href": "slides/22-slides.html#principles-of-data-visualization",
+    "title": "Basics of Data Visualization",
+    "section": "Principles of Data Visualization",
+    "text": "Principles of Data Visualization\n\nBe Honest\nPrinciple of proportional ink\nAvoid unnecessary ‘chart junk’\nUse color judiciously\nBalance data and context"
+  },
+  {
+    "objectID": "slides/22-slides.html#telling-stories-with-maps",
+    "href": "slides/22-slides.html#telling-stories-with-maps",
+    "title": "Basics of Data Visualization",
+    "section": "Telling stories with maps",
+    "text": "Telling stories with maps\n\n\n\n\n\nMaps organize a lot of information in a coherent way\nThey invite critique and inspection\nThey are also aesthetic objects that can engage broader audiences"
+  },
+  {
+    "objectID": "slides/22-slides.html#key-issues",
+    "href": "slides/22-slides.html#key-issues",
+    "title": "Basics of Data Visualization",
+    "section": "Key Issues",
+    "text": "Key Issues\n\nThinking about projections\nScale of the map\nErrors of Omission"
+  },
+  {
+    "objectID": "slides/22-slides.html#cartographic-principles",
+    "href": "slides/22-slides.html#cartographic-principles",
+    "title": "Basics of Data Visualization",
+    "section": "Cartographic Principles",
+    "text": "Cartographic Principles\n\nConcept before compilation\nHierarchy with harmony (Important things should look important)\nSimplicity from sacrifice\nMaximum information at minimum cost\nEngage emotion to enhance understanding"
+  },
+  {
+    "objectID": "slides/22-slides.html#choropleth",
+    "href": "slides/22-slides.html#choropleth",
+    "title": "Basics of Data Visualization",
+    "section": "Choropleth",
+    "text": "Choropleth\n\nMapping color to geographies\nCommon problems\n\n\nFrom Healy 2019"
+  },
+  {
+    "objectID": "slides/22-slides.html#cartogram",
+    "href": "slides/22-slides.html#cartogram",
+    "title": "Basics of Data Visualization",
+    "section": "Cartogram",
+    "text": "Cartogram\n\nAdjusts for differences in area, population, etc\nCommon Problems\n\n\nFrom Healy 2019"
   },
   {
     "objectID": "syllabus.html",

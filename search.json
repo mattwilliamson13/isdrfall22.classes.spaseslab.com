@@ -630,6 +630,34 @@
     "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\nThe Grammar of Graphics\n\n\nData, Aesthetics, Layers\n\n\nFacets, Scales, and Coordinates\n\n\nLayouts"
   },
   {
+    "objectID": "content/24-content.html",
+    "href": "content/24-content.html",
+    "title": "Maps, Truth, and Cartography",
+    "section": "",
+    "text": "Now that we’ve talked a bit about data visualization principles and the grammar of graphics, it’s time to extend those ideas to maps. We’ll talk a bit about different kinds of maps, ways that maps can mislead (unintentionally or otherwise), and ways to make sure that your maps depict data the way you intend. We’ll also begin making some static maps to give you a sense for R’s capabilities."
+  },
+  {
+    "objectID": "content/24-content.html#resources",
+    "href": "content/24-content.html#resources",
+    "title": "Maps, Truth, and Cartography",
+    "section": "Resources",
+    "text": "Resources\n\n The Draw Maps chapter by (Healy 2018) discusses a number of issues with the spatial depiction of data and has examples with graphics built with ggplot2.\n All maps of parameter estimates are misleading by (Gelman and Price 1999) provides some useful cautionary notes about mapping the results of statistical analyses.\n Making maps with R by (Lovelace et al. 2019) introduces the tmap package for making nice maps with relatively minimal syntax."
+  },
+  {
+    "objectID": "content/24-content.html#objectives",
+    "href": "content/24-content.html#objectives",
+    "title": "Maps, Truth, and Cartography",
+    "section": "Objectives",
+    "text": "Objectives\nBy the end of today you should be able to:\n\nDescribe the various elements that comprise a map\nArticulate common pitfalls that lead to misleading maps\nDescribe and generate several common types of data maps"
+  },
+  {
+    "objectID": "content/24-content.html#slides",
+    "href": "content/24-content.html#slides",
+    "title": "Maps, Truth, and Cartography",
+    "section": "Slides",
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\nElements of a map\n\n\nGeneralization\n\n\nData Maps"
+  },
+  {
     "objectID": "content/index.html",
     "href": "content/index.html",
     "title": "Readings and slides",
@@ -4016,6 +4044,83 @@
     "title": "Introduction to ggplot2",
     "section": "Changing Limits",
     "text": "Changing Limits\n\n\n\nggplot(\n    bikes,\n    aes(x = season, y = count)\n  ) +\n  geom_boxplot() +\n  coord_cartesian(\n    ylim = c(NA, 15000)\n  )\n\n\n\n\n\nggplot(\n    bikes,\n    aes(x = season, y = count)\n  ) +\n  geom_boxplot() +\n  scale_y_continuous(\n    limits = c(NA, 15000)\n  )"
+  },
+  {
+    "objectID": "slides/24-slides.html#scale",
+    "href": "slides/24-slides.html#scale",
+    "title": "Maps, Truth, and Cartography",
+    "section": "Scale",
+    "text": "Scale\n\n\n\nRelates map distance to distance on the ground\nRatio scales (1:24,000 or 1/24,000)\nGraphic scales\nLarge vs. small-scale?"
+  },
+  {
+    "objectID": "slides/24-slides.html#projection",
+    "href": "slides/24-slides.html#projection",
+    "title": "Maps, Truth, and Cartography",
+    "section": "Projection",
+    "text": "Projection\n\n\n\n\n\nDevelopable Surfaces\n\n\n\n\nDistortion makes scale invalid across large areas\nDistortion increases with distance from standard line\nFive distortions: areas, angles, shapes, distances, and direction"
+  },
+  {
+    "objectID": "slides/24-slides.html#map-symbols",
+    "href": "slides/24-slides.html#map-symbols",
+    "title": "Maps, Truth, and Cartography",
+    "section": "Map Symbols",
+    "text": "Map Symbols\n\n\n\n\n\nGraphic code for retrieving information\n(De-)emphasize (un)important information\nContrast and the role of colors"
+  },
+  {
+    "objectID": "slides/24-slides.html#section",
+    "href": "slides/24-slides.html#section",
+    "title": "Maps, Truth, and Cartography",
+    "section": "",
+    "text": "A good map tells a multitude of little white lies: it supresses truth to help the user see what needs to be seen…\n\n— Mark Monmonier"
+  },
+  {
+    "objectID": "slides/24-slides.html#geometry",
+    "href": "slides/24-slides.html#geometry",
+    "title": "Maps, Truth, and Cartography",
+    "section": "Geometry",
+    "text": "Geometry\n\nZhilin et al. 2008"
+  },
+  {
+    "objectID": "slides/24-slides.html#context",
+    "href": "slides/24-slides.html#context",
+    "title": "Maps, Truth, and Cartography",
+    "section": "Context",
+    "text": "Context\n\n\n\nFilter out irrelevant details\nTwo elements: selection and classification\nReflect interpretations of the relative importance of different features\n\n\n\n\n\nMackaness and Chaudry"
+  },
+  {
+    "objectID": "slides/24-slides.html#point-maps",
+    "href": "slides/24-slides.html#point-maps",
+    "title": "Maps, Truth, and Cartography",
+    "section": "Point Maps",
+    "text": "Point Maps\n\n\n\n\n\nDot Maps: quantity represented by amount and concentration of dots\nProportional Symbol Map: Geometric symbols scaled in proportion to a quantity"
+  },
+  {
+    "objectID": "slides/24-slides.html#ebbinghaus-illusion",
+    "href": "slides/24-slides.html#ebbinghaus-illusion",
+    "title": "Maps, Truth, and Cartography",
+    "section": "Ebbinghaus’ illusion",
+    "text": "Ebbinghaus’ illusion\n::: columns ::: {.column width=“50%”}  ::: ::: {.column width=“50%”}"
+  },
+  {
+    "objectID": "slides/24-slides.html#line-maps",
+    "href": "slides/24-slides.html#line-maps",
+    "title": "Maps, Truth, and Cartography",
+    "section": "Line Maps",
+    "text": "Line Maps\n\nFrom High Country News"
+  },
+  {
+    "objectID": "slides/24-slides.html#choropleth-maps",
+    "href": "slides/24-slides.html#choropleth-maps",
+    "title": "Maps, Truth, and Cartography",
+    "section": "Choropleth maps",
+    "text": "Choropleth maps\nExample"
+  },
+  {
+    "objectID": "slides/24-slides.html#cartograms",
+    "href": "slides/24-slides.html#cartograms",
+    "title": "Maps, Truth, and Cartography",
+    "section": "Cartograms",
+    "text": "Cartograms\nExample"
   },
   {
     "objectID": "syllabus.html",

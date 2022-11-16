@@ -658,6 +658,34 @@
     "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\nElements of a map\n\n\nGeneralization\n\n\nData Maps"
   },
   {
+    "objectID": "content/25-content.html",
+    "href": "content/25-content.html",
+    "title": "Static maps in R",
+    "section": "",
+    "text": "We are going to take a little more time to understand some of the options for building static maps in R and look at a few packages that can help you build publication-quality maps without having to move into a new software."
+  },
+  {
+    "objectID": "content/25-content.html#resources",
+    "href": "content/25-content.html#resources",
+    "title": "Static maps in R",
+    "section": "Resources",
+    "text": "Resources\n\n The Drawing Beautiful Maps Programatically with R, sf, and ggplot2 chapter by Mel Moreno and Mathieu Basille provides a nice series of blogposts designed to help you build maps with sf objects.\n Creating beautiful demographic maps in R with the tidycensus and tmap packages by Zev Ross illustrates the simplicity of mapping with tmap.\n Displaying time series, spatial and space-time data with R by Oscar Perpiñán Lamigueiro has a bunch of interesting code for producing maps contained in the book by the same name."
+  },
+  {
+    "objectID": "content/25-content.html#objectives",
+    "href": "content/25-content.html#objectives",
+    "title": "Static maps in R",
+    "section": "Objectives",
+    "text": "Objectives\nBy the end of today you should be able to:\n\nConstruct a map using ggplot2 and tmap\nCombine vector and raster data in the same map\nAdd annotations and inset maps to decorate your map"
+  },
+  {
+    "objectID": "content/25-content.html#slides",
+    "href": "content/25-content.html#slides",
+    "title": "Static maps in R",
+    "section": "Slides",
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\nChoropleth Maps\n\n\nIntegrating rasters\n\n\nDecoration"
+  },
+  {
     "objectID": "content/index.html",
     "href": "content/index.html",
     "title": "Readings and slides",
@@ -4121,6 +4149,90 @@
     "title": "Maps, Truth, and Cartography",
     "section": "Cartograms",
     "text": "Cartograms\nExample"
+  },
+  {
+    "objectID": "slides/25-slides.html#using-ggplot2",
+    "href": "slides/25-slides.html#using-ggplot2",
+    "title": "Static Maps in R",
+    "section": "Using ggplot2",
+    "text": "Using ggplot2\n\ncty.info <- get_acs(geography = \"county\", \n                      variables = c(pop=\"B01003_001\", \n                                    medincome = \"B19013_001\"),\n                      survey=\"acs5\",\n                      state = c(\"WA\", \"OR\", \"ID\", \"MT\", \"WY\"),\n                      geometry = TRUE, key = censkey, progress_bar=FALSE) %>% \n  select(., -moe) %>% \n  pivot_wider(\n    names_from = \"variable\",\n    values_from = \"estimate\"\n  )\n\np <- ggplot(data=cty.info) +\n  geom_sf(mapping=aes(fill=medincome))"
+  },
+  {
+    "objectID": "slides/25-slides.html#static-maps-with-ggplot2",
+    "href": "slides/25-slides.html#static-maps-with-ggplot2",
+    "title": "Static Maps in R",
+    "section": "Static Maps with ggplot2",
+    "text": "Static Maps with ggplot2"
+  },
+  {
+    "objectID": "slides/25-slides.html#changing-aesthetics",
+    "href": "slides/25-slides.html#changing-aesthetics",
+    "title": "Static Maps in R",
+    "section": "Changing aesthetics",
+    "text": "Changing aesthetics\n\np <- ggplot(data=cty.info) +\n  geom_sf(mapping=aes(fill=pop), color=\"white\") +\n  scale_fill_viridis()"
+  },
+  {
+    "objectID": "slides/25-slides.html#changing-aesthetics-1",
+    "href": "slides/25-slides.html#changing-aesthetics-1",
+    "title": "Static Maps in R",
+    "section": "Changing aesthetics",
+    "text": "Changing aesthetics"
+  },
+  {
+    "objectID": "slides/25-slides.html#adding-layers",
+    "href": "slides/25-slides.html#adding-layers",
+    "title": "Static Maps in R",
+    "section": "Adding layers",
+    "text": "Adding layers\n\nst <- tigris::states(progress_bar=FALSE) %>% \n  filter(., STUSPS %in% c(\"WA\", \"OR\", \"ID\", \"MT\", \"WY\"))\n\np <- ggplot(data=cty.info) +\n  geom_sf(mapping=aes(fill=pop), color=\"white\") +\n  geom_sf(data=st, fill=NA, color=\"red\")\n  scale_fill_viridis()\n\n<ScaleContinuous>\n Range:  \n Limits:    0 --    1"
+  },
+  {
+    "objectID": "slides/25-slides.html#adding-layers-1",
+    "href": "slides/25-slides.html#adding-layers-1",
+    "title": "Static Maps in R",
+    "section": "Adding layers",
+    "text": "Adding layers"
+  },
+  {
+    "objectID": "slides/25-slides.html#creating-a-custom-theme",
+    "href": "slides/25-slides.html#creating-a-custom-theme",
+    "title": "Static Maps in R",
+    "section": "Creating a custom theme",
+    "text": "Creating a custom theme\n\ntheme_map <- function(...) {\n  theme_minimal() +\n    theme(\n      #text = element_text(family = \"Ubuntu Regular\", color = \"#22211d\"),\n      axis.line = element_blank(),\n      axis.text.x = element_blank(),\n      axis.text.y = element_blank(),\n      axis.ticks = element_blank(),\n      axis.title.x = element_blank(),\n      axis.title.y = element_blank(),\n      #panel.grid.minor = element_line(color = \"#ebebe5\", size = 0.2),\n      panel.grid.major = element_line(color = \"white\", \n                                      size = 0.002),\n      panel.grid.minor = element_line(color = \"white\", \n                                      size = 0.002),\n      plot.background = element_rect(fill = \"white\", \n                                     color = NA), \n      panel.background = element_rect(fill = \"white\", \n                                      color = NA), \n      legend.background = element_rect(fill = \"white\", \n                                       color = NA),\n      panel.border = element_blank(),\n      ...\n    )\n}"
+  },
+  {
+    "objectID": "slides/25-slides.html#using-tmap",
+    "href": "slides/25-slides.html#using-tmap",
+    "title": "Static Maps in R",
+    "section": "Using tmap",
+    "text": "Using tmap\n\npt <- tm_shape(cty.info) + \n  tm_polygons(col = \"pop\",\n              border.col = \"white\") + \n  tm_legend(outside = TRUE)"
+  },
+  {
+    "objectID": "slides/25-slides.html#using-tmap-1",
+    "href": "slides/25-slides.html#using-tmap-1",
+    "title": "Static Maps in R",
+    "section": "Using tmap",
+    "text": "Using tmap"
+  },
+  {
+    "objectID": "slides/25-slides.html#changing-aesthetics-2",
+    "href": "slides/25-slides.html#changing-aesthetics-2",
+    "title": "Static Maps in R",
+    "section": "Changing aesthetics",
+    "text": "Changing aesthetics\n\npt <- tm_shape(cty.info) + \n  tm_polygons(col = \"pop\", n=10,palette=viridis(10),\n              border.col = \"white\") + \n  tm_legend(outside = TRUE)"
+  },
+  {
+    "objectID": "slides/25-slides.html#changing-aesthetics-3",
+    "href": "slides/25-slides.html#changing-aesthetics-3",
+    "title": "Static Maps in R",
+    "section": "Changing aesthetics",
+    "text": "Changing aesthetics"
+  },
+  {
+    "objectID": "slides/25-slides.html#adding-layers-2",
+    "href": "slides/25-slides.html#adding-layers-2",
+    "title": "Static Maps in R",
+    "section": "Adding layers",
+    "text": "Adding layers"
   },
   {
     "objectID": "syllabus.html",

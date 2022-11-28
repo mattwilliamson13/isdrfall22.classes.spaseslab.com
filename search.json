@@ -686,6 +686,34 @@
     "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\nChoropleth Maps\n\n\nIntegrating rasters\n\n\nDecoration"
   },
   {
+    "objectID": "content/26-content.html",
+    "href": "content/26-content.html",
+    "title": "Towards Interactivity",
+    "section": "",
+    "text": "Now that you’ve had a chance to practice building a few maps and learning some of the core ideas behind the Grammar of Graphics, we can extend those ideas into the development of interactive webmaps and more expansive data visualizations that can be served on the internet and accessed by collaborators and members of the public. Like the previous unit on static maps, this could be a course unto itself, but we should be able to introduce you to enough ideas to get started."
+  },
+  {
+    "objectID": "content/26-content.html#resources",
+    "href": "content/26-content.html#resources",
+    "title": "Towards Interactivity",
+    "section": "Resources",
+    "text": "Resources\n\n The Web-mapping section from the University Consortium for Geographic Information Science’s GIS & Technology Body of Knowledge has a nice overview of the topic and it’s origins.\n This post on User-Centered Design from Adobe provides a concise, general introduction to the core elements of User-Centered Design.\n The Maps chapter in (Sievert 2020) gives a nice demonstration of using plotly to build interactive maps. More importantly, the book provides a comprehensive resource for building interactive web-based visualization in R."
+  },
+  {
+    "objectID": "content/26-content.html#objectives",
+    "href": "content/26-content.html#objectives",
+    "title": "Towards Interactivity",
+    "section": "Objectives",
+    "text": "Objectives\nBy the end of today you should be able to:\n\nDescribe the motivations for building more complex graphics\nUnderstand User-Centered Design\nBuild a multi-layered interactive map"
+  },
+  {
+    "objectID": "content/26-content.html#slides",
+    "href": "content/26-content.html#slides",
+    "title": "Towards Interactivity",
+    "section": "Slides",
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\nInteractive Data Visualization\n\n\nMotivations\n\n\nDesigning for the user\n\n\nBuilding interactive visualizations in R"
+  },
+  {
     "objectID": "content/index.html",
     "href": "content/index.html",
     "title": "Readings and slides",
@@ -4183,7 +4211,7 @@
     "href": "slides/25-slides.html#adding-layers",
     "title": "Static Maps in R",
     "section": "Adding layers",
-    "text": "Adding layers\n\nst <- tigris::states(progress_bar=FALSE) %>% \n  filter(., STUSPS %in% c(\"WA\", \"OR\", \"ID\", \"MT\", \"WY\"))\n\np <- ggplot(data=cty.info) +\n  geom_sf(mapping=aes(fill=pop), color=\"white\") +\n  geom_sf(data=st, fill=NA, color=\"red\")\n  scale_fill_viridis()\n\n<ScaleContinuous>\n Range:  \n Limits:    0 --    1"
+    "text": "Adding layers\n\nst <- tigris::states(progress_bar=FALSE) %>% \n  filter(., STUSPS %in% c(\"WA\", \"OR\", \"ID\", \"MT\", \"WY\"))\n\np <- ggplot(data=cty.info) +\n  geom_sf(mapping=aes(fill=pop), color=\"white\") +\n  geom_sf(data=st, fill=NA, color=\"red\") +\n  scale_fill_viridis()"
   },
   {
     "objectID": "slides/25-slides.html#adding-layers-1",
@@ -4233,6 +4261,125 @@
     "title": "Static Maps in R",
     "section": "Adding layers",
     "text": "Adding layers"
+  },
+  {
+    "objectID": "slides/26-slides.html#using-ggmap",
+    "href": "slides/26-slides.html#using-ggmap",
+    "title": "Towards Interactivity",
+    "section": "Using ggmap",
+    "text": "Using ggmap\n\n\n\n\nget_map downloads ready-made image to serve as backdrop\nNeed to know projection of baselayer\nLots of maptypes\nNeed to experiment with zoom\n\n\n\n\n\n\n\nbg <- ggmap::get_map(as.vector(\n  st_bbox(\n    st_transform(cty.info, 4326))), \n  zoom = 7)\n\np <- ggmap(bg) +\n  geom_sf(data = st_transform(cty.info, 4326), \n          mapping = aes(fill = medincome), \n          alpha=0.7, \n          inherit.aes = FALSE) +\n  geom_sf(data=st_transform(cty.info, 4326), \n          color=\"yellow\", \n          fill=NA, \n          inherit.aes = FALSE) +\n  scale_fill_continuous() +\n  coord_sf(crs = st_crs(4326))"
+  },
+  {
+    "objectID": "slides/26-slides.html#using-ggmap-1",
+    "href": "slides/26-slides.html#using-ggmap-1",
+    "title": "Towards Interactivity",
+    "section": "Using ggmap",
+    "text": "Using ggmap"
+  },
+  {
+    "objectID": "slides/26-slides.html#using-ggmap-2",
+    "href": "slides/26-slides.html#using-ggmap-2",
+    "title": "Towards Interactivity",
+    "section": "Using ggmap",
+    "text": "Using ggmap\n\nbg <- ggmap::get_stamenmap(bbox = as.vector(st_bbox(\n  st_transform(cty.info, 4326))), \n  source = \"stamen\", \n  maptype = \"toner\",\n  zoom = 7)\n\np <- ggmap(bg) +\n  geom_sf(data = st_transform(cty.info, 4326), mapping = aes(fill = medincome), alpha=0.7, inherit.aes = FALSE) +\n  geom_sf(data=st_transform(cty.info, 4326), color=\"yellow\", fill=NA, inherit.aes = FALSE) +\n  scale_fill_continuous() +\n  coord_sf(crs = st_crs(4326))"
+  },
+  {
+    "objectID": "slides/26-slides.html#using-ggmap-3",
+    "href": "slides/26-slides.html#using-ggmap-3",
+    "title": "Towards Interactivity",
+    "section": "Using ggmap",
+    "text": "Using ggmap"
+  },
+  {
+    "objectID": "slides/26-slides.html#using-rstoolbox",
+    "href": "slides/26-slides.html#using-rstoolbox",
+    "title": "Towards Interactivity",
+    "section": "Using RStoolbox",
+    "text": "Using RStoolbox\n\n\n\n\nSometimes we want more flexibility\nMay want to label ourselves\nMay want custom backdrops\n\n\n\n\nelev <- rast(geodata::elevation_30s(path=tempdir(),\n                             country=\"USA\")[[1]])\nelev.crop <- project(crop(elev, \n                  project(vect(cty.info), \n                          elev)), crs(vect(cty.info)))\nslp <- terrain(elev.crop, \"slope\", unit=\"radians\")\nasp <- terrain(elev.crop, \"aspect\")\n\nhillshade <- shade(slp, asp) \n\np <- ggR(hillshade) +\n  geom_sf(data = cty.info, \n          mapping = aes(fill = medincome), \n          alpha=0.7, \n          inherit.aes = FALSE) +\n  geom_sf(data=st_transform(cty.info, 4326), \n          color=\"yellow\", \n          fill=NA, \n          inherit.aes = FALSE) +\n  scale_fill_continuous() +\n  coord_sf(crs = st_crs(4326))"
+  },
+  {
+    "objectID": "slides/26-slides.html#using-rstoolbox-1",
+    "href": "slides/26-slides.html#using-rstoolbox-1",
+    "title": "Towards Interactivity",
+    "section": "Using RStoolbox",
+    "text": "Using RStoolbox"
+  },
+  {
+    "objectID": "slides/26-slides.html#using-ggplot2",
+    "href": "slides/26-slides.html#using-ggplot2",
+    "title": "Towards Interactivity",
+    "section": "Using ggplot2",
+    "text": "Using ggplot2\n\nHave to convert to a dataframe\nThen use geom_raster\nUse caution!!\n\n\n##convert to SpatialPixelsDataFrame for ggplot\nhills.spdf <- as(hillshade, \"SpatialPixelsDataFrame\")\nhills.df <- as.data.frame(hills.spdf)\ncolnames(hills.df) <- c(\"value\", \"x\", \"y\")\n\nglobe.map <- ggplot() +\n  geom_raster(data=hills.df,aes(x=x, y=y, alpha=value))"
+  },
+  {
+    "objectID": "slides/26-slides.html#categories-of-data-visualization",
+    "href": "slides/26-slides.html#categories-of-data-visualization",
+    "title": "Towards Interactivity",
+    "section": "3 Categories of data visualization",
+    "text": "3 Categories of data visualization\n\n\n\nStatic\nInteractive\nDynamic\n\n\n\n\n\ndynamic"
+  },
+  {
+    "objectID": "slides/26-slides.html#dealing-with-complex-datasets",
+    "href": "slides/26-slides.html#dealing-with-complex-datasets",
+    "title": "Towards Interactivity",
+    "section": "Dealing with complex datasets",
+    "text": "Dealing with complex datasets\n\n\n\n\n\nIdentifying structure that might otherwise be hidden\nDiagnosing models and interpreting results\nAiding the sense-making process"
+  },
+  {
+    "objectID": "slides/26-slides.html#clarity-in-presentation",
+    "href": "slides/26-slides.html#clarity-in-presentation",
+    "title": "Towards Interactivity",
+    "section": "Clarity in presentation",
+    "text": "Clarity in presentation\n\nZooming allows the user to determine scale of presentation\nHovering allows more information to be displayed ‘on-demand’\nSubsetting facilitates ease of interpretation"
+  },
+  {
+    "objectID": "slides/26-slides.html#who-is-your-audience",
+    "href": "slides/26-slides.html#who-is-your-audience",
+    "title": "Towards Interactivity",
+    "section": "Who is your audience?",
+    "text": "Who is your audience?\n\nYour advisor and colleagues?\nAn external collaborator?\nThe general public?\n\nUser archetypes"
+  },
+  {
+    "objectID": "slides/26-slides.html#iteration",
+    "href": "slides/26-slides.html#iteration",
+    "title": "Towards Interactivity",
+    "section": "Iteration",
+    "text": "Iteration\n\n\n\n\n\nFrom Usability.gov\n\n\n\n\n\nFeedback is critical\nIdeation: What specifically does the user need?\nMeaning: Are the data clearly defined and explained? Are the conclusions obvious?\nFunction: Given the usecases, will the application (visualization) actually perform?"
+  },
+  {
+    "objectID": "slides/26-slides.html#a-note-about-apis",
+    "href": "slides/26-slides.html#a-note-about-apis",
+    "title": "Towards Interactivity",
+    "section": "A note about APIs",
+    "text": "A note about APIs\n\nAPI: Application Programming Interface\nA software intermediary that allows two applications to “communicate”\nLots of R packages rely on APIs to access data on the web (e.g.,tidycensus)\nFacilitates reproducibility and powerful web applications built on R analyses\nMay require “keys” and addtional parsing (Mapbox and Google)"
+  },
+  {
+    "objectID": "slides/26-slides.html#clarity-in-presentation-revisited",
+    "href": "slides/26-slides.html#clarity-in-presentation-revisited",
+    "title": "Towards Interactivity",
+    "section": "Clarity in presentation (revisited)",
+    "text": "Clarity in presentation (revisited)"
+  },
+  {
+    "objectID": "slides/26-slides.html#using-plotly",
+    "href": "slides/26-slides.html#using-plotly",
+    "title": "Towards Interactivity",
+    "section": "Using plotly",
+    "text": "Using plotly\n\ng <- txhousing %>% \n  # group by city\n  group_by(city) %>%\n  # initiate a plotly object with date on x and median on y\n   plotly::plot_ly(x = ~date, y = ~median) %>%\n  # add a line plot for all texan cities\n   plotly::add_lines(name = \"Texan Cities\", hoverinfo = \"none\", \n            type = \"scatter\", mode = \"lines\", \n            line = list(color = 'rgba(192,192,192,0.4)')) %>%\n  # plot separate lines for Dallas and Houston\n   plotly::add_lines(name = ~city, \n            data = filter(txhousing, \n                          city %in% c(\"Dallas\", \"Houston\")),\n            hoverinfo = ~city,\n            line = list(color = c(\"red\", \"blue\")),\n            color = ~city)"
+  },
+  {
+    "objectID": "slides/26-slides.html#interactive-maps-with-mapview-and-tmap",
+    "href": "slides/26-slides.html#interactive-maps-with-mapview-and-tmap",
+    "title": "Towards Interactivity",
+    "section": "Interactive maps with mapview and tmap",
+    "text": "Interactive maps with mapview and tmap\n\nEasy extension of your existing\nClass Demo"
+  },
+  {
+    "objectID": "slides/26-slides.html#other-options",
+    "href": "slides/26-slides.html#other-options",
+    "title": "Towards Interactivity",
+    "section": "Other options",
+    "text": "Other options\n\nleaflet\nmapview\nmapsapi"
   },
   {
     "objectID": "syllabus.html",

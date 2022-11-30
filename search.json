@@ -14,6 +14,97 @@
     "text": "Instructions\n\nAfter you’ve joined the assignment repository, you should have this file (named Readme.md) inside of a R project named assignment-1-xx where xx is your github username (or initials).\nOnce you’ve verified that you’ve correctly cloned the assignment repository, create a new Quarto document. Name this file assignment-1-xxx.qmd and give it a title (like M Williamson Assignment 1). Make sure that you select the html output option (Quarto can do a lot of cool things, but the html format is the least-likely to cause you additional headaches). We’ll be using Quarto throughout the course so it’s worth checking out the other tutorials in the getting started section.\nCopy the questions below into your document and change the color of their text.\nSave the changes and make your first commit!\nAnswer the questions making sure save and commit at least 4 more times (having 5 commits is part of the assignment).\nRender the document to html (you should now have at least 3 files in the repository: Readme.md, assignment-1-xx.qmd, and assignment-1-xx.html). Commit these changes and push them to the repository on GitHub. You should see the files there when you go to github.com."
   },
   {
+    "objectID": "assignment/02-spatialops.html",
+    "href": "assignment/02-spatialops.html",
+    "title": "Spatial Data Operations",
+    "section": "",
+    "text": "The second part of the course was designed to introduce basic operations with vector and raster data. These operations will form the basis for building the spatial databases that underlie the bulk of statistical analyses we’ll conduct in this class and probably in your graduate research. This homework is designed to give you practice building your spatial workflow and using the various functions we’ve learned to maniputlate both vector and raster data. By the end of this assignment you should be able to:"
+  },
+  {
+    "objectID": "assignment/02-spatialops.html#instructions",
+    "href": "assignment/02-spatialops.html#instructions",
+    "title": "Spatial Data Operations",
+    "section": "Instructions",
+    "text": "Instructions\n\nAfter you’ve joined the assignment repository, you should have this file (named Readme.md) inside of a R project named assignment-1-xx where xx is your github username (or initials). All of the data should be accessible on the server at /opt/data/2022/assignment02/.\nOnce you’ve verified that you’ve correctly cloned the assignment repository, create a new Quarto document. Name this file assignment-2-xxx.qmd and give it a title (like M Williamson Assignment 2). Make sure that you select the html output option (Quarto can do a lot of cool things, but the html format is the least-likely to cause you additional headaches). We’ll be using Quarto throughout the course so it’s worth checking out the other tutorials in the getting started section.\nCopy the questions below into your document and change the color of their text.\nSave the changes and make your first commit!\nAnswer the questions making sure save and commit at least 4 more times (having 5 commits is part of the assignment).\nRender the document to html (you should now have at least 3 files in the repository: Readme.md, assignment-2-xx.qmd, and assignment-2-xx.html). Commit these changes and push them to the repository on GitHub. You should see the files there when you go to github.com."
+  },
+  {
+    "objectID": "assignment/02-spatialops.html#vector-data",
+    "href": "assignment/02-spatialops.html#vector-data",
+    "title": "Spatial Data Operations",
+    "section": "Vector data",
+    "text": "Vector data\n\nPackages and datasets\nThe tigris package provides a number of handy functions for accessing different US geographic regions based on the US Census and the TIGER (Topologically Integrated Geographic Encoding and Referencing) system. You can download states (using states()), counties (using counties()), etc and have all of the objects returned as sf objects. Check out the package webpage to get a sense for what it can do!\nFor the next few weeks, we’ll be using data from the High Country News Land Grab University project. These data depict the role of expropriated Indigenous land in funding the fifty-two land-grant universities in the United States. They contain information on nearly 11 million acres of Indigenous land taken from ~250 Tribes, bands and communities through a multitude of treaties and violent land seizures. Check it out as it will help you understand what these data are depicting.\nOne of the other datasets we’ll use fairly regulrarly during this class is the United States Protected Areas Database (PAD-US). PAD-US is America’s official national inventory of U.S. terrestrial and marine protected areas that are dedicated to the preservation of biological diversity and to other natural, recreation and cultural uses, managed for these purposes through legal or other effective means. The PADUS provides a lot of interesting information on land tenure arrangements in the US. Ecologists often rely on comparisons to these protected ares to understand the effects of anthropogenic change. Finally, you’ll probably have to make a map at some point in your life and these protected areas are often useful tools for helping ‘orient’ people to the landscape you are mapping. As an additional bonus, the geometries in this dataset can be a real challenge to work with so you’ll get a chance to practice some important diagnostics and trouble-shooting. For this assignment, we have restricted the data to the “Designation” type (i.e., protected via means not requiring Congress) in the Western US.\n\n\nPracticing with vector data\nThe data for this lab are in our shared folder (located at /opt/data/2022/assignment02/). There are several shapefiles in that folder (denoted by the .shp suffix in the file name).\n\nLoad the landgrab_parcel.shp dataset. What is the CRS? How about the extent? Lastly, are the geometries valid? If not, make them valid. Show your code.\nLoad the PA_designation.shp dataset. What is the CRS? How about the extent? Lastly, are the geometries valid? If not, make them valid. Show your code.\nProject all of the vector datasets to the same CRS. Show your code. How did you choose which CRS to use?\nNow buffer the entire PA_designation.shp features by 50km and calculate the resulting area. What is the area of the largest buffered PA? Show your code.\nSubset the entire landgrab_parcel.shp so that it only contains parcels that overlap your boffered PA_designation.shp object. How many parcels overlap the buffered PAs? How big is the largest parcel? What state has the most parcels that overlap the buffered PAs?\nUse the tigris::states() function to download state boundaries and filter them so that you only have the boundary for the state that contains the most parcels (from step 3). Show your code.\nCrop the landgrab_parcel.shp and PA_designation.shp objects using your state boundary. How many features remain after you’ve cropped the datasets? Show your code."
+  },
+  {
+    "objectID": "assignment/02-spatialops.html#raster-data",
+    "href": "assignment/02-spatialops.html#raster-data",
+    "title": "Spatial Data Operations",
+    "section": "Raster Data",
+    "text": "Raster Data\nWe’re going to evaluate the current conditions are of the parcels that were sold in and around protected areas using two different raster datasets. The first comes from the PLACES lab at Boston University. This data depict land values across the contiguous United States at a fairly high resolution. The PLACES data was developed to better understand the costs, benefits, and motivaitons for private land conservation. The development and validation of this data is described in this article. The second is a categorical raster from the National Land Cover Dataset downloaded via the FedData package. FedData downloads the file as a raster so you’ll need to convert it to a SpatRaster. Similarly, you need to give the get_nlcd function a Spatial object so you’ll need to convert your cropped parcel dataset to a SpatialPolygonsDataframe (using as(parcelname, \"Spatial\"). See the helpfile for more info.\n\nPracticing with vector data\n\nLoad the places_fmv_all.tif file as a SpatRaster and download the 2019 NLCD for the state with the most parcels (from step 3) data (using FedData::get_nlcd()). What CRS are the SpatRasters in? What is their resolution? How do the extents compare? Show your code.\nThe two rasters don’t align. Write out the pseudocode for the steps hyou would take to get them into alignment.\nDealing with differing resolutions can be tricky and there are a few options for either upscaling fine resolution data or downscaling coarse resolution data. What are they and what are the benefits/drawbacks of each approach?\nBased on your answers to number 7 and 8 process the rasters so that their CRS, resolution, and extents align.\nWe might be concerned about mapping errors in the NLCD dataset (sometimes pixels get misclassified). Let’s smooth that layer out by applying a 5x5 moving window. Make sure that you drop the NAs."
+  },
+  {
+    "objectID": "assignment/02-spatialops.html#integrating-the-two",
+    "href": "assignment/02-spatialops.html#integrating-the-two",
+    "title": "Spatial Data Operations",
+    "section": "Integrating the two",
+    "text": "Integrating the two\nNow that you have a cropped parcel layer that depicts the parcels that are within 50km of protected areas and two rasters that have the same CRS, resolution, and extent; let’s integrate them a bit.\n\nGenerate a new SpatRaster depicting the distance from all pixels that are classified as “Evergreen Forest” in the NLCD layer. You’ll need to reclassify the smoothed NLCD layer so that all values that aren’t “Evergreen Forest” are set to NA and then use terra::distance to generate the estimate.\nStack the distance raster and the land value raster (you may have to align them a bit). Then extract the mean values for each variable within each of your parcels (from step 5). Remember, that you’ll need to make sure the parcels have the same CRS as the stack.\nNow extract the land cover from your smoothed raster. What is the dominant landcover type of the first 10 parcels in that dataset."
+  },
+  {
+    "objectID": "assignment/03-spatialmod.html",
+    "href": "assignment/03-spatialmod.html",
+    "title": "Spatial Models",
+    "section": "",
+    "text": "The third part of the course was designed to help you tie together the syntax you’ve learned so far to be able to conduct different kinds of spatial analyses. The ability to move from reading and manipulating your data towards a statistical analysis that is both geographically correct and statistically robust will we require you to integrate a variety of the techniques you’ve learned for manipulating tabular, sf, and raster objects. This assignment asks you to demonstrate those skills in a variety of ways. By the end of this assignment you should be able to:\n\nCombine tabular, sf, and raster datasets using joins and extractions\nGenerate kernel density estimates and estimate spatial autocorrelation\nConduct a series of ‘suitability’ analyses using weighted and statistical overlays\nEvaluate the quality of your models using confusion matrices and statistical tests"
+  },
+  {
+    "objectID": "assignment/03-spatialmod.html#instructions",
+    "href": "assignment/03-spatialmod.html#instructions",
+    "title": "Spatial Models",
+    "section": "Instructions",
+    "text": "Instructions\n\nAfter you’ve joined the assignment repository, you should have this file (named Readme.md) inside of a R project named assignment-3-xx where xx is your github username (or initials).\nOnce you’ve verified that you’ve correctly cloned the assignment repository, create a new Quarto document. Name this file assignment-3-xxx.qmd and give it a title (like M Williamson Assignment 3). Make sure that you select the html output option (Quarto can do a lot of cool things, but the html format is the least-likely to cause you additional headaches). We’ll be using Quarto throughout the course so it’s worth checking out the other tutorials in the getting started section.\nCopy the questions below into your document and change the color of their text.\nSave the changes and make your first commit!\nAnswer the questions making sure save and commit at least 4 more times (having 5 commits is part of the assignment).\nRender the document to html (you should now have at least 3 files in the repository: Readme.md, assignment-3-xx.qmd, and assignment-3-xx.html). Commit these changes and push them to the repository on GitHub. You should see the files there when you go to github.com."
+  },
+  {
+    "objectID": "assignment/03-spatialmod.html#the-data",
+    "href": "assignment/03-spatialmod.html#the-data",
+    "title": "Spatial Models",
+    "section": "The Data",
+    "text": "The Data\nWe’ll be combining a few different datasets for this assignment. Some of them are located on the server at /opt/data/2022/assignment03/. The datasets in this folder include: celltowers.csv (a Kaggle dataset depicting the lat/long of cell towers in the US), cb_2018_us_ua10_500k.shp (a shapefiled depicting urban areas in the US from the US Census), ua_list_all.xls (the attributes of those urban areas), nlcd.tif (the National Land Cover dataset for WA, OR, ID, MT, WY), and roadskm.tif (the distance, in km, to primary and secondary roads in the same region). In addition, you’ll need to use the tidycensus package (which we’ve used in class) download the population and median income datasets from the 5yr American Community Survey dataset at the block group level. You’ll aslo need to use the raster::getData() function to download the elevation data for the study region and the terra::terrain() function to estimate the slope."
+  },
+  {
+    "objectID": "assignment/03-spatialmod.html#the-assignment",
+    "href": "assignment/03-spatialmod.html#the-assignment",
+    "title": "Spatial Models",
+    "section": "The Assignment",
+    "text": "The Assignment\n\nConduct an overlay analysis using all the NLCD, roads, slope population, and median income datasets (hint: you'll probably want to rasterize the vector data from tidycensus) to identify suitable areas for cellphone towers. Use a markdown table to report the thresholds you used to define suitable and unsuitable. Write out your psedocode for the process and then implement your overlay analysis. Use plot() to dipslay your final overlay.\nNow bring in the cell phone tower dataset and build a kernel density estimate displaying the intensity of occurrence of cell towers across the region. Use Ripley’s K to evaluate whether or not assumptions of second-order randomness are being violated. Estimate Moran’s I to assess the strength of autocorrelation in your data. Write out your pseudocode and then complete the analysis. What do the different analyses tell you about spatial autocorrelation of cell tower locations? What variables appear correlated with the patterns you see in your KDE?\nFinally, you are going to build a database of predictors and use them in a model explaining the occurrence of cell phone tower locations. In addition to the NLCD, roads, slope population, and median income datasets, you’ll need to identify the population size of the nearest urban area to each cell phone tower. You’ll need to do some extracting, some attribute joins, and some spatial joins to construct the necessary data. Once you’ve got your database, fit a logistic regression and a random forest model to the data. How do the model results compare? How do the spatial predictions compare? Write your pseudocode, run the analysis and show your results.\nConstruct confusion matrices for your overlay, logisitc regression, and random forest models. What are the accuracy, sensitivity, and specificity for each of your models? Finally, run an ROC analysis for your logistic regression and random forest model. How does your assessment of model quality differ between using the confusion matrices and the ROC/AUC analysis (if at all)? Write out your pseudocode, show your confusion matrices (you can use a markdown table if you like), and state your results.\nSave your model fit objects using saveRDS() (only your model fit objects) a Google Drive folder and place the link to that folder at the end of the assignment (you’ll need these for the next assignment."
+  },
+  {
+    "objectID": "assignment/04-dataviz.html",
+    "href": "assignment/04-dataviz.html",
+    "title": "Data Visualization",
+    "section": "",
+    "text": "The fourth part of the course was designed to introduce to you to some of the principles of data visualization, especially in the spatial context, and introduce you to some of the capacity that R has for making publication-quality graphics. By the end of this assignment, you should be able to:\n\nGenerate static maps of your study area and the results of your models\nDemonstrate alternative ways for visualizing spatial data.\nBuild an interactive map to facilitate data exploration\nCompare and contrast the strengths and benfits of different types of visualization."
+  },
+  {
+    "objectID": "assignment/04-dataviz.html#instructions",
+    "href": "assignment/04-dataviz.html#instructions",
+    "title": "Data Visualization",
+    "section": "Instructions",
+    "text": "Instructions\n\nAfter you’ve joined the assignment repository, you should have this file (named Readme.md) inside of a R project named assignment-4-xx where xx is your github username (or initials).\nOnce you’ve verified that you’ve correctly cloned the assignment repository, create a new Quarto document. Name this file assignment-4-xxx.qmd and give it a title (like M Williamson Assignment 3). Make sure that you select the html output option (Quarto can do a lot of cool things, but the html format is the least-likely to cause you additional headaches). We’ll be using Quarto throughout the course so it’s worth checking out the other tutorials in the getting started section.\nCopy the questions below into your document and change the color of their text.\nSave the changes and make your first commit!\nAnswer the questions making sure save and commit at least 4 more times (having 5 commits is part of the assignment).\nRender the document to html (you should now have at least 3 files in the repository: Readme.md, assignment-4-xx.qmd, and assignment-4-xx.html). Commit these changes and push them to the repository on GitHub. You should see the files there when you go to github.com."
+  },
+  {
+    "objectID": "assignment/04-dataviz.html#the-data",
+    "href": "assignment/04-dataviz.html#the-data",
+    "title": "Data Visualization",
+    "section": "The Data",
+    "text": "The Data\nWe’ll be using the data and model results from assingment 3. Some of them are located on the server at /opt/data/2022/assignment03/. The datasets in this folder include: celltowers.csv (a Kaggle dataset depicting the lat/long of cell towers in the US), cb_2018_us_ua10_500k.shp (a shapefiled depicting urban areas in the US from the US Census), ua_list_all.xls (the attributes of those urban areas), nlcd.tif (the National Land Cover dataset for WA, OR, ID, MT, WY), and roadskm.tif (the distance, in km, to primary and secondary roads in the same region). In addition, you’ll need to use the tidycensus package (which we’ve used in class) download the population and median income datasets from the 5yr American Community Survey dataset at the block group level. You’ll aslo need to use the raster::getData() function to download the elevation data for the study region and the terra::terrain() function to estimate the slope. Finally, load the model fit objects that you saved at the end of Assignment 3 (these are saved in the /opt/data/2022/assignment04/ folder)."
+  },
+  {
+    "objectID": "assignment/04-dataviz.html#the-assignment",
+    "href": "assignment/04-dataviz.html#the-assignment",
+    "title": "Data Visualization",
+    "section": "The Assignment",
+    "text": "The Assignment\n\nBuild a static map of your study area suitable for the Methods section of a journal article. Your map should have a basemap (using either ggmap or a hillshade you create, state outlines, and points for the cell phone towers. Use the fill aesthetic to color the points by an attribute of your choosing. Add the major cities and label them. Your map should also include a north arrow and a locator map (you’ll need patchwork for this). Show your code and the final map.\nMake a multi-panel figure showing the predictions of your random forests model, your logistic regression model, and the difference between the two predictions (i.e., you should have 3 figures). Remember to include elements that help the reader orient to the map and panel labels. Show your code and the final map.\nNow make a multipanel plot with the block groups on the y-axis and the predicted probability of a cell phone tower (with confidence intervals) on the x-axis for both models (i.e., use fill or color to distinguish the predictions for each model). Make a separate plot for each state (i.e., using facet_wrap or patchwork).\nFinally, make an interactive map that allows you to explore the different predictions spatially. You should be able to click on the different portions of the map and display the mean prediction and the confidence intervals.\nIn thinking about the plots you made in steps 3 and 4, what are some of the benefits of each approach? What are the drawbacks? How might your audience determine which plot you use?"
+  },
+  {
     "objectID": "assignment/final-proj.html",
     "href": "assignment/final-proj.html",
     "title": "Final Project",
@@ -712,6 +803,34 @@
     "title": "Towards Interactivity",
     "section": "Slides",
     "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\nInteractive Data Visualization\n\n\nMotivations\n\n\nDesigning for the user\n\n\nBuilding interactive visualizations in R"
+  },
+  {
+    "objectID": "content/27-content.html",
+    "href": "content/27-content.html",
+    "title": "Interactivity Continued",
+    "section": "",
+    "text": "This week is a bit of a departure from some of the ‘strictly GIS’ components of the course to explore some more creative approaches to data (spatial or otherwise) visualization. Using the idea of the storymap as motivation, we’ll take a look at some of the growing list of tools that R provides to integrate high-powered data analysis with interactive web applications into an intuitive, visually appealing webpage. As publicly funded scientists are increasingly called upon to make their research available to the public, these tools provide a valuable framework for moving your research beyond the university walls or outside of paywalled journals."
+  },
+  {
+    "objectID": "content/27-content.html#resources",
+    "href": "content/27-content.html#resources",
+    "title": "Interactivity Continued",
+    "section": "Resources",
+    "text": "Resources\n\n The Arranging Views chapter in (Sievert 2020) introduces flexdashboards and describes how plotly and other htmlwidgets can be integrated for a complete data-plot-story pipeline.\n This blogpost by Zev Ross provides a very thorough introduction to shiny, it’s syntax, and the ideas of reactivity in interactive applications.\n The shiny and flexdashboard pages at RStudio have lots of examples of cool applications of both products, tutorials, and cheatsheets. There is a lot more to them than we’ll be able to cover in this class, but there’s plenty of additional material on both webpages."
+  },
+  {
+    "objectID": "content/27-content.html#objectives",
+    "href": "content/27-content.html#objectives",
+    "title": "Interactivity Continued",
+    "section": "Objectives",
+    "text": "Objectives\nBy the end of today you should be able to:\n\nBuild simple interactive graphics with ggplot and plotly\nDescribe the basic structure of shiny apps\nBegin incorporating interactive elements into stories"
+  },
+  {
+    "objectID": "content/27-content.html#slides",
+    "href": "content/27-content.html#slides",
+    "title": "Interactivity Continued",
+    "section": "Slides",
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\nBasic Interaction Continued\n\n\nIntroducing Shiny\n\n\nStorytelling with flexdashboards"
   },
   {
     "objectID": "content/index.html",
@@ -4380,6 +4499,90 @@
     "title": "Towards Interactivity",
     "section": "Other options",
     "text": "Other options\n\nleaflet\nmapview\nmapsapi"
+  },
+  {
+    "objectID": "slides/27-slides.html#clarity-in-presentation-revisited",
+    "href": "slides/27-slides.html#clarity-in-presentation-revisited",
+    "title": "Interactivity Continued",
+    "section": "Clarity in presentation (revisited)",
+    "text": "Clarity in presentation (revisited)"
+  },
+  {
+    "objectID": "slides/27-slides.html#using-plotly",
+    "href": "slides/27-slides.html#using-plotly",
+    "title": "Interactivity Continued",
+    "section": "Using plotly",
+    "text": "Using plotly\n\ng <- txhousing %>% \n  # group by city\n  group_by(city) %>%\n  # initiate a plotly object with date on x and median on y\n   plotly::plot_ly(x = ~date, y = ~median) %>%\n  # add a line plot for all texan cities\n   plotly::add_lines(name = \"Texan Cities\", hoverinfo = \"none\", \n            type = \"scatter\", mode = \"lines\", \n            line = list(color = 'rgba(192,192,192,0.4)')) %>%\n  # plot separate lines for Dallas and Houston\n   plotly::add_lines(name = ~city, \n            data = filter(txhousing, \n                          city %in% c(\"Dallas\", \"Houston\")),\n            hoverinfo = ~city,\n            line = list(color = c(\"red\", \"blue\")),\n            color = ~city)"
+  },
+  {
+    "objectID": "slides/27-slides.html#using-plotly-1",
+    "href": "slides/27-slides.html#using-plotly-1",
+    "title": "Interactivity Continued",
+    "section": "Using plotly",
+    "text": "Using plotly\n\nSyntax is similar to ggplot\nhoverinfo describes which elements you’d like to make interactive\nOther plot elements available (see ?plot_ly)"
+  },
+  {
+    "objectID": "slides/27-slides.html#interactive-maps-with-mapview-and-tmap",
+    "href": "slides/27-slides.html#interactive-maps-with-mapview-and-tmap",
+    "title": "Interactivity Continued",
+    "section": "Interactive maps with mapview and tmap",
+    "text": "Interactive maps with mapview and tmap\n\nEasy extension of your existing\nClass Demo"
+  },
+  {
+    "objectID": "slides/27-slides.html#other-options",
+    "href": "slides/27-slides.html#other-options",
+    "title": "Interactivity Continued",
+    "section": "Other options",
+    "text": "Other options\n\nleaflet\nmapview\nmapsapi"
+  },
+  {
+    "objectID": "slides/27-slides.html#what-is-shiny",
+    "href": "slides/27-slides.html#what-is-shiny",
+    "title": "Interactivity Continued",
+    "section": "What is shiny",
+    "text": "What is shiny\n\nAn Rstudio product designed to allow reactive data visualizations via an R server\nAllows users to generate new results (not just plot your old stuff)"
+  },
+  {
+    "objectID": "slides/27-slides.html#the-simplest-shiny-app",
+    "href": "slides/27-slides.html#the-simplest-shiny-app",
+    "title": "Interactivity Continued",
+    "section": "The simplest shiny app",
+    "text": "The simplest shiny app\n\nserver <- function(input, output, session) { } #the server\n\nui <- basicPage(\"This is a real Shiny app\") # the user interface\n\nshinyApp(ui = ui, server = server) # this launches your app\n\nShiny applications not supported in static R Markdown documents"
+  },
+  {
+    "objectID": "slides/27-slides.html#reactivity",
+    "href": "slides/27-slides.html#reactivity",
+    "title": "Interactivity Continued",
+    "section": "Reactivity",
+    "text": "Reactivity\n\nFlexdashboards allow the user to visualized data you’ve created\nIntegrating shiny apps allows them to run new analysis!\nExamples\nReactivity is the link between user input and server output"
+  },
+  {
+    "objectID": "slides/27-slides.html#reactivity-1",
+    "href": "slides/27-slides.html#reactivity-1",
+    "title": "Interactivity Continued",
+    "section": "Reactivity",
+    "text": "Reactivity\n\n\n\nserver <- function(input, output, session) {\n  \n  observe({\n    # even though the slider is not involved in a calculation, if\n    # you change the slider it will run all this code and update the text box\n    # changes to the mytext box also will trigger the code to run\n    input$myslider\n    txt <- paste(input$mytext, sample(1:10000, 1))\n    updateTextInput(session, inputId = \"myresults\", value = txt)  \n    \n  })\n  \n}\n\nui <- basicPage(\n  h3(\"The results text box gets updated if you change the other text box OR the slider.\"),\n  sliderInput(\"myslider\", \"A slider:\", min=0, max=1000, value=500),\n  textInput(\"mytext\", \"Input goes here\", value = \"Initial value\"),\n  textInput(\"myresults\", \"Results will be printed here\")\n)\n\n\n\nshinyApp(ui = ui, server = server)\n\nShiny applications not supported in static R Markdown documents"
+  },
+  {
+    "objectID": "slides/27-slides.html#the-storymap",
+    "href": "slides/27-slides.html#the-storymap",
+    "title": "Interactivity Continued",
+    "section": "The Storymap",
+    "text": "The Storymap\n\nLandback Movement\nOwyhee Wonders\nBison on the Plains"
+  },
+  {
+    "objectID": "slides/27-slides.html#telling-stories-with-flexdashboards",
+    "href": "slides/27-slides.html#telling-stories-with-flexdashboards",
+    "title": "Interactivity Continued",
+    "section": "Telling stories with flexdashboards",
+    "text": "Telling stories with flexdashboards\n\n\n\n\nDashboard: a visual display of interrelated data\nflexdashboards are an Rmarkdown-powered way to build dashboards\nIntegrates with plotly, leaflet and other htmlwidgets\nExamples ]"
+  },
+  {
+    "objectID": "slides/27-slides.html#telling-stories-with-flexdashboards-1",
+    "href": "slides/27-slides.html#telling-stories-with-flexdashboards-1",
+    "title": "Interactivity Continued",
+    "section": "Telling stories with flexdashboards",
+    "text": "Telling stories with flexdashboards\n\nAudience engagement drives design\n“Scrolling” layouts allow linear story telling (like the ArcGIS Storymap)\n“Tabset” layouts allow users to construct their own stories\nLots of readymade templates, themes, and add-ins\nDisplay your research"
   },
   {
     "objectID": "syllabus.html",

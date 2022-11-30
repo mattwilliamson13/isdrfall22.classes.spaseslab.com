@@ -1,0 +1,45 @@
+---
+title: "Spatial Models"
+---
+
+## Overview 
+
+The third part of the course was designed to help you tie together the syntax you've learned so far to be able to conduct different kinds of spatial analyses. The ability to move from reading and manipulating your data towards a statistical analysis that is both geographically correct and statistically robust will we require you to integrate a variety of the techniques you've learned for manipulating tabular, `sf`, and raster objects. [This assignment](https://classroom.github.com/a/rq8p5ImR) asks you to demonstrate those skills in a variety of ways. By the end of this assignment you should be able to:
+
+* Combine tabular, `sf`, and raster datasets using joins and extractions
+
+* Generate kernel density estimates and estimate spatial autocorrelation
+
+* Conduct a series of 'suitability' analyses using weighted and statistical overlays
+
+* Evaluate the quality of your models using confusion matrices and statistical tests
+
+## Instructions
+
+1. After you've joined the assignment repository, you should have this file (named Readme.md) inside of a R project named assignment-3-xx where xx is your github username (or initials).
+
+2. Once you've verified that you've correctly cloned the assignment repository, create a new Quarto document. Name this file assignment-3-xxx.qmd and give it a title (like M Williamson Assignment 3). Make sure that you select the html output option (Quarto can do a lot of cool things, but the html format is the least-likely to cause you additional headaches). We'll be using Quarto throughout the course so it's worth checking out the other tutorials in the getting started section.
+
+3. Copy the questions below into your document and change the color of their text.
+
+4. Save the changes and make your first commit!
+
+5. Answer the questions making sure save and commit at least 4 more times (having 5 commits is part of the assignment).
+
+6. Render the document to html (you should now have at least 3 files in the repository: Readme.md, assignment-3-xx.qmd, and assignment-3-xx.html). Commit these changes and push them to the repository on GitHub. You should see the files there when you go to github.com.
+
+## The Data
+
+We'll be combining a few different datasets for this assignment. Some of them are located on the server at `/opt/data/2022/assignment03/`. The datasets in this folder include: `celltowers.csv` (a Kaggle dataset depicting the lat/long of cell towers in the US), `cb_2018_us_ua10_500k.shp` (a shapefiled depicting urban areas in the US from the US Census), `ua_list_all.xls` (the attributes of those urban areas), `nlcd.tif` (the National Land Cover dataset for WA, OR, ID, MT, WY), and `roadskm.tif` (the distance, in km, to primary and secondary roads in the same region). In addition, you'll need to use the `tidycensus` package (which we've used in class) download the __population__ and __median income__ datasets from the 5yr American Community Survey dataset at the __block group__ level. You'll aslo need to use the `raster::getData()` function to download the elevation data for the study region and the `terra::terrain()` function to estimate the slope.
+
+## The Assignment
+
+1. Conduct an overlay analysis using all the NLCD, roads, slope population, and median income datasets (`hint: you'll probably want to rasterize the vector data from tidycensus`) to identify suitable areas for cellphone towers. Use a [markdown table](https://www.markdownguide.org/extended-syntax/) to report the thresholds you used to define suitable and unsuitable. Write out your psedocode for the process and then implement your overlay analysis. Use `plot()` to dipslay your final overlay.
+
+2. Now bring in the cell phone tower dataset and build a kernel density estimate displaying the intensity of occurrence of cell towers across the region. Use Ripley's K to evaluate whether or not assumptions of second-order randomness are being violated. Estimate Moran's _I_ to assess the strength of autocorrelation in your data.  Write out your pseudocode and then complete the analysis. What do the different analyses tell you about spatial autocorrelation of cell tower locations? What variables appear correlated with the patterns you see in your KDE?
+
+3. Finally, you are going to build a database of predictors and use them in a model explaining the occurrence of cell phone tower locations. In addition to the NLCD, roads, slope population, and median income datasets, you'll need to identify the population size of the nearest urban area to each cell phone tower. You'll need to do some extracting, some attribute joins, and some spatial joins to construct the necessary data. Once you've got your database, fit a logistic regression and a random forest model to the data. How do the model results compare? How do the spatial predictions compare? Write your pseudocode, run the analysis and show your results.
+
+4. Construct confusion matrices for your overlay, logisitc regression, and random forest models. What are the accuracy, sensitivity, and specificity for each of your models? Finally, run an ROC analysis for your logistic regression and random forest model. How does your assessment of model quality differ between using the confusion matrices and the ROC/AUC analysis (if at all)? Write out your pseudocode, show your confusion matrices (you can use a markdown table if you like), and state your results. 
+
+5. Save your model fit objects using `saveRDS()` (only your model fit objects) a Google Drive folder and place the link to that folder at the end of the assignment (you'll need these for the next assignment. 

@@ -833,6 +833,20 @@
     "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\nBasic Interaction Continued\n\n\nIntroducing Shiny\n\n\nStorytelling with flexdashboards"
   },
   {
+    "objectID": "content/28-content.html",
+    "href": "content/28-content.html",
+    "title": "Conclusion",
+    "section": "",
+    "text": "You Did It! Thank you for your perserverence throughout this semester. We’ve covered a lot of ground and introduced a lot of ideas, packages, and syntax. Hopefully you feel well prepared to continue on your journey towards fully reproducible workflows for spatial analysis. We’ll reflect a little on where we’ve been and chat a bit about where you’d like to go next. Good luck!"
+  },
+  {
+    "objectID": "content/28-content.html#slides",
+    "href": "content/28-content.html#slides",
+    "title": "Conclusion",
+    "section": "Slides",
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\nObjectives Revisited\n\n\nNext Steps\n\n\nEvaluation"
+  },
+  {
     "objectID": "content/index.html",
     "href": "content/index.html",
     "title": "Readings and slides",
